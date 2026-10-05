@@ -6,7 +6,7 @@ DungeonJournal = DungeonJournal or {}
 local SDJ = DungeonJournal
 
 SDJ.ADDON_NAME = ADDON_NAME or "DungeonJournal"
-SDJ.VERSION = "0.5.2"
+SDJ.VERSION = "0.5.3"
 SDJ.ROOT = "Interface\\AddOns\\DungeonJournal\\"
 SDJ.MEDIA = SDJ.ROOT .. "Media\\"
 SDJ.MAPS = SDJ.ROOT .. "Maps\\"
@@ -88,6 +88,9 @@ SDJ.BOT_CONSUMABLES = {
     },
     onyxia = {
         "Onyxia has no named " .. C(".bot consumables") .. " profile — do not invent one. Use flasks/pots from the raid checklist manually.",
+    },
+    bwl = {
+        "Blackwing Lair has no named " .. C(".bot consumables") .. " profile — do not invent one. Use FR pots / Onyxia Scale Cloak / flasks from the preparation checklist manually.",
     },
     zg = {
         "Zul'Gurub has no named " .. C(".bot consumables") .. " profile (not in mara/sunken/brd/scholo/stratud/dm/lbrs/ubrs/mc).",

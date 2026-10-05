@@ -1,3 +1,21 @@
+v0.5.3 - Blackwing Lair (2026-10-05)
+--------------------------------------------------------------------------
+Sources: Grimfeather IP IndividualProgressionPlayer (PROGRESSION_ONYXIA gate on
+MAP_BLACKWING_LAIR; Nefarian → PROGRESSION_BLACKWING_LAIR) + dungeon_blackwing_lair.sql
+(trash SmartAI, Vael flags_extra, Chromaggus Time Lapse spell_script, Nefarian loot
+refs 30486/30487/30551). AzerothCore BlackwingLair boss_*.cpp / instance (orb AT 7761
+ghost teleport; Chromaggus RandomResize 2 breaths; Nefarian class calls). Atlas
+BlackwingLair map. AtlasLoot BWL* tables for non-Nefarian loot (server wins on Nefarian).
+
+- 40-player raid; ORDER after Onyxia, before ZG.
+- Prep: IP Onyxia stage gate (no brand item check); classic Blackhand's Command 7761 /
+  Orb of Command; Onyxia Scale Cloak; FR; Vael BA; Razorgore orb/eggs; Broodlord
+  suppression; Chromaggus randomised breaths; Nefarian class calls.
+- Bot consumables: no named BWL profile (stated).
+- Bosses Razorgore→Nefarian + trash; T2 chests from IP ref 30486 (2 rolls).
+- Quests: 7761, Head turn-ins 7781–7784, Only One May Rise 8288, Nefarius's Corruption 8730.
+- Checks: luac, denylist, harness. Local commit only.
+
 v0.5.2 - Home sections + Vanilla World Bosses (2026-10-05)
 --------------------------------------------------------------------------
 Sources: Grimfeather AC creature spawns + mod-individual-progression

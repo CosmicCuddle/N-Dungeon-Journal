@@ -2,7 +2,7 @@
 ## Title: Dungeon Journal
 ## Notes: Server-specific dungeon journal for Vanilla, The Burning Crusade and Wrath of the Lich King. /dj
 ## Author: CosmicCuddle
-## Version: 0.5.2
+## Version: 0.5.3
 ## SavedVariables: DungeonJournalDB
 ## X-License: GPLv2 (includes GPL-licensed Atlas/AtlasLoot/AtlasQuest derived data)
 
@@ -40,6 +40,7 @@ Data\Vanilla\StratholmeLiving.lua
 Data\Vanilla\StratholmeUndead.lua
 Data\Vanilla\MoltenCore.lua
 Data\Vanilla\OnyxiasLair.lua
+Data\Vanilla\BlackwingLair.lua
 Data\Vanilla\ZulGurub.lua
 Data\Vanilla\Azuregos.lua
 Data\Vanilla\LordKazzak.lua
