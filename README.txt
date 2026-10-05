@@ -1,31 +1,32 @@
-Dungeon Journal - v0.6.0 (Vanilla raids complete)
+Dungeon Journal - v0.6.0 (Vanilla complete)
 ======================================================================
 
-Install
+What it is
+A WoW 3.3.5a dungeon journal for Grimfeather AzerothCore + Individual Progression
+(Naxxramas progression server). Slash commands: /dj  /dungeonjournal
+
+Vanilla contents
+- 29 dungeons (RFC through Stratholme Living/Undead)
+- 7 raids in IP order: Molten Core, Onyxia, Blackwing Lair, Zul'Gurub,
+  Ruins of Ahn'Qiraj, Temple of Ahn'Qiraj, Naxxramas (40)
+- 3 world-boss pages: Azuregos, Lord Kazzak, Emerald Dragons
+- Home: Dungeons | Raids | World Bosses (+ Vanilla/TBC/Wrath filter)
+- Per instance: Trash | Bosses | Quests | Preparation | Map
+- Bot Consumables help (home + Preparation). TBC and Wrath are not filled yet.
+
+Install (from the Releases zip)
 1. Exit WoW completely.
-2. Delete ANY old Interface\AddOns\ServerDungeonJournal folder (do not merge; both must not load).
-3. Extract this zip into Interface\AddOns (it contains the DungeonJournal folder).
-4. Enable "Dungeon Journal" on the character screen and type /dj in game.
+2. Delete ANY old Interface\AddOns\ServerDungeonJournal folder
+   (do not merge; both must not load).
+3. Extract into Interface\AddOns so the folder is Interface\AddOns\DungeonJournal
+   (DungeonJournal.toc at the top of that folder).
+4. Restart WoW, enable "Dungeon Journal", type /dj.
 
-SavedVariables
-- New: DungeonJournalDB
-- On first load, settings are copied once from ServerDungeonJournalDB if present
-  (lastEra and any other keys). Delete the old ServerDungeonJournal folder after installing.
+SavedVariables: DungeonJournalDB
+(On first load, settings may copy once from ServerDungeonJournalDB if present.)
 
-Slash commands (unchanged): /dj  /dungeonjournal
+Do not use GitHub "Code → Download ZIP" without renaming the folder from
+Naxx-Dungeon-Journal-main to DungeonJournal. Prefer the release zip.
 
-Layout
-DungeonJournal.toc             Interface 30300, SavedVariables: DungeonJournalDB
-Core.lua                       Addon table DungeonJournal, frame DungeonJournalFrame
-Tooltips.lua
-UI.lua
-Data\Vanilla.lua               Vanilla browser order (all Vanilla dungeons populated)
-Data\Vanilla\*.lua             Per-dungeon data (batches 1-9)
-Data\TBC.lua / Data\Wrath.lua  Placeholders (unchanged)
-Maps\ / Portraits\ / Media\
-
-v0.4.0 content (Batch 9) is included: Scholomance, Stratholme Living, Stratholme Undead.
-Vanilla dungeon set is complete. TBC and Wrath are unchanged.
-
-Bot Consumables: home button + Preparation sections (v0.4.2); MC raid profile detail in v0.5.0.
-Home: DUNGEONS | RAIDS | WORLD BOSSES section tabs; Vanilla/TBC/Wrath secondary. Raids: MC + Onyxia (v0.5.0); Zul'Gurub (v0.5.1); Blackwing Lair (v0.5.3); Ruins + Temple of Ahn'Qiraj (v0.5.4); Naxxramas 40 (v0.6.0 — Vanilla raids complete). World bosses: Azuregos, Lord Kazzak, Emerald Dragons (v0.5.2).
+Licence: GPLv2 — see LICENSE-GPL-2.0.txt and CREDITS.txt
+Changelog: CHANGELOG.txt

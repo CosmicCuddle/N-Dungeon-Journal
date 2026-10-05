@@ -17,7 +17,7 @@ OriginalWoW has T3 tables only — boss loot from IP (server wins).
   pages (Prev/Next); portraits; quests both factions.
 - Vanilla-wide consistency pass: Dungeons | Raids | World Bosses complete for
   Vanilla; no placeholders; harness extended.
-- Checks: luac, denylist, harness. Local commit only — do not push.
+- Checks: luac, denylist, harness. Published as GitHub release v0.6.0.
 
 v0.5.4 - Ruins of Ahn'Qiraj + Temple of Ahn'Qiraj (2026-10-05)
 --------------------------------------------------------------------------
