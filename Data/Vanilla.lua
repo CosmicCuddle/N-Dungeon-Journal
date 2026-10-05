@@ -11,7 +11,7 @@ end
 
 -- Ragefire Chasm now lives in Data\Vanilla\RagefireChasm.lua (loaded after this file).
 -- Browser order for the Vanilla tab (ids not listed keep their load order after these).
-SDJ.ORDER.Vanilla = {"rfc","deadmines","wailing","sfk","stockade","bfd","gnomer","rfk","smgy","smlib","smarm","smcat","rfd","ulda","zf","jintha","mara_p","mara_o","mara_i","st","brd","dm_e","dm_n","dm_w","lbrs","ubrs","scholo","strat_live","strat_ud","mc","onyxia"}
+SDJ.ORDER.Vanilla = {"rfc","deadmines","wailing","sfk","stockade","bfd","gnomer","rfk","smgy","smlib","smarm","smcat","rfd","ulda","zf","jintha","mara_p","mara_o","mara_i","st","brd","dm_e","dm_n","dm_w","lbrs","ubrs","scholo","strat_live","strat_ud","mc","onyxia","zg"}
 
 -- The Deadmines, Wailing Caverns, Shadowfang Keep and The Stockade now live in
 -- Data\Vanilla\<Dungeon>.lua (v0.3.2, loaded after this file); the old v0.2 entries were removed.
@@ -25,4 +25,4 @@ SDJ.ORDER.Vanilla = {"rfc","deadmines","wailing","sfk","stockade","bfd","gnomer"
 -- Dire Maul East, North and West moved in v0.3.7 (their placeholders were removed).
 -- Lower and Upper Blackrock Spire moved in v0.3.8 (their placeholders were removed).
 -- Scholomance and Stratholme (Living / Undead) moved in v0.4.0 (their placeholders were removed).
--- Vanilla dungeon set is complete. Raids begin at v0.5.0 (mc, onyxia); further raid batches TBD.
+-- Vanilla dungeon set is complete. Raids: v0.5.0 mc+onyxia; v0.5.1 Zul'Gurub; further batches TBD.

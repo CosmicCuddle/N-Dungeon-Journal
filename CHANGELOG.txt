@@ -1,3 +1,19 @@
+v0.5.1 - Raids batch 2: Zul'Gurub (2026-10-05)
+--------------------------------------------------------------------------
+Sources: Grimfeather mod-individual-progression (RequiredZulGurubProgression default 3 /
+PROGRESSION_BLACKWING_LAIR; dungeon_zulgurub.sql trash AI) + AzerothCore ZulGurub boss scripts
+for spell IDs. Atlas ZulGurub map. AtlasLoot ZG* tables (no IP loot-rate overrides found in
+dungeon_zulgurub.sql — AtlasLoot rates used).
+
+- 20-player raid; IP gate: progression stage 3 (Nefarian/BWL complete; after Onyxia unlocks BWL).
+- Prep: Zandalar coins/bijous, Primal Hakkari / Zanza enchants, Edge of Madness, Gahz'ranka
+  Mudskunk Lure, NR + Hakkar Blood Siphon / Poisonous Blood, consumables checklist.
+- Bot consumables: no named ZG profile; custom levels are non-raid only — stated explicitly.
+- Bosses: Jeklik, Venoxis, Mar'li, Mandokir, Edge of Madness (four possibles), Gahz'ranka,
+  Thekal, Arlokk, Jin'do, Hakkar. Trash loot ZGTrash1/2 + shared + enchants.
+- Quests: coins, bijous, heads, Heart of Hakkar, Yeh'kinya, Zanza enchants, Paragons sample.
+- Checks: luac, denylist, harness OK. Local commit only — do not push.
+
 v0.5.0 - Raids framework + Molten Core + Onyxia's Lair (2026-10-05)
 --------------------------------------------------------------------------
 Sources: Grimfeather/azerothcore-wotlk + Grimfeather/mod-individual-progression (Vanilla raid
