@@ -1,12 +1,43 @@
 ## Interface: 30300
-## Title: |cffFFD100Dungeon|r Journal
-## Notes: Dungeon journal for the Naxxramas server, covering Vanilla, The Burning Crusade and Wrath of the Lich King.
+## Title: Dungeon Journal
+## Notes: Server-specific dungeon journal for Vanilla, The Burning Crusade and Wrath of the Lich King. /dj
 ## Author: CosmicCuddle
-## Version: 0.2.1
+## Version: 0.4.1
 ## SavedVariables: DungeonJournalDB
+## X-License: GPLv2 (includes GPL-licensed Atlas/AtlasLoot/AtlasQuest derived data)
 
 Core.lua
+Tooltips.lua
 Data\Vanilla.lua
+Data\Vanilla\RagefireChasm.lua
+Data\Vanilla\TheDeadmines.lua
+Data\Vanilla\WailingCaverns.lua
+Data\Vanilla\ShadowfangKeep.lua
+Data\Vanilla\TheStockade.lua
+Data\Vanilla\BlackfathomDeeps.lua
+Data\Vanilla\Gnomeregan.lua
+Data\Vanilla\RazorfenKraul.lua
+Data\Vanilla\ScarletMonasteryGraveyard.lua
+Data\Vanilla\ScarletMonasteryLibrary.lua
+Data\Vanilla\ScarletMonasteryArmory.lua
+Data\Vanilla\ScarletMonasteryCathedral.lua
+Data\Vanilla\RazorfenDowns.lua
+Data\Vanilla\Uldaman.lua
+Data\Vanilla\ZulFarrak.lua
+Data\Vanilla\JinthaAlor.lua
+Data\Vanilla\MaraudonPurple.lua
+Data\Vanilla\MaraudonOrange.lua
+Data\Vanilla\MaraudonInner.lua
+Data\Vanilla\SunkenTemple.lua
+Data\Vanilla\BlackrockDepths.lua
+Data\Vanilla\DireMaulEast.lua
+Data\Vanilla\DireMaulNorth.lua
+Data\Vanilla\DireMaulWest.lua
+Data\Vanilla\LowerBlackrockSpire.lua
+Data\Vanilla\UpperBlackrockSpire.lua
+Data\Vanilla\Scholomance.lua
+Data\Vanilla\StratholmeLiving.lua
+Data\Vanilla\StratholmeUndead.lua
 Data\TBC.lua
 Data\Wrath.lua
 UI.lua

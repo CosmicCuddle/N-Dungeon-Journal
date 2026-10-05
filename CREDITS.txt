@@ -1,15 +1,310 @@
+CREDITS AND LICENCES
+====================
+
+This addon is distributed under the GNU General Public License v2 (see LICENSE-GPL-2.0.txt),
+because it includes material from GPL-licensed addons:
+
+1. Atlas (instance map browser) - GPLv2
+   Copyright 2005-2010 Dan Gilbert <dan.b.gilbert@gmail.com>; 3.3.5 update by Lothaer.
+   Map artwork by Niflheim (the map carries the credit "Atlas / Map: Niflheim / Addon: Dan Gilbert").
+   File: Maps\RagefireChasm.blp, copied unmodified from Atlas 1.17.0 (Interface 30300):
+   https://github.com/TrinityCore/wow_335a_addons  Atlas/Atlas/Images/Maps/RagefireChasm.blp
+   (commit 4c551c5cdb8937ddc8f7c87d936549b3e7dc0b7a). The RFC map legend comes from Atlas's AtlasMaps.lua.
+   v0.3.2 adds, copied unmodified from the same commit and folder: Maps\TheDeadmines.blp,
+   Maps\TheDeadminesEnt.blp, Maps\WailingCaverns.blp, Maps\WailingCavernsEnt.blp,
+   Maps\ShadowfangKeep.blp, Maps\TheStockade.blp. Legends, level ranges and minimum levels come
+   from AtlasMaps.lua (TheDeadmines, TheDeadminesEnt, WailingCaverns, WailingCavernsEnt,
+   ShadowfangKeep, TheStockade).
+   v0.3.3 adds, copied unmodified from the same commit and folder: Maps\BlackfathomDeeps.blp,
+   Maps\BlackfathomDeepsEnt.blp, Maps\Gnomeregan.blp, Maps\GnomereganEnt.blp,
+   Maps\RazorfenKraul.blp, Maps\SMGraveyard.blp, Maps\SMLibrary.blp, Maps\SMArmory.blp,
+   Maps\SMCathedral.blp, Maps\SMEnt.blp, with legends, level ranges and minimum levels from the
+   matching AtlasMaps.lua entries.
+   v0.3.4 adds, copied unmodified from the same commit and folder: Maps\RazorfenDowns.blp,
+   Maps\Uldaman.blp, Maps\UldamanEnt.blp, Maps\ZulFarrak.blp, with legends, level ranges and
+   minimum levels from the matching AtlasMaps.lua entries.
+   v0.3.5 adds, copied unmodified from the same commit and folder: Maps\Maraudon.blp,
+   Maps\MaraudonEnt.blp, Maps\TheSunkenTemple.blp, Maps\TheSunkenTempleEnt.blp, with legends,
+   level ranges and minimum levels from the matching AtlasMaps.lua entries (the Maraudon map is
+   shared by the three wings).
+   v0.3.6 adds, copied unmodified from the same commit and folder: Maps\BlackrockDepths.blp and
+   Maps\BlackrockSpireEnt.blp (Blackrock Mountain entrance), with legends, level range and minimum
+   level from the matching AtlasMaps.lua entries. Atlas has a single Blackrock Depths page.
+   v0.3.7 adds, copied unmodified from the same commit and folder: Maps\DireMaulEast.blp,
+   Maps\DireMaulNorth.blp, Maps\DireMaulWest.blp and Maps\DireMaulEnt.blp, with legends, level ranges
+   and minimum levels from the matching AtlasMaps.lua entries.
+   v0.3.8 adds, copied unmodified from the same commit and folder: Maps\BlackrockSpireLower.blp and
+   Maps\BlackrockSpireUpper.blp, with legends, level ranges and minimum levels from the matching
+   AtlasMaps.lua entries (the entrance map BlackrockSpireEnt.blp is reused).
+
+2. AtlasLoot (AtlasLoot_OriginalWoW) - GPL
+   Boss loot tables and drop percentages for Ragefire Chasm come from
+   AtlasLoot_OriginalWoW/originalwow.lua, AtlasLoot_Data["RagefireChasm"], in the same repository.
+   v0.3.2: AtlasLoot_Data["TheDeadmines1"/"TheDeadmines2"], ["WailingCaverns1"/"WailingCaverns2"],
+   ["ShadowfangKeep1"/"ShadowfangKeep2"], ["TheStockade"] and the Defias Leather / Embrace of the
+   Viper rows of ["VWOWSets1"]; Love is in the Air loot from AtlasLoot_WorldEvents/worldevents.lua,
+   AtlasLoot_Data["Valentineday3"].
+   v0.3.3: AtlasLoot_Data["BlackfathomDeeps1"/"BlackfathomDeeps2"], ["Gnomeregan1"/"Gnomeregan2"],
+   ["RazorfenKraul1"/"RazorfenKraul2"], ["SMGraveyard"], ["SMLibrary"], ["SMHerod"], ["SMCathedral"],
+   ["SMTrash"] (shared by the four SM wings), and AtlasLoot_WorldEvents/worldevents.lua
+   AtlasLoot_Data["HeadlessHorseman"].
+   v0.3.4: AtlasLoot_Data["RazorfenDowns1"/"RazorfenDowns2"], ["Uldaman1"/"Uldaman2"] and the
+   Zul'Farrak tables ["ZFAntusul"], ["ZFThekatheMartyr"], ["ZFWitchDoctorZumrah"],
+   ["ZFNekrumGutchewer"], ["ZFSezzziz"], ["ZFDustwraith"], ["ZFSandfury"], ["ZFSergeantBly"],
+   ["ZFHydromancerVelratha"], ["ZFGahzrilla"], ["ZFChiefUkorzSandscalp"], ["ZFZerillis"], ["ZFTrash"].
+   AtlasLoot has no Jintha'Alor table; its loot rows come from AzerothCore (see 4).
+   v0.3.5: AtlasLoot_Data["Maraudon1"/"Maraudon2"] and the Sunken Temple tables ["STAtalalarion"],
+   ["STTrollMinibosses"], ["STJammalan"], ["STOgom"], ["STDreamscythe"], ["STWeaver"],
+   ["STMorphaz"], ["STHazzas"], ["STAvatarofHakkar"], ["STEranikus"], ["STSpawnOfHakkar"],
+   ["STTrash"]. AtlasLoot has no Maraudon trash table.
+   v0.3.6: the Blackrock Depths tables ["BRDLordRoccor"], ["BRDHighInterrogatorGerstahn"],
+   ["BRDHoundmaster"], ["BRDArena"], ["BRDTheldren"], ["BRDPyromantLoregrain"], ["BRDWarderStilgiss"],
+   ["BRDVerek"], ["BRDTheVault"], ["BRDFineousDarkvire"], ["BRDLordIncendius"], ["BRDBaelGar"],
+   ["BRDGeneralAngerforge"], ["BRDGolemLordArgelmach"], ["BRDGuzzler"], ["BRDFlamelash"], ["BRDPanzor"],
+   ["BRDTomb"], ["BRDMagmus"], ["BRDImperatorDagranThaurissan"], ["BRDPrincess"], ["BRDBSPlans"],
+   ["BRDLyceum"], ["BRDForgewright"] and ["BRDTrash"].
+   v0.3.7: the Dire Maul tables ["DMEPusillin"], ["DMEZevrimThornhoof"], ["DMELethtendris"], ["DMEPimgib"],
+   ["DMEHydro"], ["DMEAlzzin"], ["DMEIsalien"], ["DMETrash"], ["DMNGuardMoldar"], ["DMNStomperKreeg"],
+   ["DMNGuardFengus"], ["DMNThimblejack"], ["DMNGuardSlipkik"], ["DMNCaptainKromcrush"], ["DMNChoRush"],
+   ["DMNKingGordok"], ["DMNTRIBUTERUN"], ["DMWTendrisWarpwood"], ["DMWIllyannaRavenoak"],
+   ["DMWMagisterKalendris"], ["DMWTsuzee"], ["DMWImmolthar"], ["DMWHelnurath"], ["DMWPrinceTortheldrin"],
+   ["DMWTrash"] and ["DMBooks"].
+   v0.3.8: the Blackrock Spire tables ["LBRSQuestItems"], ["LBRSSpirestoneButcher"], ["LBRSOmokk"],
+   ["LBRSSpirestoneLord"], ["LBRSLordMagus"], ["LBRSVosh"], ["LBRSVoone"], ["LBRSGrayhoof"], ["LBRSGrimaxe"],
+   ["LBRSSmolderweb"], ["LBRSCrystalFang"], ["LBRSDoomhowl"], ["LBRSZigris"], ["LBRSSlavener"], ["LBRSHalycon"],
+   ["LBRSBashguud"], ["LBRSWyrmthalak"], ["LBRSFelguard"], ["LBRSTrash"], ["UBRSEmberseer"], ["UBRSSolakar"],
+   ["UBRSFLAME"], ["UBRSQuestItems"], ["UBRSRunewatcher"], ["UBRSAnvilcrack"], ["UBRSRend"], ["UBRSGyth"],
+   ["UBRSBeast"], ["UBRSValthalak"], ["UBRSDrakkisath"] and ["UBRSTrash"].
+
+3. AtlasQuest - GPLv2
+   https://github.com/nanderson11/AtlasQuest (commit 19998f50ffd76c9bda1141e9ae5c7263d089c460)
+   The RFC quest list, levels, objectives, giver locations, notes and reward item IDs come from
+   Data/Quests.lua and Locales/enUS.lua. v0.3.2: the same files for The Deadmines, Wailing Caverns,
+   Shadowfang Keep and The Stockade (both factions).
+   v0.3.3: the same files for Blackfathom Deeps, Gnomeregan, Razorfen Kraul and the four
+   Scarlet Monastery wings (both factions).
+   v0.3.4: the same files for Razorfen Downs, Uldaman and Zul'Farrak (both factions). AtlasQuest
+   has no Jintha'Alor section; those quests come from the AzerothCore quest tables.
+   v0.3.5: the same files for Maraudon and The Temple of Atal'Hakkar (both factions).
+   v0.3.6: the same files for Blackrock Depths (both factions).
+   v0.3.7: the same files for Dire Maul East, North and West (both factions).
+   v0.3.8: the same files for Lower and Upper Blackrock Spire (both factions).
+
+4. AzerothCore world database (GPLv2) - https://github.com/azerothcore/azerothcore-wotlk
+   From v0.3.7 all data is generated from the server's fork: https://github.com/Grimfeather/azerothcore-wotlk
+   master @ 1a7e71b30226444b8403662b073e5b764535cd10 (2026-09-22): AC base SQL + 382 fork update files
+   through 2026_09_20_00. Earlier batches were re-checked against it (see CHANGELOG v0.3.7).
+   Used to cross-check quest chains (quest_template / quest_template_addon /
+   creature_queststarter / creature_questender), creature levels (creature_template),
+   creature abilities (smart_scripts) and creature display IDs (creature_template_model).
+   v0.3.2 also uses creature (spawns per map), creature_loot_template (quest-drop sources),
+   creature_template_addon (auras) and the C++ scripts boss_mr_smite.cpp,
+   boss_apothecary_hummel.cpp and instance_deadmines.cpp.
+   v0.3.3 also uses gameobject_template (Scarlet Monastery door locks) and the C++ scripts
+   instance_blackfathom_deeps.cpp, instance_gnomeregan.cpp, instance_razorfen_kraul.cpp,
+   instance_scarlet_monastery.cpp and hallows_end.cpp (Headless Horseman, Pumpkin Shrine).
+   v0.3.4 also uses gameobject / gameobject_loot_template (Jintha'Alor quest objects, the Ancient
+   Egg), creature spawn coordinates (Jintha'Alor map markers and quest-giver coordinates) and the
+   C++ scripts razorfen_downs.cpp, instance_razorfen_downs.cpp, instance_uldaman.cpp,
+   zulfarrak.cpp and instance_zulfarrak.cpp.
+   v0.3.5 also uses lfg_dungeon_template and areatrigger_teleport (the Maraudon wing split),
+   conditions, and the C++ script instance_sunken_temple.cpp (statues, Atal'ai Defenders,
+   Jammal'an / Eranikus, Egg of Hakkar event).
+   v0.3.6 also uses dungeon_access_template (minimum levels for Blackrock Depths and Molten Core) and
+   the C++ scripts blackrock_depths.cpp (Ring of Law / High Justice Grimstone, Theldren, Rocknot,
+   Phalanx), instance_blackrock_depths.cpp (The Vault, Argelmach, Tomb of the Seven, Lyceum /
+   Magmus) and boss_ambassador_flamelash.cpp, boss_anubshiah.cpp, boss_emperor_dagran_thaurissan.cpp,
+   boss_eviscerator.cpp, boss_general_angerforge.cpp, boss_gorosh_the_dervish.cpp, boss_grizzle.cpp,
+   boss_hedrum.cpp, boss_high_interrogator_gerstahn.cpp, boss_magmus.cpp, boss_moira_bronzebeard.cpp,
+   boss_okthor.cpp and boss_tomb_of_seven.cpp.
+   v0.3.7 also uses gameobject_loot_template (Gordok Tribute loot modes, Knot's cache, Fengus's Chest,
+   The Prince's Chest, Dusty Tomes, Warpwood Pods), reference_loot_template (Dire Maul books and Librams),
+   npc_vendor (Stomper Kreeg), game_event_creature (Revanchion) and the C++ scripts
+   instance_dire_maul.cpp (pylons, Immol'thar, Highborne Summoners, Gordok Tribute) and boss_isalien.cpp,
+   from the Grimfeather fork.
+   v0.3.8 also uses creature_summon_groups (Rend event waves), pool_creature (Ghok Bashguud),
+   gameobject_loot_template (Blackrock Spire quest objects, Father Flame), dungeon_access_template (map 229)
+   and the fork's C++ scripts in scripts/EasternKingdoms/BlackrockMountain/BlackrockSpire:
+   instance_blackrock_spire.cpp, boss_highlord_omokk.cpp, boss_warmaster_voone.cpp, boss_halycon.cpp,
+   boss_quartermaster_zigris.cpp, boss_overlord_wyrmthalak.cpp, boss_urok_doomhowl.cpp, boss_mor_grayhoof.cpp,
+   boss_pyroguard_emberseer.cpp, boss_solakar_flamewreath.cpp, boss_gyth.cpp, boss_rend_blackhand.cpp,
+   boss_the_beast.cpp, boss_lord_valthalak.cpp and boss_drakkisath.cpp.
+
+4b. mod-individual-progression (MIT License, Copyright (c) 2021 AzerothCore) - restored Vanilla creature AI
+   https://github.com/ZhengPeiRu21/mod-individual-progression (commit 0180b9172d0d29bbce53dd84af133b3d998b0622)
+   From v0.3.7 the server's fork is used instead: https://github.com/Grimfeather/mod-individual-progression
+   master @ d5e393bdc4624239d432d27d3ad2178abf8b94e9 (all earlier batches re-checked).
+   data/sql/world/base/dungeon_deadmines.sql, dungeon_wailing_caverns.sql, dungeon_shadowfang_keep.sql,
+   dungeon_stockade.sql: the smart_scripts there override AzerothCore's and were used for the
+   trash and boss abilities (only facts were taken; no code is included).
+   v0.3.3: dungeon_blackfathom_deeps.sql, dungeon_gnomeregan.sql, dungeon_razorfen_kraul.sql and
+   dungeon_scarlet_monastery.sql (same commit), including the restored Scarlet Scryer spawns and
+   rare spawn chances.
+   v0.3.4: dungeon_razorfen_downs.sql, dungeon_uldaman.sql, dungeon_zulfarrak.sql,
+   zone_hinterlands.sql (Jintha'Alor creatures; quest 2880 made Alliance-only) and the creature
+   level/rank overrides in vanilla_creatures.sql. From v0.3.4 creature levels in every populated
+   entry apply these overrides.
+   v0.3.5: dungeon_maraudon.sql, dungeon_sunken_temple.sql, dungeon_attunements.sql and
+   src/vanillaScripts/instance_maraudon.cpp (go_mara_portal: the Portal to Inner Maraudon is shown
+   only to players carrying the Scepter of Celebras).
+   v0.3.6: dungeon_blackrock_depths.sql, src/vanillaScripts/instance_blackrock_depths.cpp (Dark Keeper
+   portrait, Panzor spawn chance), quest_the_masquerade.sql (restored Alliance Onyxia attunement chain
+   through Marshal Windsor) and src/vanillaScripts/instance_onyxias_lair.cpp (Drakefire Amulet check).
+   v0.3.7: dungeon_dire_maul.sql (Dire Maul SAI, Kromcrush, Mastiff patrols, Dusty Tomes, Tsu'zee spawn
+   chance, warlock Dreadsteed ritual / Lord Hel'nurath) and dungeon_onyxia.sql (Foror's Compendium /
+   Quel'Serrar quest enders restored at Lorekeeper Lydros).
+   v0.3.8: dungeon_blackrock_spire.sql (Blackrock Spire SAI, rare spawn chances, Bannok Grimaxe pool,
+   Bijou's Belongings / Important Blackrock Documents objects, gemstone / seal / Dungeon Set 1 drop rates),
+   src/vanillaScripts/instance_blackrock_spire.cpp (UBRS door opened by the Seal of Ascension, Solakar waves,
+   Rend wipe reset) and boss_drakkisath.cpp, quest_the_masquerade.sql (6501 / 6502 giver and ender),
+   vanilla_quest_levels.sql (Warlord's Command objective) and zone_desolace.sql (6602 text).
+   The Dark Keeper Key's use ("Use on the Dark Coffer in the Black Vault") is from its Wowhead WotLK
+   item tooltip.
+   Spell names and short descriptions were checked against Wowhead's WotLK tooltips for the
+   scripted spell IDs.
+
+5. Boss portraits (Portraits\*.tga)
+   Cropped from Wowhead's model-viewer thumbnail renders (wow.zamimg.com, "wrath" model set) of the
+   3.3.5 creature display IDs that AzerothCore gives these NPCs:
+     Oggleflint (NPC 11517)            display 11611
+     Taragaman the Hungerer (NPC 11520) display 7970
+     Jergosh the Invoker (NPC 11518)   display 11429
+     Bazzalan (NPC 11519)              display 2007
+     Zelemar the Wrathful (NPC 17830)  display 1912
+   v0.3.2 (same method; all 42 checked visually on a contact sheet):
+     The Deadmines: Marisa du'Paige 599/2355, Brainwashed Noble 596/3267, Foreman Thistlenettle
+       626/10628, Rhahk'Zor 644/14403, Miner Johnson 3586/556, Sneed's Shredder 642/1269,
+       Sneed 643/7125, Gilnid 1763/7124, Mr. Smite 646/2026, Captain Greenskin 647/7113,
+       Edwin VanCleef 639/2029, Cookie 645/1305
+     Wailing Caverns: Mad Magglish 3655/7221, Trigore the Lasher 3652/1092, Boahn 3672/4212,
+       Lord Cobrahn 3669/4213, Lady Anacondra 3671/4313, Kresh 3653/5126, Lord Pythas 3670/4214,
+       Skum 3674/4203, Lord Serpentis 3673/4215, Verdan the Everliving 5775/4256,
+       Mutanus the Devourer 3654/4088, Deviate Faerie Dragon 5912/1267 (manual crop: the
+       antennae make the automatic crop too small)
+     Shadowfang Keep: Rethilgore 3914/524, Fel Steed 3864/1951, Razorclaw the Butcher 3886/524,
+       Baron Silverlaine 3887/3222, Commander Springvale 4278/3223, Odo the Blindwatcher 4279/522,
+       Deathsworn Captain 3872/3224, Fenrus the Devourer 4274/20180, Arugal's Voidwalker 4627/1131,
+       Wolf Master Nandos 3927/11179, Archmage Arugal 4275/2353, Apothecary Hummel 36296/31167
+     The Stockade: Targorr the Dread 1696/517, Kam Deepfury 1666/825, Hamhock 1717/3250,
+       Bazil Thredd 1716/1621, Dextren Ward 1663/2149, Bruegal Ironknuckle 1720/2142
+     (format: NPC entry / display ID)
+   v0.3.3 (same method; all 36 checked visually on a contact sheet; format NPC entry / display ID):
+     Blackfathom Deeps: Ghamoo-ra 4887/5027, Lady Sarevess 4831/4979, Gelihast 6243/1773,
+       Lorgus Jett 12902/12822, Baron Aquanis 12876/110, Twilight Lord Kelris 4832/4939,
+       Old Serra'kis 4830/1816 (manual crop), Aku'mai 4829/2837
+     Gnomeregan: Techbot 6231/7288, Grubbis 7361/6533, Viscous Fallout 7079/5497,
+       Electrocutioner 6000 6235/6915, Crowd Pummeler 9-60 6229/6774, Dark Iron Ambassador 6228/6669,
+       Mekgineer Thermaplugg 7800/6980
+     Razorfen Kraul: Roogug 6168/6110, Aggem Thorncurse 4424/6097, Death Speaker Jargba 4428/4644,
+       Overlord Ramtusk 4420/4652, Razorfen Spearhide 4438/6078, Agathelos the Raging 4422/2450,
+       Blind Hunter 4425/4735 (manual crop: the wings make the automatic crop too wide),
+       Charlga Razorflank 4421/4642, Earthcaller Halmgar 4842/6102
+     Scarlet Monastery: Interrogator Vishas 3983/2044, Bloodmage Thalnos 4543/11396,
+       Ironspine 6489/5231, Azshir the Sleepless 6490/5534, Fallen Champion 6488/5230,
+       Headless Horseman 23682/22351, Houndmaster Loksey 3974/2040, Arcanist Doan 6487/5266,
+       Herod 3975/2041, High Inquisitor Fairbanks 4542/2605, Scarlet Commander Mograine 3976/2042,
+       High Inquisitor Whitemane 3977/2043
+   v0.3.4 (same method; all 35 checked visually on a contact sheet; format NPC entry / display ID):
+     Razorfen Downs: Tuten'kash 7355/7845, Mordresh Fire Eye 7357/8055, Glutton 8567/7864,
+       Ragglesnout 7354/11382, Amnennar the Coldbringer 7358/7971, Plaguemaw the Rotting 7356/6124
+     Uldaman: Magregan Deepshadow 2932/4938, Digmaster Shovelphlange 7057/7220, Baelog 6906/5710,
+       Eric "The Swift" 6907/5708, Olaf 6908/5709, Revelosh 6910/5945, Ironaya 7228/6089,
+       Obsidian Sentinel 7023/5285, Ancient Stone Keeper 7206/10798, Galgann Firehammer 7291/6059,
+       Grimlok 4854/11165, Archaedas 2748/5988
+     Zul'Farrak: Antu'sul 8127/7353, Theka the Martyr 7272/6696, Witch Doctor Zum'rah 7271/6434,
+       Nekrum Gutchewer 7796/6690, Shadowpriest Sezz'ziz 7275/6441, Dustwraith 10081/9292,
+       Sandfury Executioner 7274/6440, Sergeant Bly 7604/6433, Hydromancer Velratha 7795/6685,
+       Gahz'rilla 7273/7271, Chief Ukorz Sandscalp 7267/6439, Ruuzlu 7797/6687,
+       Zerillis 10082/9293, Sandarr Dunereaver 10080/9291
+     Jintha'Alor: Vile Priestess Hexx 7995/7121, Hitah'ya the Keeper 10802/10659,
+       Mith'rethis the Enchanter 8217/28248
+   v0.3.5 (same method; all 22 checked visually on a contact sheet; format NPC entry / display ID):
+     Maraudon: Veng 13738/9418, Noxxion 13282/11172, Razorlash 12258/12389, Maraudos 13739/9441,
+       Lord Vyletongue 12236/12334, Meshlok the Harvester 12237/9014, Celebras the Cursed
+       12225/12350, Landslide 12203/12293, Tinkerer Gizlock 13601/7125, Rotgrip 13596/13589,
+       Princess Theradras 12201/12292
+   v0.3.6 (same method; all 24 checked visually on a contact sheet; format NPC entry / display ID):
+     Blackrock Depths: Lord Roccor 9025/5781, High Interrogator Gerstahn 9018/8761, Houndmaster Grebmar
+       9319/9212, Ring of Law (High Justice Grimstone 10096/9329), Theldren 16059/15981, Pyromancer
+       Loregrain 9024/8762, Warder Stilgiss 9041/9089, Verek 9042/9019, Watchman Doomgrip 9476/8655,
+       Fineous Darkvire 9056/8704, Lord Incendius 9017/1204, Bael'Gar 9016/12162, General Angerforge
+       9033/8756, Golem Lord Argelmach 8983/8759, Hurley Blackbreath 9537/8658, Phalanx 9502/8177,
+       Ribbly Screwspigot 9543/8667, Plugger Spazzring 9499/8652, Ambassador Flamelash 9156/8329,
+       Panzor the Invincible 8923/8270, The Seven (Doom'rel 9039/8687), Magmus 9938/12162,
+       Emperor Dagran Thaurissan 9019/8807, Princess Moira Bronzebeard 8929/8705
+     Sunken Temple: Atal'alarion 8580/7873, Dreamscythe 5721/7553 (manual crop), Weaver 5720/6375
+       (manual crop), Avatar of Hakkar 8443/8053 (manual crop), Jammal'an the Prophet 5710/6708,
+       Ogom the Wretched 5711/6709, Morphaz 5719/7975 (manual crop), Hazzas 5722/9584 (manual crop),
+       Shade of Eranikus 5709/7806, Spawn of Hakkar 5708/4065, Atal'ai Defenders (Zul'Lor 5716/6701)
+   v0.3.7 (same method; all 24 checked visually on a contact sheet; format NPC entry / display ID):
+     Dire Maul: Pusillin 14354/7552, Zevrim Thornhoof 11490/11335, Hydrospawn 13280/5489, Lethtendris
+       14327/21012, Pimgib 14349/14380, Alzzin the Wildshaper 11492/14416, Isalien 16097/16000,
+       Guard Mol'dar 14326/11561, Stomper Kreeg 14322/11545, Guard Fengus 14321/11561, Knot Thimblejack
+       14338/14381, Guard Slip'kik 14323/11561, Captain Kromcrush 14325/11564, Cho'Rush the Observer
+       14324/11537, King Gordok 11501/11583, Gordok Tribute (Mizzle the Crafty 14353/14406),
+       Tendris Warpwood 11489/14383, Illyanna Ravenoak 11488/11270, Magister Kalendris 11487/14384,
+       Tsu'zee 11467/11250, Immol'thar 11496/14173, Lord Hel'nurath 14506/14556, Prince Tortheldrin
+       11486/11256, Revanchion 14690/14695
+   v0.3.8 (same method; all 26 checked visually on a contact sheet; format NPC entry / display ID):
+     Lower Blackrock Spire: Highlord Omokk 9196/11565, Spirestone Butcher 9219/11574, Spirestone Battle
+       Lord 9218/11576, Spirestone Lord Magus 9217/11578, Shadow Hunter Vosh'gajin 9236/9732, War Master
+       Voone 9237/28281, Mor Grayhoof 16080/15997, Bannok Grimaxe 9596/9668, Mother Smolderweb 10596/9929,
+       Crystal Fang 10376/9755, Urok Doomhowl 10584/11583, Quartermaster Zigris 9736/9738, Halycon
+       10220/9567, Gizrul the Slavener 10268/9564, Ghok Bashguud 9718/11809, Burning Felguard 10263/5047,
+       Overlord Wyrmthalak 9568/8711
+     Upper Blackrock Spire: Pyroguard Emberseer 9816/2172, Solakar Flamewreath 10264/9581, Jed
+       Runewatcher 10509/9686, Goraluk Anvilcrack 10899/10222, Gyth 10339/9806, Warchief Rend Blackhand
+       10429/9778, The Beast 10430/10193, Lord Valthalak 16042/14308, General Drakkisath 10363/10115
+   The renders are of Blizzard Entertainment's in-game models (World of Warcraft (c) Blizzard
+   Entertainment). They are included for personal/private-server use only and are not covered by the GPL.
+
+5b. Jintha'Alor map (Maps\JinthaAlor.tga, v0.3.4)
+   A 512x512 crop of the 3.3.5 client's Hinterlands world map art (World of Warcraft (c) Blizzard
+   Entertainment), taken from Wowhead's copy (wow.zamimg.com/images/wow/wrath/maps/enus/original/47.jpg,
+   zone 47). Numbered markers were placed from AzerothCore spawn coordinates converted with the
+   Hinterlands WorldMapArea bounds. Also used as the Jintha'Alor cover. Not covered by the GPL.
+
+5c. 3.3.5 UI textures (v0.3.7 header)
+   The header uses only textures that ship with the 3.3.5 client; they are referenced by path, not
+   included. Paths were checked against the 3.3.5 FrameXML/art listfile of
+   https://github.com/s0h2x/WoTLK-3.3.5-UI-Source (blp branch). The mock preview image
+   (header_preview_v0.3.7.png, not part of the addon) was drawn from those textures.
+
+6. Server-specific trash/boss behaviour comes from the server owner's notes on the restored Vanilla AI
+   and (v0.3.2) from mod-individual-progression's smart_scripts (see 4b).
+   The per-role recommended levels for The Deadmines and Wailing Caverns were supplied by the
+   server owner.
+
+----- v0.3.0 credits (kept) -----
 TEST BUILD CREDITS
 ==================
 
-Visual reference:
+Visual reference
 Forever Dungeon Journal v1.2.0 by Exehn, supplied by the server owner as the requested design template.
 
-This v0.2.0 build is a WoW 3.3.5a rewrite rather than a direct port of the modern addon engine.
-The test build reuses the supplied Alliance/Horde, boss-level, quest-chain and rare-portrait frame artwork so the visual comparison can be judged accurately.
+This addon is a WoW 3.3.5a rewrite rather than a direct port of the modern addon engine. The test build reuses the supplied Alliance/Horde, boss-level, quest-chain and rare-portrait frame artwork so the visual comparison can be judged accurately.
 
-3.3.5 reference data used while building this test:
-- Blizzard client-native loading-screen and WorldMap texture paths.
-- Atlas / AtlasLoot-era 3.3.5 addon data for instance-map structure and encounter-specific loot/drop-rate reference values.
-- The server owner's own Dungeon Handbook material for custom Individual Progression trash/boss behaviour and quest guidance.
+3.3.5 reference data
+- AtlasLoot-era 3.3.5 data for encounter-specific loot tables and recorded drop percentages.
+- Atlas 3.3.5 naming/path conventions for optional map integration.
+- The server owner's Dungeon Handbook material for custom Individual Progression trash/boss behaviour and quest guidance.
+- Classic-era quest references were cross-checked where needed when filling missing quest-level, prerequisite and follow-up details.
 
-Before any public release, review the reference addon's redistribution/license terms. Test media can be replaced with client-native or original server artwork without changing the journal layout.
+Map artwork
+- v0.3 Batch 1 includes an original bundled RFC fallback route map drawn for this journal from the classic Ragefire Chasm layout.
+- If the player's 3.3.5 Atlas addon is installed, the journal prefers Atlas's own RagefireChasm.blp map. The Atlas project is GPL-licensed; this test build does not redistribute Atlas's BLP map file.
+
+Before any public release, review the supplied reference addon's redistribution/license terms and retain appropriate source/asset credits.
+
+v0.4.0 additions
+----------------
+- Maps\Scholomance.blp, Maps\Stratholme.blp from Atlas 1.17.0 (same commit/folder as prior batches).
+- AtlasLoot SCHOLO* and STRAT* tables from AtlasLoot_OriginalWoW/originalwow.lua; Postmaster set
+  from VWOWSets2 (no rates listed).
+- AtlasQuest entries for Scholomance / Stratholme quests, cross-checked with AzerothCore
+  quest_template.
+- AzerothCore: instance_scholomance.cpp, boss_darkmaster_gandling.cpp, boss_kirtonos_the_herald.cpp,
+  boss_kormok.cpp; instance_stratholme.cpp, boss_baroness_anastari.cpp, boss_jarien_and_sothos.cpp;
+  creature_template / smart_scripts for map 289 and 329.
+- mod-individual-progression: dungeon_scholomance.sql, dungeon_stratholme.sql (Vanilla SAI).
+- Boss portraits: same zamimg Wrath modelviewer method as prior batches (Portraits\*.tga).

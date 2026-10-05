@@ -1,41 +1,28 @@
-Dungeon Journal - v0.2.1 TEST
-===================================
-
-A WoW 3.3.5a-compatible server Dungeon Journal inspired closely by the layout and interaction style of Forever Dungeon Journal.
-
-THIS IS A SECOND VISUAL / DATA TEST BUILD.
-
-Major v0.2 changes
-- Five dungeon tabs: Trash, Bosses, Quests, Preparation and Map.
-- Correct 3.3.5 client loading-screen artwork paths for the browser, with a stronger centre crop to remove the Warcraft logo and top/bottom loading-screen framing.
-- Corrected Vanilla Stockade, Scarlet Monastery and Stratholme artwork paths.
-- Corrected shared TBC artwork paths and 3.3.5 Wrath loading-screen paths.
-- Real 3.3.5 creature models are used as selected-boss portraits where a creature ID is available.
-- Boss pages now include a concise encounter summary, abilities/phases, key mechanics, a full AtlasLoot-style loot table and drop rates.
-- Trash pages list dangerous trash abilities plus dungeon-specific AtlasLoot-style trash drops and drop rates.
-- Dungeon maps use the 3.3.5 client's own WorldMap dungeon tiles. Multi-floor dungeons receive Previous / Next floor controls.
-- Jintha'Alor uses the Hinterlands zone map because it is outdoor dungeon-style content.
-
-Fully upgraded v0.2 example entries
-- Ragefire Chasm
-- The Deadmines
-- Wailing Caverns
-- Jintha'Alor
-
-The remaining dungeon covers and many Vanilla map definitions are already wired in, but their full trash/boss/quest databases will be populated after this interface is approved.
-
-Important loot note
-The journal follows the AtlasLoot approach: boss tables contain the encounter-specific drops and the Trash tab contains dungeon-specific trash drops. Generic cloth, coin, food, vendor junk and broad random world-green pools are not mislabelled as dungeon-specific loot. Jintha'Alor is outdoor content, so broad zone/world drops are treated separately from its quest-critical encounter drops.
-
-Commands
-/dj
-/dungeonjournal
+Dungeon Journal - v0.4.1 (rename + Vanilla complete through Stratholme)
+======================================================================
 
 Install
-1. Close World of Warcraft.
-2. Back up or remove the previous DungeonJournal folder.
-3. Extract the fresh DungeonJournal folder into Interface\AddOns.
-4. Start WoW and enable Dungeon Journal.
-5. Type /dj.
+1. Exit WoW completely.
+2. Delete ANY old Interface\AddOns\ServerDungeonJournal folder (do not merge; both must not load).
+3. Extract this zip into Interface\AddOns (it contains the DungeonJournal folder).
+4. Enable "Dungeon Journal" on the character screen and type /dj in game.
 
-Do not copy v0.2 over an older test folder. Replace the folder so stale files cannot survive between builds.
+SavedVariables
+- New: DungeonJournalDB
+- On first load, settings are copied once from ServerDungeonJournalDB if present
+  (lastEra and any other keys). Delete the old ServerDungeonJournal folder after installing.
+
+Slash commands (unchanged): /dj  /dungeonjournal
+
+Layout
+DungeonJournal.toc             Interface 30300, SavedVariables: DungeonJournalDB
+Core.lua                       Addon table DungeonJournal, frame DungeonJournalFrame
+Tooltips.lua
+UI.lua
+Data\Vanilla.lua               Vanilla browser order (all Vanilla dungeons populated)
+Data\Vanilla\*.lua             Per-dungeon data (batches 1-9)
+Data\TBC.lua / Data\Wrath.lua  Placeholders (unchanged)
+Maps\ / Portraits\ / Media\
+
+v0.4.0 content (Batch 9) is included: Scholomance, Stratholme Living, Stratholme Undead.
+Vanilla dungeon set is complete. TBC and Wrath are unchanged.
