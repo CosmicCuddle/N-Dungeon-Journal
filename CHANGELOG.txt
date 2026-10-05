@@ -1,3 +1,34 @@
+v0.5.2 - Home sections + Vanilla World Bosses (2026-10-05)
+--------------------------------------------------------------------------
+Sources: Grimfeather AC creature spawns + mod-individual-progression
+(zz_ipp_aware_npcs.sql, zone_azshara.sql sinew 100%, boss_lord_kazzak.sql /
+vanillaScripts/boss_lord_kazzak.cpp, checkIPPhasing PROGRESSION_ONYXIA for
+emerald portal areas). AzerothCore boss_azuregos.cpp / boss_emerald_dragons.cpp
+spell IDs. AtlasLoot WorldBossesClassic + DYsondre/DLethon/DEmeriss/DTaerar
+(server rates win: 18704 and 20644 at 100%). Zone maps from Wowhead
+(wow.zamimg.com original zone art) with spawn markers — same approach as Jintha'Alor.
+Portraits from Wowhead wrath modelviewer display IDs.
+
+UI
+- Primary Blizzard-style tabs: Dungeons | Raids | World Bosses (sectionHolder).
+- Expansion selector (Vanilla/TBC/Wrath) is the secondary filter under the section tabs.
+- Removed the old Vanilla-only Dungeons/Raids sub-toggle (kindHolder).
+- Raid cards keep 40/20-PLAYER badge; world boss cards use WORLD badge.
+- Raid ORDER remains IP progression: MC, Onyxia, (BWL when shipped), ZG, …
+- Selection (section + era) resets to Dungeons / Vanilla on close (ESC/X).
+
+World Bosses (Vanilla)
+- Azuregos (Azshara): Manastorm / Arcane Vacuum teleport / Reflect / Mark of Frost;
+  ~10d respawn; FR prep; sinew IP 100%.
+- Lord Kazzak (Blasted Lands, IP restored): Mark of Kazzak, Twisted Reflection,
+  Capture Soul, 180s supreme Berserk; death respawn 2–3d; SR prep; loot IP ref 60000.
+- Emerald Dragons (one entry, four bosses): Ysondre druids, Lethon spirits/whirl,
+  Emeriss mushrooms, Taerar shades; Mark of Nature; four portal maps; IP visible after
+  Onyxia; Classic rotation noted vs fixed AC spawns; NR prep.
+- Highlord Kruul not spawned — omitted. No named bot consumables profiles (stated).
+
+Checks: luac, denylist, harness (ESC, overflow, section entries). Local commit only.
+
 v0.5.1 - Raids batch 2: Zul'Gurub (2026-10-05)
 --------------------------------------------------------------------------
 Sources: Grimfeather mod-individual-progression (RequiredZulGurubProgression default 3 /

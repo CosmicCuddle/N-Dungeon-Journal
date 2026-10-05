@@ -6,7 +6,7 @@ local SDJ = DungeonJournal
 
 local frame
 local selectedEra = "Vanilla"
-local selectedVanillaKind = "Dungeons"  -- or "Raids"
+local selectedSection = "Dungeons"  -- Dungeons | Raids | WorldBosses
 local selectedDungeon
 local selectedMode = "trash"
 local selectedBoss = 1
@@ -185,6 +185,8 @@ local ERA_LOGOS = {
     Wrath   = "Interface\\Glues\\Common\\Glues-WoW-WotLKLogo",
 }
 local ERA_TAB_W, ERA_TAB_H = 256, 38
+-- Primary section tabs (Dungeons | Raids | World Bosses) — same Blizzard tab art, slightly shorter
+local SEC_TAB_W, SEC_TAB_H = 250, 38
 
 -- three-piece tab (left cap / stretched middle / right cap), texcoords flipped top<->bottom
 local function TabPieces(b, layer, path)
@@ -231,6 +233,35 @@ local function MakeEraButton(parent, era, x)
     b:SetScript("OnClick", function()
         selectedEra = era
         DungeonJournalDB.lastEra = era
+        selectedDungeon = nil
+        SDJ:ShowHome()
+    end)
+    return b
+end
+
+local function MakeSectionButton(parent, key, label, x, width)
+    local b = CreateFrame("Button", nil, parent)
+    b:SetWidth(width or SEC_TAB_W); b:SetHeight(SEC_TAB_H)
+    b:SetPoint("BOTTOMLEFT", parent, "BOTTOMLEFT", x, 0)
+    local okA, okI
+    b.active, okA = TabPieces(b, "BACKGROUND", TAB_ACTIVE)
+    b.inactive, okI = TabPieces(b, "BACKGROUND", TAB_INACTIVE)
+    b.textured = okA and okI
+    b.selGlow = b:CreateTexture(nil, "ARTWORK"); b.selGlow:SetPoint("TOPLEFT", 6, -2); b.selGlow:SetPoint("BOTTOMRIGHT", -6, 2)
+    b.selGlow:SetTexCoord(0, 1, 1, 0); b.selGlow:SetBlendMode("ADD")
+    if not TrySetTexture(b.selGlow, TAB_GLOW) then b.selGlow:SetTexture(nil) end
+    b.hover = b:CreateTexture(nil, "HIGHLIGHT"); b.hover:SetPoint("TOPLEFT", 6, -2); b.hover:SetPoint("BOTTOMRIGHT", -6, 2)
+    b.hover:SetTexCoord(0, 1, 1, 0); b.hover:SetBlendMode("ADD"); b.hover:SetAlpha(0.55)
+    if not TrySetTexture(b.hover, TAB_GLOW) then b.hover:SetTexture("Interface\\Buttons\\WHITE8X8"); b.hover:SetVertexColor(1,0.82,0.3,0.12) end
+    if not b.textured then
+        ShowPieces(b.active, false); ShowPieces(b.inactive, false)
+        SetBackdrop(b, "Interface\\Buttons\\WHITE8X8", "Interface\\Tooltips\\UI-Tooltip-Border", 10, 2)
+    end
+    b.text = b:CreateFontString(nil,"OVERLAY","GameFontNormal")
+    b.text:SetHeight(14); b.text:SetText(label); b.text:SetPoint("CENTER", 0, 1)
+    b.section = key
+    b:SetScript("OnClick", function()
+        selectedSection = key
         selectedDungeon = nil
         SDJ:ShowHome()
     end)
@@ -328,44 +359,63 @@ local function IsRaidEntry(dungeon)
     return dungeon and (dungeon.tag == "Raid" or dungeon.raid == true)
 end
 
-local function UpdateKindButtons()
-    if not frame or not frame.kindHolder then return end
-    local show = (selectedEra == "Vanilla")
-    if show then frame.kindHolder:Show() else frame.kindHolder:Hide() end
-    if not show then return end
-    for _,b in ipairs({frame.kindDungeons, frame.kindRaids}) do
-        local sel = (b.kind == selectedVanillaKind)
-        if sel then
-            b:SetBackdropColor(0.43,0.23,0.07,1)
-            b:SetBackdropBorderColor(0.92,0.68,0.18,1)
-            b.text:SetTextColor(1,0.82,0.27)
+local function IsWorldBossEntry(dungeon)
+    return dungeon and (dungeon.tag == "World Boss" or dungeon.worldBoss == true)
+end
+
+local function EntryMatchesSection(dungeon)
+    if selectedSection == "Raids" then return IsRaidEntry(dungeon) end
+    if selectedSection == "WorldBosses" then return IsWorldBossEntry(dungeon) end
+    -- Dungeons: everything that is not a raid or world boss
+    return not IsRaidEntry(dungeon) and not IsWorldBossEntry(dungeon)
+end
+
+local function UpdateSectionButtons()
+    if not frame or not frame.sectionButtons then return end
+    for key,b in pairs(frame.sectionButtons) do
+        local sel = (key == selectedSection)
+        if b.textured then
+            ShowPieces(b.active, sel); ShowPieces(b.inactive, not sel)
+            b:SetHeight(sel and SEC_TAB_H or SEC_TAB_H - 4)
         else
-            b:SetBackdropColor(0.07,0.065,0.055,0.98)
-            b:SetBackdropBorderColor(0.34,0.27,0.16,1)
-            b.text:SetTextColor(0.77,0.71,0.62)
+            b:SetBackdropColor(sel and 0.44 or 0.07, sel and 0.25 or 0.06, sel and 0.08 or 0.05, sel and 1 or 0.98)
+            b:SetBackdropBorderColor(sel and 0.92 or 0.34, sel and 0.68 or 0.27, sel and 0.18 or 0.16, 1)
         end
+        if sel then b.selGlow:Show(); b.selGlow:SetAlpha(0.75); b.text:SetTextColor(1,0.84,0.28) else b.selGlow:Hide(); b.text:SetTextColor(0.72,0.67,0.58) end
+    end
+    if frame.homeTitle then
+        if selectedSection == "Raids" then frame.homeTitle:SetText("Browse Raids")
+        elseif selectedSection == "WorldBosses" then frame.homeTitle:SetText("Browse World Bosses")
+        else frame.homeTitle:SetText("Browse Dungeons") end
     end
     if frame.homeSub then
-        if selectedVanillaKind == "Raids" then
+        if selectedSection == "Raids" then
             frame.homeSub:SetText("Select a raid cover — same tabs as dungeons (trash, bosses, quests, preparation, maps)")
+        elseif selectedSection == "WorldBosses" then
+            frame.homeSub:SetText("Select a world boss cover — location, mechanics, loot, preparation and maps")
         else
             frame.homeSub:SetText("Select a dungeon cover to view trash, bosses, quests, preparation and maps")
         end
     end
+    if frame.backButton then
+        if selectedSection == "Raids" then frame.backButton:SetText("Raids")
+        elseif selectedSection == "WorldBosses" then frame.backButton:SetText("World Bosses")
+        else frame.backButton:SetText("Dungeons") end
+    end
+end
+
+local function UpdateEraButtonsSecondary()
+    -- era tabs stay Blizzard-style; they are the secondary filter under the section tabs
+    UpdateEraButtons()
 end
 
 local function RefreshHome()
-    UpdateEraButtons()
-    UpdateKindButtons()
+    UpdateSectionButtons()
+    UpdateEraButtonsSecondary()
     local raw = SDJ:GetDungeonList(selectedEra)
     local list = {}
-    if selectedEra == "Vanilla" then
-        local wantRaid = (selectedVanillaKind == "Raids")
-        for _,dungeon in ipairs(raw) do
-            if wantRaid == IsRaidEntry(dungeon) then table.insert(list, dungeon) end
-        end
-    else
-        list = raw
+    for _,dungeon in ipairs(raw) do
+        if EntryMatchesSection(dungeon) then table.insert(list, dungeon) end
     end
     local width = math.max(700,(frame.homeScroll:GetWidth() or 760)-4)
     local gap = 12
@@ -397,6 +447,8 @@ local function RefreshHome()
         end
         if IsRaidEntry(dungeon) then
             card.badge:SetText((dungeon.players or "?") .. "-PLAYER")
+        elseif IsWorldBossEntry(dungeon) then
+            card.badge:SetText("WORLD")
         elseif dungeon.tag == "Outdoor Dungeon" then
             card.badge:SetText("OUTDOOR")
         else
@@ -867,10 +919,13 @@ function SDJ:OpenDungeon(dungeon)
     selectedBoss=1; selectedQuest=1; selectedMapFloor=1; chainExpanded=false; questFaction=SDJ:PlayerFaction()
     frame.homePanel:Hide()
     if frame.botHelpPanel then frame.botHelpPanel:Hide() end
-    frame.contentPanel:Show(); frame.backButton:Show(); frame.eraHolder:Hide()
+    frame.contentPanel:Show(); frame.backButton:Show()
+    if frame.eraHolder then frame.eraHolder:Hide() end
+    if frame.sectionHolder then frame.sectionHolder:Hide() end
     frame.dungeonTitle:SetText(dungeon.name)
     local meta="LV "..tostring(dungeon.level or "").."  |  "..tostring(dungeon.location or "")
     if dungeon.tag=="Outdoor Dungeon" then meta=meta.."  |  OUTDOOR DUNGEON"
+    elseif dungeon.tag=="World Boss" or dungeon.worldBoss then meta=meta.."  |  WORLD BOSS"
     elseif (dungeon.tag=="Raid" or dungeon.raid) and dungeon.players then meta=meta.."  |  "..tostring(dungeon.players).."-PLAYER RAID" end
     local rl=dungeon.roleLevels
     if type(rl)=="table" and (rl.dps or rl.healer or rl.tank) then
@@ -886,7 +941,9 @@ function SDJ:ShowHome()
     if not frame then return end
     frame.contentPanel:Hide()
     if frame.botHelpPanel then frame.botHelpPanel:Hide() end
-    frame.homePanel:Show(); frame.backButton:Hide(); frame.eraHolder:Show()
+    frame.homePanel:Show(); frame.backButton:Hide()
+    if frame.eraHolder then frame.eraHolder:Show() end
+    if frame.sectionHolder then frame.sectionHolder:Show() end
     selectedDungeon=nil
     RefreshHome()
 end
@@ -934,12 +991,18 @@ local function ResetOnClose()
         owner = owner:GetParent()
     end
     selectedDungeon = nil; selectedBoss = 1; selectedQuest = 1; selectedMapFloor = 1; chainExpanded = false; selectedMode = "trash"
+    selectedSection = "Dungeons"; selectedEra = "Vanilla"
+    if DungeonJournalDB then DungeonJournalDB.lastEra = "Vanilla" end
     for _,sf in ipairs({frame.homeScroll, frame.trashTextScroll, frame.trashLootScroll, frame.bossList, frame.bossInfoScroll, frame.lootScroll,
                         frame.questList, frame.questDetail, frame.prepScroll, frame.mapLegendScroll, frame.botHelpScroll}) do
         if sf then sf:SetVerticalScroll(0) end
     end
     if frame.botHelpPanel then frame.botHelpPanel:Hide() end
-    if frame.contentPanel then frame.contentPanel:Hide(); frame.homePanel:Show(); frame.backButton:Hide(); frame.eraHolder:Show() end
+    if frame.contentPanel then
+        frame.contentPanel:Hide(); frame.homePanel:Show(); frame.backButton:Hide()
+        if frame.sectionHolder then frame.sectionHolder:Show() end
+        if frame.eraHolder then frame.eraHolder:Show() end
+    end
 end
 SDJ.ResetOnClose = ResetOnClose
 
@@ -984,43 +1047,39 @@ local function CreateFrameUI()
     if TrySetTexture(div,"Interface\\DialogFrame\\UI-DialogBox-Divider") then div:SetTexCoord(0,0.71,0,1); div:SetVertexColor(1,0.82,0.42) -- metal bar tinted gold
     else div:SetTexture("Interface\\Buttons\\WHITE8X8"); div:SetVertexColor(0.68,0.52,0.20,0.65); div:SetHeight(1) end
     local close=CreateFrame("Button",nil,frame,"UIPanelCloseButton"); close:SetPoint("TOPRIGHT",-3,-3)
-    frame.backButton=CreateFrame("Button",nil,frame,"UIPanelButtonTemplate"); frame.backButton:SetWidth(105); frame.backButton:SetHeight(24); frame.backButton:SetPoint("TOPLEFT",28,-54); frame.backButton:SetText("Dungeons"); frame.backButton:SetScript("OnClick",function() SDJ:ShowHome() end)
+    frame.backButton=CreateFrame("Button",nil,frame,"UIPanelButtonTemplate"); frame.backButton:SetWidth(120); frame.backButton:SetHeight(24); frame.backButton:SetPoint("TOPLEFT",28,-54); frame.backButton:SetText("Dungeons"); frame.backButton:SetScript("OnClick",function() SDJ:ShowHome() end)
 
     local home=CreateFrame("Frame",nil,frame); frame.homePanel=home; home:SetPoint("TOPLEFT",18,-86); home:SetPoint("BOTTOMRIGHT",-18,18)
     SetBackdrop(home,"Interface\\Buttons\\WHITE8X8","Interface\\Tooltips\\UI-Tooltip-Border",14,4); home:SetBackdropColor(unpack(COLORS.panel)); home:SetBackdropBorderColor(unpack(COLORS.border)); AddParchment(home,0.15)
     local ht=home:CreateFontString(nil,"OVERLAY","GameFontNormalHuge"); ht:SetPoint("TOPLEFT",18,-15); ht:SetText("Browse Dungeons"); ht:SetTextColor(unpack(COLORS.gold))
+    frame.homeTitle = ht
     local hs=home:CreateFontString(nil,"OVERLAY","GameFontHighlightSmall"); hs:SetPoint("TOPLEFT",ht,"BOTTOMLEFT",1,-5); hs:SetText("Select a dungeon cover to view trash, bosses, quests, preparation and maps"); hs:SetTextColor(unpack(COLORS.muted))
     frame.homeSub = hs
-    -- Dungeons / Raids sub-toggle (Vanilla tab only)
-    local kh=CreateFrame("Frame",nil,home); kh:SetPoint("TOPRIGHT",home,"TOPRIGHT",-8,-36); kh:SetWidth(220); kh:SetHeight(28)
-    frame.kindHolder=kh
-    local function MakeKind(label, kind, x)
-        local b=CreateFrame("Button",nil,kh)
-        b:SetWidth(100); b:SetHeight(24); b:SetPoint("LEFT",x,0); b.kind=kind
-        SetBackdrop(b,"Interface\\Buttons\\WHITE8X8","Interface\\Tooltips\\UI-Tooltip-Border",8,2)
-        b.text=b:CreateFontString(nil,"OVERLAY","GameFontNormalSmall"); b.text:SetPoint("CENTER"); b.text:SetText(label)
-        b:SetScript("OnClick",function()
-            selectedVanillaKind=kind
-            RefreshHome()
-        end)
-        return b
-    end
-    frame.kindDungeons=MakeKind("Dungeons","Dungeons",0)
-    frame.kindRaids=MakeKind("Raids","Raids",110)
     frame.botHelpButton=CreateFrame("Button",nil,home,"UIPanelButtonTemplate")
     frame.botHelpButton:SetWidth(140); frame.botHelpButton:SetHeight(24)
-    frame.botHelpButton:SetPoint("TOPRIGHT",-18,-18)
+    frame.botHelpButton:SetPoint("TOPRIGHT",-18,-14)
     frame.botHelpButton:SetText("Bot Consumables")
     frame.botHelpButton:SetScript("OnClick", function() SDJ:ShowBotConsumablesHelp() end)
-    frame.homeScroll=CreateFrame("ScrollFrame","DungeonJournalHomeScroll",home,"UIPanelScrollFrameTemplate"); frame.homeScroll:SetPoint("TOPLEFT",18,-68); frame.homeScroll:SetPoint("BOTTOMRIGHT",-31,15)
-    frame.homeContent=CreateFrame("Frame",nil,frame.homeScroll); frame.homeContent:SetWidth(747); frame.homeContent:SetHeight(1); frame.homeScroll:SetScrollChild(frame.homeContent)
-    -- expansion tabs sit on the home panel's top edge (eraHolder shares the panel's rect)
-    frame.eraHolder=CreateFrame("Frame",nil,frame); frame.eraHolder:SetPoint("BOTTOMLEFT",home,"TOPLEFT",0,-4); frame.eraHolder:SetPoint("BOTTOMRIGHT",home,"TOPRIGHT",0,-4); frame.eraHolder:SetHeight(ERA_TAB_H); frame.eraHolder:SetFrameLevel(home:GetFrameLevel()+2)
+    -- Secondary expansion filter (Vanilla / TBC / Wrath) under the primary section tabs
+    frame.eraHolder=CreateFrame("Frame",nil,home); frame.eraHolder:SetPoint("TOPLEFT",home,"TOPLEFT",8,-52); frame.eraHolder:SetPoint("TOPRIGHT",home,"TOPRIGHT",-160,-52); frame.eraHolder:SetHeight(ERA_TAB_H)
     frame.eraButtons={}
-    frame.eraButtons.Vanilla=MakeEraButton(frame.eraHolder,"Vanilla",22)
-    frame.eraButtons.TBC=MakeEraButton(frame.eraHolder,"TBC",286)
-    frame.eraButtons.Wrath=MakeEraButton(frame.eraHolder,"Wrath",550)
-
+    -- slightly narrower era tabs so three fit as a secondary row
+    local function MakeEraButtonSecondary(parent, era, x)
+        local b = MakeEraButton(parent, era, x)
+        b:SetWidth(200)
+        return b
+    end
+    frame.eraButtons.Vanilla=MakeEraButtonSecondary(frame.eraHolder,"Vanilla",4)
+    frame.eraButtons.TBC=MakeEraButtonSecondary(frame.eraHolder,"TBC",210)
+    frame.eraButtons.Wrath=MakeEraButtonSecondary(frame.eraHolder,"Wrath",416)
+    frame.homeScroll=CreateFrame("ScrollFrame","DungeonJournalHomeScroll",home,"UIPanelScrollFrameTemplate"); frame.homeScroll:SetPoint("TOPLEFT",18,-96); frame.homeScroll:SetPoint("BOTTOMRIGHT",-31,15)
+    frame.homeContent=CreateFrame("Frame",nil,frame.homeScroll); frame.homeContent:SetWidth(747); frame.homeContent:SetHeight(1); frame.homeScroll:SetScrollChild(frame.homeContent)
+    -- Primary section tabs (DUNGEONS | RAIDS | WORLD BOSSES) sit on the home panel's top edge
+    frame.sectionHolder=CreateFrame("Frame",nil,frame); frame.sectionHolder:SetPoint("BOTTOMLEFT",home,"TOPLEFT",0,-4); frame.sectionHolder:SetPoint("BOTTOMRIGHT",home,"TOPRIGHT",0,-4); frame.sectionHolder:SetHeight(SEC_TAB_H); frame.sectionHolder:SetFrameLevel(home:GetFrameLevel()+3)
+    frame.sectionButtons={}
+    frame.sectionButtons.Dungeons=MakeSectionButton(frame.sectionHolder,"Dungeons","Dungeons",10,240)
+    frame.sectionButtons.Raids=MakeSectionButton(frame.sectionHolder,"Raids","Raids",262,240)
+    frame.sectionButtons.WorldBosses=MakeSectionButton(frame.sectionHolder,"WorldBosses","World Bosses",514,270)
     local content=CreateFrame("Frame",nil,frame); frame.contentPanel=content; content:SetPoint("TOPLEFT",18,-90); content:SetPoint("BOTTOMRIGHT",-18,18)
     SetBackdrop(content,"Interface\\Buttons\\WHITE8X8","Interface\\Tooltips\\UI-Tooltip-Border",14,4); content:SetBackdropColor(unpack(COLORS.panel)); content:SetBackdropBorderColor(unpack(COLORS.border)); AddParchment(content,0.13)
     frame.dungeonArt=content:CreateTexture(nil,"BACKGROUND"); frame.dungeonArt:SetAllPoints(content); frame.dungeonArt:SetAlpha(0.08)
