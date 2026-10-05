@@ -1,4 +1,4 @@
-Dungeon Journal - v0.4.1 (rename + Vanilla complete through Stratholme)
+Dungeon Journal - v0.4.2 (rename + Vanilla complete through Stratholme)
 ======================================================================
 
 Install
@@ -26,3 +26,5 @@ Maps\ / Portraits\ / Media\
 
 v0.4.0 content (Batch 9) is included: Scholomance, Stratholme Living, Stratholme Undead.
 Vanilla dungeon set is complete. TBC and Wrath are unchanged.
+
+Bot Consumables: home button + Preparation sections (v0.4.2).

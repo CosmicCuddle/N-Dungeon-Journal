@@ -499,6 +499,7 @@ end
 
 local function HideJournalPanels()
     frame.trashPanel:Hide(); frame.bossPanel:Hide(); frame.questPanel:Hide(); frame.prepPanel:Hide(); frame.mapPanel:Hide()
+    if frame.botHelpPanel then frame.botHelpPanel:Hide() end
 end
 
 
@@ -729,6 +730,10 @@ function SDJ:RefreshPreparation()
             table.insert(out, H..i..".|r  "..tostring(entry))   -- legacy string list
         end
     end
+    local bot = SDJ:GetBotConsumablesPrep(selectedDungeon)
+    if bot then
+        table.insert(out, H..tostring(bot.title).."|r\n"..BulletLines(bot.lines))
+    end
     if #out == 0 then
         frame.prepText:SetText("Preparation notes for this dungeon have not been populated yet.")
     else
@@ -737,6 +742,7 @@ function SDJ:RefreshPreparation()
     frame.prepScroll:SetVerticalScroll(0)
     FitText(frame.prepText, frame.prepContent, 12, frame.prepScroll)
 end
+
 
 ------------------------------------------------------------------ MAP
 function SDJ:RefreshMap()
@@ -808,7 +814,9 @@ function SDJ:OpenDungeon(dungeon)
     if not frame then return end
     selectedDungeon=dungeon
     selectedBoss=1; selectedQuest=1; selectedMapFloor=1; chainExpanded=false; questFaction=SDJ:PlayerFaction()
-    frame.homePanel:Hide(); frame.contentPanel:Show(); frame.backButton:Show(); frame.eraHolder:Hide()
+    frame.homePanel:Hide()
+    if frame.botHelpPanel then frame.botHelpPanel:Hide() end
+    frame.contentPanel:Show(); frame.backButton:Show(); frame.eraHolder:Hide()
     frame.dungeonTitle:SetText(dungeon.name)
     local meta="LV "..tostring(dungeon.level or "").."  |  "..tostring(dungeon.location or "")..(dungeon.tag=="Outdoor Dungeon" and "  |  OUTDOOR DUNGEON" or "")
     local rl=dungeon.roleLevels
@@ -823,7 +831,9 @@ end
 
 function SDJ:ShowHome()
     if not frame then return end
-    frame.contentPanel:Hide(); frame.homePanel:Show(); frame.backButton:Hide(); frame.eraHolder:Show()
+    frame.contentPanel:Hide()
+    if frame.botHelpPanel then frame.botHelpPanel:Hide() end
+    frame.homePanel:Show(); frame.backButton:Hide(); frame.eraHolder:Show()
     selectedDungeon=nil
     RefreshHome()
 end
@@ -850,6 +860,7 @@ local function TextScroll(name, parent, width, fontObject)
 end
 
 ------------------------------------------------------------------ BUILD
+
 -- v0.3.7 ESC handling. 3.3.5 path: ESC -> ToggleGameMenu -> CloseAllWindows -> CloseWindows ->
 -- CloseSpecialWindows, which hides every shown _G[name] listed in UISpecialFrames.
 local FRAME_NAME = "DungeonJournalFrame"
@@ -871,9 +882,10 @@ local function ResetOnClose()
     end
     selectedDungeon = nil; selectedBoss = 1; selectedQuest = 1; selectedMapFloor = 1; chainExpanded = false; selectedMode = "trash"
     for _,sf in ipairs({frame.homeScroll, frame.trashTextScroll, frame.trashLootScroll, frame.bossList, frame.bossInfoScroll, frame.lootScroll,
-                        frame.questList, frame.questDetail, frame.prepScroll, frame.mapLegendScroll}) do
+                        frame.questList, frame.questDetail, frame.prepScroll, frame.mapLegendScroll, frame.botHelpScroll}) do
         if sf then sf:SetVerticalScroll(0) end
     end
+    if frame.botHelpPanel then frame.botHelpPanel:Hide() end
     if frame.contentPanel then frame.contentPanel:Hide(); frame.homePanel:Show(); frame.backButton:Hide(); frame.eraHolder:Show() end
 end
 SDJ.ResetOnClose = ResetOnClose
@@ -925,6 +937,11 @@ local function CreateFrameUI()
     SetBackdrop(home,"Interface\\Buttons\\WHITE8X8","Interface\\Tooltips\\UI-Tooltip-Border",14,4); home:SetBackdropColor(unpack(COLORS.panel)); home:SetBackdropBorderColor(unpack(COLORS.border)); AddParchment(home,0.15)
     local ht=home:CreateFontString(nil,"OVERLAY","GameFontNormalHuge"); ht:SetPoint("TOPLEFT",18,-15); ht:SetText("Browse Dungeons"); ht:SetTextColor(unpack(COLORS.gold))
     local hs=home:CreateFontString(nil,"OVERLAY","GameFontHighlightSmall"); hs:SetPoint("TOPLEFT",ht,"BOTTOMLEFT",1,-5); hs:SetText("Select a dungeon cover to view trash, bosses, quests, preparation and maps"); hs:SetTextColor(unpack(COLORS.muted))
+    frame.botHelpButton=CreateFrame("Button",nil,home,"UIPanelButtonTemplate")
+    frame.botHelpButton:SetWidth(140); frame.botHelpButton:SetHeight(24)
+    frame.botHelpButton:SetPoint("TOPRIGHT",-18,-18)
+    frame.botHelpButton:SetText("Bot Consumables")
+    frame.botHelpButton:SetScript("OnClick", function() SDJ:ShowBotConsumablesHelp() end)
     frame.homeScroll=CreateFrame("ScrollFrame","DungeonJournalHomeScroll",home,"UIPanelScrollFrameTemplate"); frame.homeScroll:SetPoint("TOPLEFT",18,-68); frame.homeScroll:SetPoint("BOTTOMRIGHT",-31,15)
     frame.homeContent=CreateFrame("Frame",nil,frame.homeScroll); frame.homeContent:SetWidth(747); frame.homeContent:SetHeight(1); frame.homeScroll:SetScrollChild(frame.homeContent)
     -- expansion tabs sit on the home panel's top edge (eraHolder shares the panel's rect)
@@ -1047,9 +1064,74 @@ local function CreateFrameUI()
     if frame.mapLegend.SetSpacing then frame.mapLegend:SetSpacing(4) end
     frame.mapCredit=frame.mapPanel:CreateFontString(nil,"OVERLAY","GameFontHighlightSmall"); frame.mapCredit:SetPoint("TOPLEFT",frame.mapCanvas,"BOTTOMLEFT",2,-5); frame.mapCredit:SetWidth(316); frame.mapCredit:SetHeight(24); frame.mapCredit:SetJustifyH("LEFT"); frame.mapCredit:SetJustifyV("TOP"); frame.mapCredit:SetTextColor(0.60,0.56,0.50)
 
+    -- Bot Consumables help (home browser); same parchment style, scrolls, ESC closes the journal
+    local help=CreateFrame("Frame",nil,frame); frame.botHelpPanel=help
+    help:SetPoint("TOPLEFT",18,-86); help:SetPoint("BOTTOMRIGHT",-18,18)
+    SetBackdrop(help,"Interface\\Buttons\\WHITE8X8","Interface\\Tooltips\\UI-Tooltip-Border",14,4)
+    help:SetBackdropColor(unpack(COLORS.panel)); help:SetBackdropBorderColor(unpack(COLORS.border)); AddParchment(help,0.15)
+    local htitle=help:CreateFontString(nil,"OVERLAY","GameFontNormalHuge"); htitle:SetPoint("TOPLEFT",18,-15); htitle:SetText("Bot Consumables"); htitle:SetTextColor(unpack(COLORS.gold))
+    local hsub=help:CreateFontString(nil,"OVERLAY","GameFontHighlightSmall"); hsub:SetPoint("TOPLEFT",htitle,"BOTTOMLEFT",1,-5)
+    hsub:SetText("Naxxramas Core Playerbot packages — commands and short notes"); hsub:SetTextColor(unpack(COLORS.muted))
+    frame.botHelpScroll, frame.botHelpContent, frame.botHelpText = TextScroll("DungeonJournalBotHelpScroll", help, 760, "GameFontHighlight")
+    frame.botHelpScroll:SetPoint("TOPLEFT",18,-64); frame.botHelpScroll:SetPoint("BOTTOMRIGHT",-34,14)
+    help:Hide()
+
     for _,sf in ipairs({frame.homeScroll, frame.trashTextScroll, frame.trashLootScroll, frame.bossList, frame.bossInfoScroll, frame.lootScroll,
-                        frame.questList, frame.questDetail, frame.prepScroll, frame.mapLegendScroll}) do SetupScroll(sf) end
+                        frame.questList, frame.questDetail, frame.prepScroll, frame.mapLegendScroll, frame.botHelpScroll}) do SetupScroll(sf) end
     frame:Hide(); frame.contentPanel:Hide(); frame.backButton:Hide()
+end
+
+
+------------------------------------------------------------------ BOT CONSUMABLES HELP
+local function BotHelpBody()
+    local C = SDJ.CMD or "|cff69ccf0"
+    local function cmd(s) return C .. s .. "|r" end
+    local parts = {
+        H .. "What it does|r\n" ..
+        "Gives Playerbots role-appropriate consumables from class, spec, role, level, dungeon, weapon type, mana use and pet. Long-duration buffs (flasks, elixirs, food, scrolls, juju, protection) are applied as auras. Usable items (healing/mana potions 5, bandages 20, stones, poisons, oils) are topped up to a target — never stacked endlessly.",
+
+        H .. "Roles (examples)|r\n" ..
+        "- Tank: defense elixir + Protection scroll.\n" ..
+        "- Strength DPS: strength elixir + Strength scroll.\n" ..
+        "- Agility DPS: agility elixir + Agility scroll; Grilled Squid at 35+.\n" ..
+        "- Healer: intellect/wisdom elixir + Spirit scroll; Nightfin Soup at 35+.\n" ..
+        "- Caster DPS: school elixir (shadow/frost/fire, else arcane/wisdom) + Intellect scroll; Nightfin Soup at 35+.\n" ..
+        "Every bot gets 5 level-appropriate healing potions. Mana users also get 5 mana potions (not warriors or rogues).",
+
+        H .. "Who is affected|r\n" ..
+        "Alt bots and random bots in your group/raid that are inside the correct instance or wing. Random bots are never modified globally. Death Knights and Protection Paladins (MC) are unsupported.",
+
+        H .. "Commands|r\n" ..
+        "- " .. cmd(".bot consumables 1-54") .. " — custom level package (1–54).\n" ..
+        "- Named: " .. cmd("mara") .. ", " .. cmd("sunken") .. ", " .. cmd("brd") .. ", " .. cmd("scholo") .. ", " .. cmd("stratud") .. ", " .. cmd("dm") .. ", " .. cmd("lbrs") .. ", " .. cmd("ubrs") .. ", " .. cmd("mc") .. ".\n" ..
+        "- " .. cmd(".bot consumables status") .. " — active profile, tracked auras, missing buffs, timed sequences.\n" ..
+        "- " .. cmd(".bot consumables clear") .. " — remove tracked auras and stop timed sequences.",
+
+        H .. "Tracking|r\n" ..
+        "About every 10 seconds the server checks tracked auras and warns once per missing buff (with the command to re-run). Scrolls, Greater Stoneshield and Juju Escape do not warn. Juju Flurry is reapplied automatically 3 times, about 60 seconds apart. Profiles clear when you leave the instance or wing.",
+
+        H .. "Molten Core|r\n" ..
+        cmd(".bot consumables mc") .. " works inside MC only. Every bot gets Greater Fire Protection, 5 Major Healing Potions, 20 bandages, 5 LIPs and class reagents, plus class/spec raid consumables (flasks, elixirs, juju, food, weapon stones/oils by equipped weapon). A Cache of Mau'ari is supplied automatically for juju.",
+
+        H .. "MultiBot addon|r\n" ..
+        "Left-click the Consumables button for the custom level (1–54). Right-click for the named dungeon bar.",
+
+        H .. "Dungeon profiles|r\n" ..
+        "Each dungeon Preparation tab lists the matching command. See mara, sunken, brd, scholo, stratud, dm, lbrs, ubrs; other Vanilla dungeons use " .. cmd(".bot consumables <1-54>") .. ".",
+    }
+    return table.concat(parts, "\n\n")
+end
+
+function SDJ:ShowBotConsumablesHelp()
+    if not frame then return end
+    frame.contentPanel:Hide()
+    frame.homePanel:Hide()
+    frame.eraHolder:Hide()
+    frame.backButton:Show()
+    frame.botHelpPanel:Show()
+    frame.botHelpText:SetText(BotHelpBody())
+    frame.botHelpScroll:SetVerticalScroll(0)
+    FitText(frame.botHelpText, frame.botHelpContent, 12, frame.botHelpScroll)
 end
 
 function SDJ:Toggle()

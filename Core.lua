@@ -6,7 +6,7 @@ DungeonJournal = DungeonJournal or {}
 local SDJ = DungeonJournal
 
 SDJ.ADDON_NAME = ADDON_NAME or "DungeonJournal"
-SDJ.VERSION = "0.4.1"
+SDJ.VERSION = "0.4.2"
 SDJ.ROOT = "Interface\\AddOns\\DungeonJournal\\"
 SDJ.MEDIA = SDJ.ROOT .. "Media\\"
 SDJ.MAPS = SDJ.ROOT .. "Maps\\"
@@ -18,6 +18,66 @@ SDJ.QUESTION_ICON = "Interface\\Icons\\INV_Misc_QuestionMark"
 SDJ.DUNGEONS = SDJ.DUNGEONS or { Vanilla = {}, TBC = {}, Wrath = {} }
 SDJ.BY_ID = SDJ.BY_ID or {}
 SDJ.ORDER = SDJ.ORDER or {}
+
+-- Bot Consumables (Naxxramas Core BotRaidConsumables.cpp / MultiBot Chatless – Naxxramas Fork).
+-- Command highlight used in Preparation and the help page.
+SDJ.CMD = "|cff69ccf0"
+local function C(cmd) return SDJ.CMD .. cmd .. "|r" end
+
+-- Per-dungeon Preparation "Bot Consumables" lines (facts from the server owner only).
+SDJ.BOT_CONSUMABLES = {
+    mara_p = {
+        C(".bot consumables mara") .. " — level cap 54; adds Nature Protection (Greater if the bot can use it).",
+    },
+    mara_o = {
+        C(".bot consumables mara") .. " — level cap 54; adds Nature Protection (Greater if the bot can use it).",
+    },
+    mara_i = {
+        C(".bot consumables mara") .. " — level cap 54; adds Nature Protection (Greater if the bot can use it).",
+    },
+    st = {
+        C(".bot consumables sunken") .. " — level cap 54; Nature Protection.",
+    },
+    brd = {
+        C(".bot consumables brd") .. " — level cap 60; Fire Protection.",
+    },
+    scholo = {
+        C(".bot consumables scholo") .. " — Shadow Protection.",
+    },
+    strat_ud = {
+        C(".bot consumables stratud") .. " (alias " .. C("strat") .. ") — Shadow Protection; you must be on the Undead/Service Entrance side.",
+    },
+    strat_live = {
+        "No named Living-side profile. Use " .. C(".bot consumables <level>") .. " (custom levels 1–54 only).",
+        "The named Stratholme profile is Undead-side only (" .. C(".bot consumables stratud") .. ").",
+    },
+    dm_e = {
+        C(".bot consumables dm") .. " — server detects the wing. East: Nature Protection.",
+    },
+    dm_w = {
+        C(".bot consumables dm") .. " — server detects the wing. West: Shadow Protection.",
+    },
+    dm_n = {
+        C(".bot consumables dm") .. " — server detects the wing. North: Enhanced profile (bandages 20, Limited Invulnerability Potions 5, Brilliant Wizard Oil 1 for casters, Brilliant Mana Oil 1 for healers, Instant Poison VI 20 / Deadly Poison IV 20 for rogues).",
+    },
+    lbrs = {
+        C(".bot consumables lbrs") .. " — normal level-60 role package; you must be in the Lower section.",
+    },
+    ubrs = {
+        C(".bot consumables ubrs") .. " — Fire Protection plus the Enhanced profile; you must be in the Upper section.",
+    },
+}
+SDJ.BOT_CONSUMABLES_DEFAULT = {
+    C(".bot consumables <1-54>") .. " — role-based package for this dungeon.",
+    "Effective level = lowest of the requested level, the bot's level and the dungeon's level cap. Only works inside non-raid dungeons.",
+}
+
+function SDJ:GetBotConsumablesPrep(dungeon)
+    if not dungeon or not dungeon.id then return nil end
+    local lines = self.BOT_CONSUMABLES[dungeon.id] or self.BOT_CONSUMABLES_DEFAULT
+    return { title = "Bot Consumables", lines = lines }
+end
+
 
 -- Register a dungeon. Entries are sorted by SDJ.ORDER[era] (list of ids) when
 -- the browser is drawn, so per-dungeon data files can load in any order.
