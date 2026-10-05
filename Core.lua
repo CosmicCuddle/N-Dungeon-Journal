@@ -6,7 +6,7 @@ DungeonJournal = DungeonJournal or {}
 local SDJ = DungeonJournal
 
 SDJ.ADDON_NAME = ADDON_NAME or "DungeonJournal"
-SDJ.VERSION = "0.4.2"
+SDJ.VERSION = "0.5.0"
 SDJ.ROOT = "Interface\\AddOns\\DungeonJournal\\"
 SDJ.MEDIA = SDJ.ROOT .. "Media\\"
 SDJ.MAPS = SDJ.ROOT .. "Maps\\"
@@ -65,6 +65,29 @@ SDJ.BOT_CONSUMABLES = {
     },
     ubrs = {
         C(".bot consumables ubrs") .. " — Fire Protection plus the Enhanced profile; you must be in the Upper section.",
+    },
+    mc = {
+        C(".bot consumables mc") .. " — works only inside Molten Core.",
+        "Common package: Greater Fire Protection aura; Major Healing Potions topped to 5; Heavy Runecloth Bandages to 20; Limited Invulnerability Potions to 5; plus class reagents.",
+        "Warrior tank: Flask of the Titans, Mongoose, Elixir of Fortitude, Superior Defense, Greater Stoneshield, Lung Juice Cocktail, Blessed Sunfruit, Juju Power/Might/Escape, Elemental Sharpening Stones (sharp) or Dense Weightstones (blunt) x20.",
+        "DPS warrior (Arms/Fury): Titans, Mongoose, R.O.I.D.S., Blessed Sunfruit, Juju Power/Might/Flurry, plus stones.",
+        "Holy Paladin: Major Mana Potions 5, Greater Intellect, Sages, Flask of Distilled Wisdom, Cerebral Cortex Compound, Nightfin Soup, Brilliant Mana Oil.",
+        "Ret Paladin: Major Mana, Greater Intellect, Sages, Mongoose, Giants, R.O.I.D.S., Blessed Sunfruit, Juju Power/Might/Flurry, plus stones.",
+        "Prot Paladin: unsupported.",
+        "Hunter: Major Mana, Greater Intellect, Sages, Mongoose, Ground Scorpok Assay, Grilled Squid; active pet gets Juju Power/Might (skipped if no pet).",
+        "Rogue: Mongoose, Ground Scorpok Assay, Grilled Squid, Juju Power/Might/Flurry, Instant Poison VI 20, Deadly Poison IV 20.",
+        "Shadow Priest: caster package (Major Mana, Greater Intellect, Sages, Flask of Supreme Power, Greater Arcane Elixir, Cerebral Cortex Compound, Nightfin Soup, Brilliant Wizard Oil) + Shadow Power.",
+        "Healing Priest: healer package (Major Mana, Greater Intellect, Sages, Flask of Distilled Wisdom, Cerebral Cortex Compound, Nightfin Soup, Brilliant Mana Oil).",
+        "Shaman: Enhancement — Major Mana, Greater Intellect, Sages, Mongoose, R.O.I.D.S., Nightfin Soup, Juju Power/Might; Elemental — caster package; Resto — healer package.",
+        "Mage: caster package; Frost also gets Frost Power.",
+        "Warlock: caster package + Shadow Power, plus Soul Shards.",
+        "Druid: Feral Tank — Titans, Mongoose, Lung Juice Cocktail, Greater Stoneshield, Blessed Sunfruit, Juju Power/Might; Feral DPS — Major Mana, Greater Intellect, Sages, Mongoose, Ground Scorpok Assay, Grilled Squid, Juju Power/Might; Balance — caster package; Resto — healer package.",
+        "Death Knights: unsupported.",
+        "Reagents: Druid Ironwood Seed 20 / Wild Thornroot 20; Mage Rune of Teleportation 10 / Rune of Portals 10 / Arcane Powder 20 / Light Feather 20; Paladin Symbol of Kings 100 / Symbol of Divinity 5; Priest Sacred Candle 20 / Light Feather 20; Rogue Flash Powder 20 / Blinding Powder 20; Shaman one each Earth/Fire/Water/Air Totem, Ankh 5, Shiny Fish Scales 20, Fish Oil 20; Warlock Soul Shard 5.",
+        "Juju needs a Cache of Mau'ari (supplied automatically). Juju Flurry is applied 3 times, about 60 seconds apart.",
+    },
+    onyxia = {
+        "Onyxia has no named " .. C(".bot consumables") .. " profile — do not invent one. Use flasks/pots from the raid checklist manually.",
     },
 }
 SDJ.BOT_CONSUMABLES_DEFAULT = {

@@ -1,3 +1,29 @@
+v0.5.0 - Raids framework + Molten Core + Onyxia's Lair (2026-10-05)
+--------------------------------------------------------------------------
+Sources: Grimfeather/azerothcore-wotlk + Grimfeather/mod-individual-progression (Vanilla raid
+scripts and dungeon_molten_core.sql / dungeon_onyxia.sql / quest_the_masquerade.sql). Atlas
+1.17.0 maps MoltenCore / OnyxiasLair. AtlasLoot OriginalWoW MC* tables; Onyxia Vanilla loot from
+IP (AtlasLoot 3.3.5 only has Wrath Onyxia_* — noted in the journal).
+
+UI
+- Vanilla home: Dungeons | Raids sub-toggle. Dungeon cards unchanged. Raid cards use the same
+  style with a "40-PLAYER" badge; dungeon header shows "40-PLAYER RAID".
+
+Molten Core (id mc)
+- 40-player raid; Atlas legend Lucifron→Ragnaros; trash + 10 bosses with scannable mechanics.
+- Preparation: Attunement 7848/7487, Hydraxian/Aqual/Eternal Quintessence + ManualRuneHandling,
+  IP PROGRESSION_MOLTEN_CORE on Ragnaros kill (no Drakefire-style item gate on MC enter), FR,
+  raid consumables checklist, full .bot consumables mc class/spec packages.
+- Quests: Hydraxian chain, Thunderfury start (7785–7787). Domo via runes; Rag summon via Domo.
+
+Onyxia's Lair (id onyxia)
+- IP Vanilla 40 (NPC 301000); Drakefire Amulet 16309 required (level ≥50; blocks post-TBC-T5).
+- Alliance Windsor chain + Horde Warlord's Command→Drakefire; head turn-ins 7495/7490.
+- PROGRESSION_ONYXIA unlocks BWL. No named bot-consumables profile (stated explicitly).
+- Phases 1–3, Deep Breath, warders; loot from IP reference tables.
+
+Checks: luac, denylist, harness (raids toggle + MC/Onyxia prep) OK. Local commit only — do not push.
+
 v0.4.2 - Bot Consumables (Naxxramas Core) (2026-10-05)
 --------------------------------------------------------------------------
 - Preparation tab: every Vanilla dungeon gets a short "Bot Consumables" section with the

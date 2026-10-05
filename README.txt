@@ -1,4 +1,4 @@
-Dungeon Journal - v0.4.2 (rename + Vanilla complete through Stratholme)
+Dungeon Journal - v0.5.0 (Vanilla raids: Molten Core + Onyxia)
 ======================================================================
 
 Install
@@ -27,4 +27,5 @@ Maps\ / Portraits\ / Media\
 v0.4.0 content (Batch 9) is included: Scholomance, Stratholme Living, Stratholme Undead.
 Vanilla dungeon set is complete. TBC and Wrath are unchanged.
 
-Bot Consumables: home button + Preparation sections (v0.4.2).
+Bot Consumables: home button + Preparation sections (v0.4.2); MC raid profile detail in v0.5.0.
+Raids: Vanilla home Dungeons/Raids toggle; Molten Core + Onyxia (v0.5.0).

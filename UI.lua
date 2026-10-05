@@ -6,6 +6,7 @@ local SDJ = DungeonJournal
 
 local frame
 local selectedEra = "Vanilla"
+local selectedVanillaKind = "Dungeons"  -- or "Raids"
 local selectedDungeon
 local selectedMode = "trash"
 local selectedBoss = 1
@@ -323,9 +324,49 @@ local function HomeCard(parent)
     return b
 end
 
+local function IsRaidEntry(dungeon)
+    return dungeon and (dungeon.tag == "Raid" or dungeon.raid == true)
+end
+
+local function UpdateKindButtons()
+    if not frame or not frame.kindHolder then return end
+    local show = (selectedEra == "Vanilla")
+    if show then frame.kindHolder:Show() else frame.kindHolder:Hide() end
+    if not show then return end
+    for _,b in ipairs({frame.kindDungeons, frame.kindRaids}) do
+        local sel = (b.kind == selectedVanillaKind)
+        if sel then
+            b:SetBackdropColor(0.43,0.23,0.07,1)
+            b:SetBackdropBorderColor(0.92,0.68,0.18,1)
+            b.text:SetTextColor(1,0.82,0.27)
+        else
+            b:SetBackdropColor(0.07,0.065,0.055,0.98)
+            b:SetBackdropBorderColor(0.34,0.27,0.16,1)
+            b.text:SetTextColor(0.77,0.71,0.62)
+        end
+    end
+    if frame.homeSub then
+        if selectedVanillaKind == "Raids" then
+            frame.homeSub:SetText("Select a raid cover — same tabs as dungeons (trash, bosses, quests, preparation, maps)")
+        else
+            frame.homeSub:SetText("Select a dungeon cover to view trash, bosses, quests, preparation and maps")
+        end
+    end
+end
+
 local function RefreshHome()
     UpdateEraButtons()
-    local list = SDJ:GetDungeonList(selectedEra)
+    UpdateKindButtons()
+    local raw = SDJ:GetDungeonList(selectedEra)
+    local list = {}
+    if selectedEra == "Vanilla" then
+        local wantRaid = (selectedVanillaKind == "Raids")
+        for _,dungeon in ipairs(raw) do
+            if wantRaid == IsRaidEntry(dungeon) then table.insert(list, dungeon) end
+        end
+    else
+        list = raw
+    end
     local width = math.max(700,(frame.homeScroll:GetWidth() or 760)-4)
     local gap = 12
     local cardWidth = math.floor((width-gap)/2)
@@ -342,7 +383,11 @@ local function RefreshHome()
         card:SetPoint("TOPLEFT",frame.homeContent,"TOPLEFT",col*(cardWidth+gap),-row*138)
         card.dungeon = dungeon
         card.title:SetText(dungeon.name)
-        card.meta:SetText("LV " .. tostring(dungeon.level or "") .. "  |  " .. tostring(dungeon.location or ""))
+        local meta = "LV " .. tostring(dungeon.level or "") .. "  |  " .. tostring(dungeon.location or "")
+        if IsRaidEntry(dungeon) and dungeon.players then
+            meta = meta .. "  |  " .. tostring(dungeon.players) .. "-PLAYER"
+        end
+        card.meta:SetText(meta)
         local count = SDJ:GetQuestCount(dungeon,faction)
         if count > 0 then
             local icon = faction == "Horde" and SDJ.HORDE_ICON or SDJ.ALLIANCE_ICON
@@ -350,7 +395,13 @@ local function RefreshHome()
         else
             card.counts:SetText("")
         end
-        card.badge:SetText(dungeon.tag == "Outdoor Dungeon" and "OUTDOOR" or "")
+        if IsRaidEntry(dungeon) then
+            card.badge:SetText((dungeon.players or "?") .. "-PLAYER")
+        elseif dungeon.tag == "Outdoor Dungeon" then
+            card.badge:SetText("OUTDOOR")
+        else
+            card.badge:SetText("")
+        end
         ApplyDungeonArt(card.art, dungeon)
         card:Show()
     end
@@ -818,7 +869,9 @@ function SDJ:OpenDungeon(dungeon)
     if frame.botHelpPanel then frame.botHelpPanel:Hide() end
     frame.contentPanel:Show(); frame.backButton:Show(); frame.eraHolder:Hide()
     frame.dungeonTitle:SetText(dungeon.name)
-    local meta="LV "..tostring(dungeon.level or "").."  |  "..tostring(dungeon.location or "")..(dungeon.tag=="Outdoor Dungeon" and "  |  OUTDOOR DUNGEON" or "")
+    local meta="LV "..tostring(dungeon.level or "").."  |  "..tostring(dungeon.location or "")
+    if dungeon.tag=="Outdoor Dungeon" then meta=meta.."  |  OUTDOOR DUNGEON"
+    elseif (dungeon.tag=="Raid" or dungeon.raid) and dungeon.players then meta=meta.."  |  "..tostring(dungeon.players).."-PLAYER RAID" end
     local rl=dungeon.roleLevels
     if type(rl)=="table" and (rl.dps or rl.healer or rl.tank) then
         -- per-role recommended levels (server-supplied values; shown only when a dungeon defines them)
@@ -937,6 +990,23 @@ local function CreateFrameUI()
     SetBackdrop(home,"Interface\\Buttons\\WHITE8X8","Interface\\Tooltips\\UI-Tooltip-Border",14,4); home:SetBackdropColor(unpack(COLORS.panel)); home:SetBackdropBorderColor(unpack(COLORS.border)); AddParchment(home,0.15)
     local ht=home:CreateFontString(nil,"OVERLAY","GameFontNormalHuge"); ht:SetPoint("TOPLEFT",18,-15); ht:SetText("Browse Dungeons"); ht:SetTextColor(unpack(COLORS.gold))
     local hs=home:CreateFontString(nil,"OVERLAY","GameFontHighlightSmall"); hs:SetPoint("TOPLEFT",ht,"BOTTOMLEFT",1,-5); hs:SetText("Select a dungeon cover to view trash, bosses, quests, preparation and maps"); hs:SetTextColor(unpack(COLORS.muted))
+    frame.homeSub = hs
+    -- Dungeons / Raids sub-toggle (Vanilla tab only)
+    local kh=CreateFrame("Frame",nil,home); kh:SetPoint("TOPRIGHT",home,"TOPRIGHT",-8,-36); kh:SetWidth(220); kh:SetHeight(28)
+    frame.kindHolder=kh
+    local function MakeKind(label, kind, x)
+        local b=CreateFrame("Button",nil,kh)
+        b:SetWidth(100); b:SetHeight(24); b:SetPoint("LEFT",x,0); b.kind=kind
+        SetBackdrop(b,"Interface\\Buttons\\WHITE8X8","Interface\\Tooltips\\UI-Tooltip-Border",8,2)
+        b.text=b:CreateFontString(nil,"OVERLAY","GameFontNormalSmall"); b.text:SetPoint("CENTER"); b.text:SetText(label)
+        b:SetScript("OnClick",function()
+            selectedVanillaKind=kind
+            RefreshHome()
+        end)
+        return b
+    end
+    frame.kindDungeons=MakeKind("Dungeons","Dungeons",0)
+    frame.kindRaids=MakeKind("Raids","Raids",110)
     frame.botHelpButton=CreateFrame("Button",nil,home,"UIPanelButtonTemplate")
     frame.botHelpButton:SetWidth(140); frame.botHelpButton:SetHeight(24)
     frame.botHelpButton:SetPoint("TOPRIGHT",-18,-18)
