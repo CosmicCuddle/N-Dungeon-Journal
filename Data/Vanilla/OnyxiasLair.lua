@@ -24,9 +24,9 @@ SDJ:AddDungeon("Vanilla", {
     location = "Dustwallow Marsh",
     tag = "Raid",
     players = "40",
-    art = "Interface\\GLUES\\LOADINGSCREENS\\LoadScreenKalimdor",
+    art = SDJ.MAPS .. "OnyxiasLair",
     artFallback = SDJ.MAPS .. "OnyxiasLair",
-    crop = {0.04, 0.96, 0.29, 0.73},
+    crop = {0.0, 1.0, 0.25, 0.7},
     fallbackCrop = {0.0, 1.0, 0.25, 0.7},
     maps = {
         {

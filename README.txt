@@ -1,4 +1,4 @@
-Dungeon Journal - v0.6.0 (Vanilla complete)
+Dungeon Journal - v0.6.1 (Vanilla complete)
 ======================================================================
 
 What it is

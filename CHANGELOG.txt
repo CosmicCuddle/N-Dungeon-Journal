@@ -1,3 +1,10 @@
+v0.6.1 - Fix Onyxia cover art (2026-10-05)
+--------------------------------------------------------------------------
+- Fix: Onyxia's Lair cover showed solid green (continent loading screen not
+  loadable on client); now uses bundled Atlas map art.
+- Guard: denylist + harness flag generic continent/glue loadscreens used as
+  cover art (LoadScreenKalimdor / EasternKingdom / Northrend / Outland / Wide).
+
 v0.6.0 - Vanilla raids complete: Naxxramas 40 (2026-10-05)
 --------------------------------------------------------------------------
 Sources: Grimfeather IP naxx40 (map 533 + RAID_DIFFICULTY_10MAN_HEROIC; creature
