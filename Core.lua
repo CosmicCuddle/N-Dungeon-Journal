@@ -6,7 +6,7 @@ DungeonJournal = DungeonJournal or {}
 local SDJ = DungeonJournal
 
 SDJ.ADDON_NAME = ADDON_NAME or "DungeonJournal"
-SDJ.VERSION = "0.5.4"
+SDJ.VERSION = "0.6.0"
 SDJ.ROOT = "Interface\\AddOns\\DungeonJournal\\"
 SDJ.MEDIA = SDJ.ROOT .. "Media\\"
 SDJ.MAPS = SDJ.ROOT .. "Maps\\"
@@ -101,6 +101,9 @@ SDJ.BOT_CONSUMABLES = {
     },
     aq40 = {
         "Temple of Ahn'Qiraj has no named " .. C(".bot consumables") .. " profile — do not invent one. Use NR / frost prep / flasks from the preparation checklist manually.",
+    },
+    naxx = {
+        "Naxxramas has no named " .. C(".bot consumables") .. " profile — do not invent one. Use FR pots / flasks / Frozen Rune gear from the preparation checklist manually.",
     },
     azuregos = {
         "Azuregos has no named " .. C(".bot consumables") .. " profile — do not invent one. Use frost pots / flasks from the preparation checklist manually.",

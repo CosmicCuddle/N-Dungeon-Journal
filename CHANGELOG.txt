@@ -1,3 +1,24 @@
+v0.6.0 - Vanilla raids complete: Naxxramas 40 (2026-10-05)
+--------------------------------------------------------------------------
+Sources: Grimfeather IP naxx40 (map 533 + RAID_DIFFICULTY_10MAN_HEROIC; creature
+entries 351xxx; naxx40_creatures.sql / naxx40_gameobjects.sql loot refs 3045xx /
+314800; naxx40Scripts/*_40.cpp). IndividualProgression isAttuned (9121/9122/9123),
+RequireNaxxStrathEntrance (default off), Stratholme Elders' Square gate 176424,
+gobject_naxx40_tele, PROGRESSION_AQ visibility / Kel'Thuzad → PROGRESSION_NAXX40.
+Atlas Naxxramas.blp (one art file; journal wing pages share it). AtlasLoot
+OriginalWoW has T3 tables only — boss loot from IP (server wins).
+
+- ORDER after AQ40: mc → onyxia → bwl → zg → aq20 → aq40 → naxx.
+- Prep: Angela Dosantos attunement Honored/Revered/Exalted costs (enforced);
+  Argent Dawn; FR for Sapphiron/KT; four wings any order then Frostwyrm; T3 /
+  Atiesh / Ramaladni; consumables. How the fork does Vanilla Naxx documented.
+- Bot consumables: no named Naxx profile (stated).
+- 15 bosses (Spider/Plague/Military/Construct + Sapphiron + KT) + trash; 5 map
+  pages (Prev/Next); portraits; quests both factions.
+- Vanilla-wide consistency pass: Dungeons | Raids | World Bosses complete for
+  Vanilla; no placeholders; harness extended.
+- Checks: luac, denylist, harness. Local commit only — do not push.
+
 v0.5.4 - Ruins of Ahn'Qiraj + Temple of Ahn'Qiraj (2026-10-05)
 --------------------------------------------------------------------------
 Sources: Grimfeather IP IndividualProgressionPlayer (PROGRESSION_PRE_AQ stage 4
