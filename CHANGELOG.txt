@@ -1,3 +1,27 @@
+v0.5.4 - Ruins of Ahn'Qiraj + Temple of Ahn'Qiraj (2026-10-05)
+--------------------------------------------------------------------------
+Sources: Grimfeather IP IndividualProgressionPlayer (PROGRESSION_PRE_AQ stage 4
+on MAP_RUINS_OF_AHN_QIRAJ / MAP_AHN_QIRAJ_TEMPLE; Bang a Gong! 8743 / Simply Bang a
+Gong! 108743 award PRE_AQ; Chaos and Destruction 108744 → PROGRESSION_AQ_WAR stage 5
+for outdoor war / Field Duty — not required to zone into the raids; C'Thun kill →
+PROGRESSION_AQ stage 6). aq_gate_quest.sql / aq_scripts.cpp (Scarab Gong restore;
+Simply Bang needs Mallet of Zul'Farrak 9240). aq_war_effort.sql. dungeon_aq20.sql
+(IP boss loot refs 30411–30436; server wins). dungeon_aq40.sql minimal (Ouro Scarab
+15718 SAI) — AtlasLoot AQ40* for Temple loot. AzerothCore RuinsOfAhnQiraj /
+TempleOfAhnQiraj boss_*.cpp. Atlas TheRuinsofAhnQiraj / TheTempleofAhnQiraj maps
+(one page each).
+
+- ORDER after ZG: mc → onyxia → bwl → zg → aq20 → aq40.
+- Prep: PRE_AQ / gong / war effort notes; Cenarion Circle + Brood of Nozdormu;
+  AQ20 class tokens / AQ40 set turn-ins; NR (Huhuran/Viscidus); frost for Viscidus;
+  Twin Emps teleports; C'Thun two phases; Qiraji mounts; consumables.
+- Bot consumables: no named AQ20 or AQ40 profile (stated).
+- AQ20 bosses: Kurinnaxx, Rajaxx (+ waves), Moam, Buru, Ayamiss, Ossirian (crystals).
+- AQ40 bosses: Skeram, Bug Trio (one entry), Sartura, Fankriss, Viscidus, Huhuran,
+  Twin Emperors, Ouro, C'Thun. Trash loot both raids.
+- Quests both factions (gong, Fall of Ossirian, C'Thun's Legacy / Savior of Kalimdor).
+- Checks: luac, denylist, harness. Local commit only.
+
 v0.5.3 - Blackwing Lair (2026-10-05)
 --------------------------------------------------------------------------
 Sources: Grimfeather IP IndividualProgressionPlayer (PROGRESSION_ONYXIA gate on

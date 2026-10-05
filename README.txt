@@ -1,4 +1,4 @@
-Dungeon Journal - v0.5.3 (Blackwing Lair)
+Dungeon Journal - v0.5.4 (Ahn'Qiraj)
 ======================================================================
 
 Install
@@ -28,4 +28,4 @@ v0.4.0 content (Batch 9) is included: Scholomance, Stratholme Living, Stratholme
 Vanilla dungeon set is complete. TBC and Wrath are unchanged.
 
 Bot Consumables: home button + Preparation sections (v0.4.2); MC raid profile detail in v0.5.0.
-Home: DUNGEONS | RAIDS | WORLD BOSSES section tabs; Vanilla/TBC/Wrath secondary. Raids: MC + Onyxia (v0.5.0); Zul'Gurub (v0.5.1). World bosses: Azuregos, Lord Kazzak, Emerald Dragons (v0.5.2). Raids: Blackwing Lair (v0.5.3).
+Home: DUNGEONS | RAIDS | WORLD BOSSES section tabs; Vanilla/TBC/Wrath secondary. Raids: MC + Onyxia (v0.5.0); Zul'Gurub (v0.5.1); Blackwing Lair (v0.5.3); Ruins + Temple of Ahn'Qiraj (v0.5.4). World bosses: Azuregos, Lord Kazzak, Emerald Dragons (v0.5.2).

@@ -6,7 +6,7 @@ DungeonJournal = DungeonJournal or {}
 local SDJ = DungeonJournal
 
 SDJ.ADDON_NAME = ADDON_NAME or "DungeonJournal"
-SDJ.VERSION = "0.5.3"
+SDJ.VERSION = "0.5.4"
 SDJ.ROOT = "Interface\\AddOns\\DungeonJournal\\"
 SDJ.MEDIA = SDJ.ROOT .. "Media\\"
 SDJ.MAPS = SDJ.ROOT .. "Maps\\"
@@ -95,6 +95,12 @@ SDJ.BOT_CONSUMABLES = {
     zg = {
         "Zul'Gurub has no named " .. C(".bot consumables") .. " profile (not in mara/sunken/brd/scholo/stratud/dm/lbrs/ubrs/mc).",
         "Custom " .. C(".bot consumables <1-54>") .. " only works inside non-raid dungeons — the system does not cover ZG yet. Do not invent a profile.",
+    },
+    aq20 = {
+        "Ruins of Ahn'Qiraj has no named " .. C(".bot consumables") .. " profile — do not invent one. Use NR pots / flasks from the preparation checklist manually.",
+    },
+    aq40 = {
+        "Temple of Ahn'Qiraj has no named " .. C(".bot consumables") .. " profile — do not invent one. Use NR / frost prep / flasks from the preparation checklist manually.",
     },
     azuregos = {
         "Azuregos has no named " .. C(".bot consumables") .. " profile — do not invent one. Use frost pots / flasks from the preparation checklist manually.",
