@@ -1,9 +1,15 @@
-v0.6.1 - Fix Onyxia cover art (2026-10-05)
+v0.6.1 - Onyxia cover art (loading screen), version fix (2026-10-06)
 --------------------------------------------------------------------------
-- Fix: Onyxia's Lair cover showed solid green (continent loading screen not
-  loadable on client); now uses bundled Atlas map art.
+- Onyxia's Lair cover now uses the Onyxia's Lair loading screen art (Blizzard)
+  as a bundled TGA (Media\Covers\OnyxiasLair.tga, 1024x512 32-bit), replacing
+  the continent loading screen that showed solid green / missing on the client.
+  Atlas map kept as artFallback.
+- Fix: the login chat message now reports the correct addon version (it still
+  said v0.6.0).
 - Guard: denylist + harness flag generic continent/glue loadscreens used as
-  cover art (LoadScreenKalimdor / EasternKingdom / Northrend / Outland / Wide).
+  cover art (LoadScreenKalimdor / EasternKingdom / Northrend / Outland / Wide);
+  harness also requires bundled cover TGAs to exist and be uncompressed 32-bit
+  power-of-two, and checks the addon version.
 
 v0.6.0 - Vanilla raids complete: Naxxramas 40 (2026-10-05)
 --------------------------------------------------------------------------

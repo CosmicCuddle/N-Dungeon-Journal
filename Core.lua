@@ -6,7 +6,7 @@ DungeonJournal = DungeonJournal or {}
 local SDJ = DungeonJournal
 
 SDJ.ADDON_NAME = ADDON_NAME or "DungeonJournal"
-SDJ.VERSION = "0.6.0"
+SDJ.VERSION = "0.6.1"
 SDJ.ROOT = "Interface\\AddOns\\DungeonJournal\\"
 SDJ.MEDIA = SDJ.ROOT .. "Media\\"
 SDJ.MAPS = SDJ.ROOT .. "Maps\\"

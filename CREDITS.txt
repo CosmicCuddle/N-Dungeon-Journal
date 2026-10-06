@@ -308,3 +308,8 @@ v0.4.0 additions
   creature_template / smart_scripts for map 289 and 329.
 - mod-individual-progression: dungeon_scholomance.sql, dungeon_stratholme.sql (Vanilla SAI).
 - Boss portraits: same zamimg Wrath modelviewer method as prior batches (Portraits\*.tga).
+
+v0.6.1 additions
+----------------
+- Onyxia's Lair cover: Blizzard Entertainment Onyxia's Lair loading screen artwork (World of
+  Warcraft), supplied by the server owner; cropped/resized. (Media\Covers\OnyxiasLair.tga)
