@@ -1,0 +1,356 @@
+# Changelog
+
+All notable changes to Dungeon Journal are documented here. Newest first. Dates are when the version was finished; see the GitHub Releases page for what was actually published.
+
+---
+
+## 0.6.2 - Bot Consumables update (2026-10-14)
+
+### Fixed
+- The Bot Consumables page no longer draws under the DUNGEONS | RAIDS | WORLD BOSSES tab row. The tabs are hidden while it is open, as on instance pages, the Back button shows on its own, and the page starts at the same height as instance pages.
+
+### Changed
+- Bot Consumables text rechecked against Mod-Naxxramas-Core `BotRaidConsumables.cpp` (commit `69a91be`) and N-MultiBot-Chatless (commit `7bc9baa`):
+  - level caps on every named profile (54 for mara and sunken, 60 for the rest);
+  - Greater protection potion only when usable at the bot's effective level, otherwise the normal one;
+  - Enhanced extras (DM North, UBRS) only when usable;
+  - who is prepared: bots in your group, or your own bots when you are not grouped; random bots only when grouped;
+  - 10-minute group cooldown, refresh at 10 minutes (auras) and 5 minutes (food), no preparing while dead;
+  - the `debug <profile>` form and the `strat` alias;
+  - the MultiBot bar has no MC button;
+  - raids other than MC and the world bosses: plain "no named profile" wording instead of developer notes.
+- Repository renamed to `CosmicCuddle/N-Dungeon-Journal`; links updated. The addon folder is still `DungeonJournal`.
+- `CHANGELOG.txt` replaced by this `CHANGELOG.md`, which is no longer shipped in the zip. `README.txt` links to the repository instead.
+
+### Added
+- `ROADMAP.md` and `docs/` (features, Bot Consumables, data sources, data format, art rules, install, troubleshooting, testing, release checklist).
+- `tools/` in the repository: the offline harness, denylist, 3.3.5 listfile and `build.sh`, with a README.
+- Harness check: no page opened from home may overlap the tab row.
+
+### Packaging
+- The zip is built from an explicit file list and contains only `DungeonJournal/`. `docs/`, `tools/`, `ROADMAP.md`, `CHANGELOG.md` and `README.md` are not shipped.
+
+---
+
+## 0.6.1 - Onyxia cover art (loading screen), version fix (2026-10-06)
+
+- Onyxia's Lair cover now uses the Onyxia's Lair loading screen art (Blizzard) as a bundled TGA (Media\Covers\OnyxiasLair.tga, 1024x512 32-bit), replacing the continent loading screen that showed solid green / missing on the client. Atlas map kept as artFallback.
+- Fix: the login chat message now reports the correct addon version (it still said v0.6.0).
+- Guard: denylist + harness flag generic continent/glue loadscreens used as cover art (LoadScreenKalimdor / EasternKingdom / Northrend / Outland / Wide); harness also requires bundled cover TGAs to exist and be uncompressed 32-bit power-of-two, and checks the addon version.
+
+---
+
+## 0.6.0 - Vanilla raids complete: Naxxramas 40 (2026-10-05)
+
+Sources: Grimfeather IP naxx40 (map 533 + RAID_DIFFICULTY_10MAN_HEROIC; creature entries 351xxx; naxx40_creatures.sql / naxx40_gameobjects.sql loot refs 3045xx / 314800; naxx40Scripts/*_40.cpp). IndividualProgression isAttuned (9121/9122/9123), RequireNaxxStrathEntrance (default off), Stratholme Elders' Square gate 176424, gobject_naxx40_tele, PROGRESSION_AQ visibility / Kel'Thuzad → PROGRESSION_NAXX40. Atlas Naxxramas.blp (one art file; journal wing pages share it). AtlasLoot OriginalWoW has T3 tables only — boss loot from IP (server wins).
+
+- ORDER after AQ40: mc → onyxia → bwl → zg → aq20 → aq40 → naxx.
+- Prep: Angela Dosantos attunement Honored/Revered/Exalted costs (enforced); Argent Dawn; FR for Sapphiron/KT; four wings any order then Frostwyrm; T3 / Atiesh / Ramaladni; consumables. How the fork does Vanilla Naxx documented.
+- Bot consumables: no named Naxx profile (stated).
+- 15 bosses (Spider/Plague/Military/Construct + Sapphiron + KT) + trash; 5 map pages (Prev/Next); portraits; quests both factions.
+- Vanilla-wide consistency pass: Dungeons | Raids | World Bosses complete for Vanilla; no placeholders; harness extended.
+- Checks: luac, denylist, harness. Published as GitHub release v0.6.0.
+
+---
+
+## 0.5.4 - Ruins of Ahn'Qiraj + Temple of Ahn'Qiraj (2026-10-05)
+
+Sources: Grimfeather IP IndividualProgressionPlayer (PROGRESSION_PRE_AQ stage 4 on MAP_RUINS_OF_AHN_QIRAJ / MAP_AHN_QIRAJ_TEMPLE; Bang a Gong! 8743 / Simply Bang a Gong! 108743 award PRE_AQ; Chaos and Destruction 108744 → PROGRESSION_AQ_WAR stage 5 for outdoor war / Field Duty — not required to zone into the raids; C'Thun kill → PROGRESSION_AQ stage 6). aq_gate_quest.sql / aq_scripts.cpp (Scarab Gong restore; Simply Bang needs Mallet of Zul'Farrak 9240). aq_war_effort.sql. dungeon_aq20.sql (IP boss loot refs 30411–30436; server wins). dungeon_aq40.sql minimal (Ouro Scarab 15718 SAI) — AtlasLoot AQ40* for Temple loot. AzerothCore RuinsOfAhnQiraj / TempleOfAhnQiraj boss_*.cpp. Atlas TheRuinsofAhnQiraj / TheTempleofAhnQiraj maps (one page each).
+
+- ORDER after ZG: mc → onyxia → bwl → zg → aq20 → aq40.
+- Prep: PRE_AQ / gong / war effort notes; Cenarion Circle + Brood of Nozdormu; AQ20 class tokens / AQ40 set turn-ins; NR (Huhuran/Viscidus); frost for Viscidus; Twin Emps teleports; C'Thun two phases; Qiraji mounts; consumables.
+- Bot consumables: no named AQ20 or AQ40 profile (stated).
+- AQ20 bosses: Kurinnaxx, Rajaxx (+ waves), Moam, Buru, Ayamiss, Ossirian (crystals).
+- AQ40 bosses: Skeram, Bug Trio (one entry), Sartura, Fankriss, Viscidus, Huhuran, Twin Emperors, Ouro, C'Thun. Trash loot both raids.
+- Quests both factions (gong, Fall of Ossirian, C'Thun's Legacy / Savior of Kalimdor).
+- Checks: luac, denylist, harness. Local commit only.
+
+---
+
+## 0.5.3 - Blackwing Lair (2026-10-05)
+
+Sources: Grimfeather IP IndividualProgressionPlayer (PROGRESSION_ONYXIA gate on MAP_BLACKWING_LAIR; Nefarian → PROGRESSION_BLACKWING_LAIR) + dungeon_blackwing_lair.sql (trash SmartAI, Vael flags_extra, Chromaggus Time Lapse spell_script, Nefarian loot refs 30486/30487/30551). AzerothCore BlackwingLair boss_*.cpp / instance (orb AT 7761 ghost teleport; Chromaggus RandomResize 2 breaths; Nefarian class calls). Atlas BlackwingLair map. AtlasLoot BWL* tables for non-Nefarian loot (server wins on Nefarian).
+
+- 40-player raid; ORDER after Onyxia, before ZG.
+- Prep: IP Onyxia stage gate (no brand item check); classic Blackhand's Command 7761 / Orb of Command; Onyxia Scale Cloak; FR; Vael BA; Razorgore orb/eggs; Broodlord suppression; Chromaggus randomised breaths; Nefarian class calls.
+- Bot consumables: no named BWL profile (stated).
+- Bosses Razorgore→Nefarian + trash; T2 chests from IP ref 30486 (2 rolls).
+- Quests: 7761, Head turn-ins 7781–7784, Only One May Rise 8288, Nefarius's Corruption 8730.
+- Checks: luac, denylist, harness. Local commit only.
+
+---
+
+## 0.5.2 - Home sections + Vanilla World Bosses (2026-10-05)
+
+Sources: Grimfeather AC creature spawns + mod-individual-progression (zz_ipp_aware_npcs.sql, zone_azshara.sql sinew 100%, boss_lord_kazzak.sql / vanillaScripts/boss_lord_kazzak.cpp, checkIPPhasing PROGRESSION_ONYXIA for emerald portal areas). AzerothCore boss_azuregos.cpp / boss_emerald_dragons.cpp spell IDs. AtlasLoot WorldBossesClassic + DYsondre/DLethon/DEmeriss/DTaerar (server rates win: 18704 and 20644 at 100%). Zone maps from Wowhead (wow.zamimg.com original zone art) with spawn markers — same approach as Jintha'Alor. Portraits from Wowhead wrath modelviewer display IDs.
+
+**UI**
+- Primary Blizzard-style tabs: Dungeons | Raids | World Bosses (sectionHolder).
+- Expansion selector (Vanilla/TBC/Wrath) is the secondary filter under the section tabs.
+- Removed the old Vanilla-only Dungeons/Raids sub-toggle (kindHolder).
+- Raid cards keep 40/20-PLAYER badge; world boss cards use WORLD badge.
+- Raid ORDER remains IP progression: MC, Onyxia, (BWL when shipped), ZG, …
+- Selection (section + era) resets to Dungeons / Vanilla on close (ESC/X).
+
+World Bosses (Vanilla)
+- Azuregos (Azshara): Manastorm / Arcane Vacuum teleport / Reflect / Mark of Frost; ~10d respawn; FR prep; sinew IP 100%.
+- Lord Kazzak (Blasted Lands, IP restored): Mark of Kazzak, Twisted Reflection, Capture Soul, 180s supreme Berserk; death respawn 2–3d; SR prep; loot IP ref 60000.
+- Emerald Dragons (one entry, four bosses): Ysondre druids, Lethon spirits/whirl, Emeriss mushrooms, Taerar shades; Mark of Nature; four portal maps; IP visible after Onyxia; Classic rotation noted vs fixed AC spawns; NR prep.
+- Highlord Kruul not spawned — omitted. No named bot consumables profiles (stated).
+
+Checks: luac, denylist, harness (ESC, overflow, section entries). Local commit only.
+
+---
+
+## 0.5.1 - Raids batch 2: Zul'Gurub (2026-10-05)
+
+Sources: Grimfeather mod-individual-progression (RequiredZulGurubProgression default 3 / PROGRESSION_BLACKWING_LAIR; dungeon_zulgurub.sql trash AI) + AzerothCore ZulGurub boss scripts for spell IDs. Atlas ZulGurub map. AtlasLoot ZG* tables (no IP loot-rate overrides found in dungeon_zulgurub.sql — AtlasLoot rates used).
+
+- 20-player raid; IP gate: progression stage 3 (Nefarian/BWL complete; after Onyxia unlocks BWL).
+- Prep: Zandalar coins/bijous, Primal Hakkari / Zanza enchants, Edge of Madness, Gahz'ranka Mudskunk Lure, NR + Hakkar Blood Siphon / Poisonous Blood, consumables checklist.
+- Bot consumables: no named ZG profile; custom levels are non-raid only — stated explicitly.
+- Bosses: Jeklik, Venoxis, Mar'li, Mandokir, Edge of Madness (four possibles), Gahz'ranka, Thekal, Arlokk, Jin'do, Hakkar. Trash loot ZGTrash1/2 + shared + enchants.
+- Quests: coins, bijous, heads, Heart of Hakkar, Yeh'kinya, Zanza enchants, Paragons sample.
+- Checks: luac, denylist, harness OK. Local commit only — do not push.
+
+---
+
+## 0.5.0 - Raids framework + Molten Core + Onyxia's Lair (2026-10-05)
+
+Sources: Grimfeather/azerothcore-wotlk + Grimfeather/mod-individual-progression (Vanilla raid scripts and dungeon_molten_core.sql / dungeon_onyxia.sql / quest_the_masquerade.sql). Atlas 1.17.0 maps MoltenCore / OnyxiasLair. AtlasLoot OriginalWoW MC* tables; Onyxia Vanilla loot from IP (AtlasLoot 3.3.5 only has Wrath Onyxia_* — noted in the journal).
+
+**UI**
+- Vanilla home: Dungeons | Raids sub-toggle. Dungeon cards unchanged. Raid cards use the same style with a "40-PLAYER" badge; dungeon header shows "40-PLAYER RAID".
+
+Molten Core (id mc)
+- 40-player raid; Atlas legend Lucifron→Ragnaros; trash + 10 bosses with scannable mechanics.
+- Preparation: Attunement 7848/7487, Hydraxian/Aqual/Eternal Quintessence + ManualRuneHandling, IP PROGRESSION_MOLTEN_CORE on Ragnaros kill (no Drakefire-style item gate on MC enter), FR, raid consumables checklist, full .bot consumables mc class/spec packages.
+- Quests: Hydraxian chain, Thunderfury start (7785–7787). Domo via runes; Rag summon via Domo.
+
+Onyxia's Lair (id onyxia)
+- IP Vanilla 40 (NPC 301000); Drakefire Amulet 16309 required (level ≥50; blocks post-TBC-T5).
+- Alliance Windsor chain + Horde Warlord's Command→Drakefire; head turn-ins 7495/7490.
+- PROGRESSION_ONYXIA unlocks BWL. No named bot-consumables profile (stated explicitly).
+- Phases 1–3, Deep Breath, warders; loot from IP reference tables.
+
+Checks: luac, denylist, harness (raids toggle + MC/Onyxia prep) OK. Local commit only — do not push.
+
+---
+
+## 0.4.2 - Bot Consumables (Naxxramas Core) (2026-10-05)
+
+- Preparation tab: every Vanilla dungeon gets a short "Bot Consumables" section with the matching .bot consumables command (named profiles for mara/sunken/brd/scholo/stratud/dm/ lbrs/ubrs; Living Strat notes Undead-only named profile; others use .bot consumables <1-54>).
+- Home browser: "Bot Consumables" button opens a scrolling help page (what it does, roles, who is affected, commands, tracking, Molten Core, MultiBot). Commands highlighted in cyan.
+- Facts only from BotRaidConsumables.cpp / MultiBot Chatless – Naxxramas Fork (server owner).
+- Checks: luac, denylist, harness (prep profiles + help page overflow/ESC) OK.
+
+---
+
+## 0.4.1 - Rename to Dungeon Journal (2026-10-05)
+
+- Folder / zip top-level renamed ServerDungeonJournal -> DungeonJournal.
+- Toc: DungeonJournal.toc, Title "Dungeon Journal", Version 0.4.1, SavedVariables DungeonJournalDB.
+- Global table DungeonJournal; main frame DungeonJournalFrame; texture root Interface\AddOns\DungeonJournal\.
+- One-time migrate from ServerDungeonJournalDB into DungeonJournalDB on ADDON_LOADED.
+- Slash commands /dj and /dungeonjournal unchanged.
+- Content identical to v0.4.0 (Scholomance + Stratholme Living/Undead; Vanilla complete).
+- Delete the old ServerDungeonJournal AddOns folder so both do not load.
+
+---
+
+## 0.4.0 - Batch 9: Scholomance + Stratholme Living/Undead (final Vanilla pass) (2026-10-05)
+
+Sources: Grimfeather/azerothcore-wotlk @ 1a7e71b3 and Grimfeather/mod-individual-progression @ d5e393bd (same commits as v0.3.8). TBC and Wrath are unchanged.
+
+**Levels**
+- Scholomance: LV 58-60 plus the server's role levels as a second header line: "Recommended:  DPS 60  /  Healer 60  /  Tank 60" (supplied by the server owner; overrides other sources). Minimum level 45 (AzerothCore dungeon access, map 289).
+- Stratholme - Living: normal range only, LV 58-60 (Atlas; minimum level 45 from AzerothCore, map 329, shared by both wings).
+- Stratholme - Undead: LV 58-60 plus the same DPS/Healer/Tank 60 role line as Scholomance (server owner).
+
+New data files (loaded after Data\Vanilla\UpperBlackrockSpire.lua)
+- Data\Vanilla\Scholomance.lua  1 map (Scholomance.blp), trash + bosses (Blood Steward, Kirtonos, Jandice, Rattlegore, Darkreaver, Marduk, Vectus, Ras, Kormok, six Teaching bosses, Gandling, Lord Blackwood event), AtlasLoot SCHOLO* loot, quests and preparation (Skeleton Key, Viewing Room Key, Blood of Innocents, Divination Scryer, DS2 Brazier).
+- Data\Vanilla\StratholmeLiving.lua  1 map (Stratholme.blp, Living legend), Crimson trash, Skul, Courier, Fras Siabi, Postmaster Malown, Atiesh, Forresten, Unforgiven, Timmy, Malor, Hammersmith, Willey, Galford, Dathrohan/Balnazzar, Jarien/Sothos; AtlasLoot STRAT* (Living) loot.
+- Data\Vanilla\StratholmeUndead.lua  1 map (Stratholme.blp, Undead legend), Undead trash, Barthilas, Stonespine, Anastari, Swordsmith, Nerub'enkan, Maleki, Ramstein, Rivendare; AtlasLoot STRAT* (Undead) loot.
+- Maps\Scholomance.blp and Maps\Stratholme.blp (Atlas) added.
+- New boss portraits (Portraits\*.tga) for Scholo/Strat bosses.
+- The scholo / strat_live / strat_ud placeholders in Data\Vanilla.lua were removed; SDJ.ORDER.Vanilla now ends "lbrs","ubrs","scholo","strat_live","strat_ud".
+- Vanilla dungeon coverage is complete (no remaining Vanilla placeholders).
+
+**Server-specific facts shown**
+- Individual Progression: Scholomance and Stratholme trash/boss SAI (Vanilla abilities); Skul despawns ~80% of runs; Stonespine ~50%; Dathrohan transforms into Balnazzar at 40%; Anastari possess script (C++); Gandling / Kirtonos / Kormok C++ scripts from AzerothCore.
+- Role levels for Scholomance and Stratholme Undead are the server owner's values.
+
+Checks: luac -p on all Lua, denylist clean, harness OK (role line asserted for scholo and strat_ud and absent for strat_live, 0 layout overflows, ESC check OK).
+
+---
+
+## 0.3.8 - Batch 8: Lower and Upper Blackrock Spire (2026-09-27)
+
+Sources: Grimfeather/azerothcore-wotlk @ 1a7e71b3 and Grimfeather/mod-individual-progression @ d5e393bd (same commits as v0.3.7). TBC and Wrath are unchanged.
+
+**Levels**
+- Lower Blackrock Spire: normal range only, LV 54-60 (Atlas; minimum level 45 from AzerothCore dungeon access, map 229, shared by both wings).
+- Upper Blackrock Spire: LV 56-61 plus the server's role levels as a second header line: "Recommended:  DPS 60  /  Healer 60  /  Tank 60" (supplied by the server owner; overrides other sources).
+
+New data files (loaded after Data\Vanilla\DireMaulWest.lua)
+- Data\Vanilla\LowerBlackrockSpire.lua  2 maps (Lower + entrance), 41 trash entries, 17 bosses (2 optional: Mor Grayhoof, Urok Doomhowl; 7 rare: Spirestone Butcher, Spirestone Battle Lord, Spirestone Lord Magus, Bannok Grimaxe, Crystal Fang, Ghok Bashguud, Burning Felguard), 85 boss loot rows, 30 trash loot rows (AtlasLoot LBRSTrash + LBRSQuestItems, objects, quest drops, Dungeon Set 1 pieces at Individual Progression rates), 19 quests (4 A / 4 H / 11 both), 5 preparation sections.
+- Data\Vanilla\UpperBlackrockSpire.lua  2 maps (Upper + entrance), 20 trash entries, 9 bosses (1 optional: Lord Valthalak; 1 rare: Jed Runewatcher), 89 boss loot rows, 9 trash loot rows (AtlasLoot UBRSTrash + UBRSQuestItems, quest drops), 16 quests (3 A / 4 H / 9 both), 6 preparation sections.
+- Preparation covers the Seal of Ascension (4742 / 4743, Vaelan revealed by the Scarshield Infiltrator; Individual Progression opens the UBRS door for Seal carriers outside Dungeon Finder), the Onyxia attunement steps done here (Horde 4903 / 4974 / 6569 / 6602; Alliance 5089 / 5102 and the Individual Progression-restored 6501 / 6502) and Drakkisath's Brand (Blackhand's Command 7761, Blackwing Lair attunement).
+- Maps\BlackrockSpireLower.blp and Maps\BlackrockSpireUpper.blp (Atlas) added; the entrance map (BlackrockSpireEnt.blp) is shared with Blackrock Depths.
+- 26 new boss portraits (Portraits\*.tga).
+- The lbrs / ubrs placeholders in Data\Vanilla.lua were removed; SDJ.ORDER.Vanilla now ends "dm_e","dm_n","dm_w","lbrs","ubrs".
+
+**Server-specific facts shown**
+- Individual Progression: gemstones 33% (AtlasLoot 100%), Unadorned Seal of Ascension 7.5%, Pattern: Robe of the Archmage 10%, Important Blackrock Documents a ground scroll at one of four spots, rare spawns (the three Spirestone rares, Bannok Grimaxe, Crystal Fang, Jed Runewatcher) about 15%, Solakar waves and General Drakkisath scripted by Individual Progression.
+- Vaelastrasz is defined in the Individual Progression instance header but never spawned or used, so he is not listed.
+
+Checks: luac -p on all Lua, denylist clean, harness OK (role line asserted for UBRS and absent for LBRS, 0 portrait fallbacks, 0 layout overflows, 0 missing client textures, ESC check OK).
+
+---
+
+## 0.3.7 - Batch 7: Dire Maul, Grimfeather re-check, UI fixes (2026-09-27)
+
+No role levels: the Dire Maul headers show the normal level range only (Atlas; minimum level 45 from AzerothCore dungeon access). Creature levels use the Individual Progression overrides.
+
+Grimfeather forks (the server's actual sources)
+- All data was regenerated from Grimfeather/azerothcore-wotlk master @ 1a7e71b3 (2026-09-22; AC base SQL plus the 382 fork update files through 2026_09_20_00) and Grimfeather/mod-individual-progression master @ d5e393bd, instead of upstream AzerothCore and ZhengPeiRu21/mod-individual-progression @ 0180b917. The fork base SQL is the same as upstream.
+- Result per dungeon: RFC, Deadmines, Wailing Caverns, Shadowfang Keep, Stockade, Blackfathom Deeps, Razorfen Kraul, Razorfen Downs, Uldaman, Jintha'Alor, Maraudon (3), Sunken Temple: no change. Scarlet Monastery: the fork changes Ashbringer-event SAI timers only (Wrath-era event, not shown). Gnomeregan: a cast-flag change on the Peacekeeper Security Suit's Net only; the text is unchanged. Zul'Farrak: the fork does not have upstream's 2026-09-24 pyramid / Sergeant Bly rewrite, so the existing text ("talking to Bly makes the crew hostile") matches the server. No change. Blackrock Depths: text updated. Ironhand Guardians are now AzerothCore's script (IP's replacement was removed); The Vault coffers, Watchman Doomgrip and the Warbringer Constructs are AzerothCore instance-scripted (the fork adds Skull Crack / Sunder Armor / Healing Potion SAI, which already matched); the Dark Keeper portrait stays IP; IP's Magmus now closes the hall doors during the fight and opens them on death (new mechanic line). Dire Maul: built on the fork (Captain Kromcrush actions are conditioned on King Gordok's death).
+
+Dire Maul (new data files, loaded after Data\Vanilla\BlackrockDepths.lua)
+- Data\Vanilla\DireMaulEast.lua   2 maps (East + entrance), 18 trash entries, 7 bosses (2 optional: Pimgib, Isalien), 38 boss loot rows, 19 trash loot rows, 7 quests (1 A / 1 H / 5 both).
+- Data\Vanilla\DireMaulNorth.lua  2 maps (North + entrance), 9 trash entries, 9 entries (3 optional: Stomper Kreeg, Knot Thimblejack, Gordok Tribute), 97 boss loot rows, 16 trash loot rows, 5 quests (all both factions).
+- Data\Vanilla\DireMaulWest.lua   2 maps (West + entrance), 19 trash entries, 8 bosses (2 optional: Lord Hel'nurath, Revanchion; 1 rare: Tsu'zee), 49 boss loot rows, 17 trash loot rows, 19 quests (2 A / 2 H / 15 both, including the nine class-book quests).
+- Preparation covers keys (Crescent Key, Gordok keys, Shackle Key), the Tribute run (what lowers it and how to skip the guards), Immol'thar's pylons, the Library, books and Librams.
+- Maps\: DireMaulEast, DireMaulNorth, DireMaulWest, DireMaulEnt (Atlas). Portraits\: 24 new.
+- The three placeholders were removed from Data\Vanilla.lua; the wings follow Blackrock Depths.
+
+**UI**
+- Scroll / overflow fix: long boss, trash, quest, preparation and legend text now scrolls instead of running off the panel (ScrollFit / FitText / SetupScroll); the map legend scrolls and the map credit sits under the map. The test harness checks every panel for overflow.
+- ESC: the frame was already a named, top-level, UIParent-parented ServerDungeonJournalFrame added to UISpecialFrames after creation, which is the standard 3.3.5 way. What could still break it: an earlier ESC step using the key first (open dropdown, spell targeting, StaticPopup), or another addon replacing UISpecialFrames after our one-time insert. Fix: the name is re-registered on every show (no duplicates); a ToggleGameMenu hook closes the journal if it is still open when the game menu opens; closing resets the view (selected dungeon, boss, quest, map floor, scroll positions, tooltip, dragging) back to the home browser. The harness checks that the registered name resolves to the main frame, that ESC closes and resets it, and that it still works after UISpecialFrames is replaced.
+- Home header redesign (the dungeon cards are unchanged): gold dialog title bar (Interface\DialogFrame\UI-DialogBox-Gold-Header), larger gold title (GameFontNormalHuge), gold divider (Interface\DialogFrame\UI-DialogBox-Divider), Blizzard tab buttons for the expansion selector (Interface\PaperDollInfoFrame\UI-Character-ActiveTab / UI-Character-InactiveTab) with a gold glow on the selected tab and a hover glow (UI-Character-Tab-Highlight-yellow), small expansion logos (Interface\Glues\Common\Glues-WoW-Logo / Glues-WoW-BCLogo / Glues-WoW-WotLKLogo), and less empty space. Flat fallbacks are kept. Every client texture path is checked against a 3.3.5 listfile; Interface\Common\UI-TooltipDivider-Transparent is not in 3.3.5 and is not used.
+
+---
+
+## 0.3.6 - Batch 6: Blackrock Depths (2026-09-27)
+
+UI and architecture unchanged from v0.3.5. No role levels: the header shows the normal level range (Atlas 52-58, minimum level 40). Creature levels use the Individual Progression overrides.
+
+New data file (loaded after Data\Vanilla\SunkenTemple.lua; same format as batch 5)
+- Data\Vanilla\BlackrockDepths.lua  2 maps (Blackrock Depths + Blackrock Mountain entrance, with Prev/Next), 34 trash entries, 24 bosses (7 optional, 5 rare), 160 boss loot rows, 30 trash loot rows, 30 quests (12 Alliance / 11 Horde / 7 both). The Ring of Law is one entry that lists its six random champions (Anub'shiah, Eviscerator, Gorosh the Dervish, Grizzle, Hedrum the Creeper, Ok'thor the Breaker); each BRDArena item notes which champion drops it. Theldren (Banner of Provocation) is a separate optional entry, and his gladiators are listed in it. The Seven (Summoner's Tomb) is one entry. The Vault entry covers Watchman Doomgrip, the Secret Safe and the Dark Coffer. Rares: Lord Roccor, Pyromancer Loregrain, Warder Stilgiss, Verek, Panzor the Invincible.
+- Trash loot: AtlasLoot BRDTrash plus the Shadowforge Torch, Essence of the Elements, Intact Elemental Core and the Blacksmithing Plans objects (BRDBSPlans).
+- Preparation: access, the Shadowforge Key (Dark Iron Legacy), Prison Cell Key, Relic Coffer and Dark Keeper keys, Shadowforge Torches, Molten Core attunement (7848 Alliance / 7487 Horde), the Alliance Onyxia chain through Marshal Windsor (restored by Individual Progression), and the mobs outside the instance (Overmaster Pyron, Lothos Riftwaker, Franclorn Forgewright).
+- Maps\: 2 Atlas BLPs (BlackrockDepths, BlackrockSpireEnt). Atlas has only one Blackrock Depths page.
+- Portraits\: 24 new boss portraits.
+- The brd placeholder was removed from Data\Vanilla.lua; Blackrock Depths now follows Sunken Temple in the browser.
+- Source conflicts are written into the relevant quest / boss / loot notes.
+
+---
+
+## 0.3.5 - Batch 5: Maraudon (Purple, Orange, Inner) and Sunken Temple (2026-09-27)
+
+UI and architecture unchanged from v0.3.4. No role levels: every batch-5 header shows the normal level range only. Creature levels use the Individual Progression overrides, as in v0.3.4.
+
+New data files (loaded after Data\Vanilla\JinthaAlor.lua; same format as batch 4)
+- Data\Vanilla\MaraudonPurple.lua  2 maps (shared Maraudon map + entrance), 15 trash entries, 4 bosses (Maraudos optional, Meshlok the Harvester rare), 11 boss loot rows, 1 trash loot row, 8 quests (2 Alliance / 2 Horde / 4 both).
+- Data\Vanilla\MaraudonOrange.lua  2 maps, 9 trash entries, 3 bosses (Veng optional), 9 boss loot rows, 1 trash loot row, 5 quests (1 Alliance / 1 Horde / 3 both).
+- Data\Vanilla\MaraudonInner.lua   2 maps, 6 trash entries, 4 bosses, 18 boss loot rows, 1 trash loot row, 4 quests (1 Alliance / 1 Horde / 2 both). The wings were split using AzerothCore lfg_dungeon_template / areatrigger_teleport (Orange Crystals, Purple Crystals, Pristine Waters) and spawn positions. The shared Atlas map lists only each wing's markers. Each wing's level range comes from its creature levels; Atlas gives 42-51 for the whole instance. Quests that span wings are listed in each wing they touch.
+- Data\Vanilla\SunkenTemple.lua    2 maps (instance + entrance), 19 trash entries, 11 bosses (the six Atal'ai Defenders grouped as one entry; Spawn of Hakkar optional), 74 boss loot rows, 17 trash loot rows, 20 quests (4 Alliance / 3 Horde / 13 both, including 8 class quests).
+- Maps\: 4 Atlas BLPs (Maraudon, MaraudonEnt, TheSunkenTemple, TheSunkenTempleEnt).
+- Portraits\: 22 new boss portraits.
+- The four placeholders (mara_p, mara_o, mara_i, st) were removed from Data\Vanilla.lua. Browser order is unchanged: Purple, Orange, Inner, Sunken Temple, after Jintha'Alor.
+- Preparation covers the Scepter of Celebras and the Portal to Inner Maraudon (on Individual Progression it is visible only to a player carrying the Scepter), the Khans / Amulet of Spirits, the Sunken Temple statue order, the Atal'ai Defenders forcefield, the Egg of Hakkar event and access through the Pool of Tears.
+- Source conflicts are written into the relevant quest / boss / loot notes.
+
+---
+
+## 0.3.4 - Batch 4: Razorfen Downs, Uldaman, Zul'Farrak, Jintha'Alor (2026-09-27)
+
+UI and architecture unchanged from v0.3.3. No role levels: every batch-4 header shows the normal level range only.
+
+New data files (loaded after Data\Vanilla\ScarletMonasteryCathedral.lua; same format as batch 3)
+- Data\Vanilla\RazorfenDowns.lua  1 map, 15 trash entries, 6 bosses (Ragglesnout rare, Plaguemaw from the idol event), 19 boss loot rows, 12 trash loot rows, 5 quests (1 Alliance / 2 Horde / 2 both).
+- Data\Vanilla\Uldaman.lua        2 maps (instance + entrance), 22 trash entries, 12 bosses (Digmaster Shovelphlange rare), 40 boss loot rows, 32 trash loot rows, 23 quests (12 Alliance / 6 Horde / 5 both).
+- Data\Vanilla\ZulFarrak.lua      1 map, 14 trash entries, 14 bosses (Gahz'rilla summoned; Dustwraith, Zerillis and Sandarr Dunereaver rare), 28 boss loot rows, 15 trash loot rows, 8 quests (1 Alliance / 1 Horde / 6 both).
+- Data\Vanilla\JinthaAlor.lua     full entry for the outdoor dungeon. It replaces the old v0.2 block. 1 map, 14 trash entries, 3 bosses (Mith'rethis rare), 13 boss loot rows, 7 trash loot rows, 9 quests (2 Alliance / 5 Horde / 2 both). There is no AtlasLoot or AtlasQuest data for it: loot rows are quest items and notable drops from AzerothCore, with no invented boss tables, and quests come from AzerothCore. Its level range 45-52 is taken from creature levels.
+- Maps\: 4 Atlas BLPs (RazorfenDowns, Uldaman, UldamanEnt, ZulFarrak). Maps\JinthaAlor.tga is a crop of the client's Hinterlands world map with numbered markers placed from AzerothCore spawns. It is also the Jintha'Alor cover.
+- Portraits\: 35 new boss portraits.
+- The three placeholders (rfd, ulda, zf) and the old Jintha'Alor block were removed from Data\Vanilla.lua. Browser order is unchanged.
+- Preparation covers the Razorfen Downs gong and the idol event, the Uldaman Staff of Prehistoria and the Stone Keeper / Archaedas events, the Zul'Farrak Executioner's Key, the stairs event, the Mallet of Zul'Farrak (Sacred Mallet -> Jintha'Alor altar), and the Jintha'Alor keys.
+- Source conflicts are written into the relevant quest / boss / loot notes.
+
+Fix to earlier batches: creature levels and elite rank now apply mod-individual-progression's creature_template overrides (mostly vanilla_creatures.sql). 157 level strings changed across the batch 1-3 files. Examples: Aggem Thorncurse 27 -> 30 Elite, Mekgineer Thermaplugg -> 34, Mograine / Whitemane -> 42, Archmage Arugal 21 -> 26, Techbot / Lorgus Jett / Baron Aquanis
+-> Elite, Boahn -> Rare Elite, Edwin VanCleef -> 21 Rare Elite.
+- Dev test harness (tools/harness.lua, not shipped) now also checks rfd, ulda, zf and jintha.
+
+---
+
+## 0.3.3 - Batch 3: Blackfathom Deeps, Gnomeregan, Razorfen Kraul, Scarlet Monastery (4 wings) (2026-09-27)
+
+UI and architecture unchanged from v0.3.2. No role levels: every batch-3 header shows the normal level range only.
+
+New data files (loaded after Data\Vanilla\TheStockade.lua; same format as batch 2)
+- Data\Vanilla\BlackfathomDeeps.lua  2 maps (instance + entrance), 15 trash entries, 8 bosses (Lorgus Jett rare, Baron Aquanis quest-summoned), 20 boss loot rows, 16 trash loot rows, 10 quests (5 Alliance / 4 Horde / 1 both).
+- Data\Vanilla\Gnomeregan.lua        2 maps (instance + entrance), 18 trash entries, 7 bosses (Techbot outside, Dark Iron Ambassador rare), 27 boss loot rows, 15 trash loot rows, 14 quests (8 Alliance / 3 Horde / 3 both).
+- Data\Vanilla\RazorfenKraul.lua     1 map, 20 trash entries, 9 bosses (3 rares), 21 boss loot rows, 12 trash loot rows, 8 quests (3 Alliance / 3 Horde / 2 both).
+- Scarlet Monastery is four separate journal entries, each with its own Atlas map plus the shared Atlas entrance map (SMEnt) as map 2. All four share AtlasLoot "SMTrash" (27 rows) plus Heart of Zeal.
+  - Data\Vanilla\ScarletMonasteryGraveyard.lua  6 trash entries, 6 bosses (3 rares, seasonal Headless Horseman), 24 boss loot rows, 2 Horde quests.
+  - Data\Vanilla\ScarletMonasteryLibrary.lua    7 trash entries, 2 bosses, 9 boss loot rows (incl. The Scarlet Key from Doan's Strongbox), 7 quests (2 Alliance / 4 Horde / 1 both).
+  - Data\Vanilla\ScarletMonasteryArmory.lua     7 trash entries, Herod, 5 loot rows (incl. the Scarlet Trainee tabard), 3 quests (1 Alliance / 2 Horde).
+  - Data\Vanilla\ScarletMonasteryCathedral.lua  7 trash entries, 3 bosses, 11 boss loot rows, 3 quests (1 Alliance / 2 Horde).
+- The seven placeholders were removed from Data\Vanilla.lua. Browser order is unchanged (... Stockade, BFD, Gnomeregan, RFK, SM Graveyard, Library, Armory, Cathedral ...).
+- Maps\: 10 Atlas BLPs added. Portraits\: 36 new boss portraits (Chomper shares Grubbis's entry).
+- Preparation covers the Scarlet Key (Library -> Armory / Cathedral), the Gnomeregan Workshop Key (back entrance) and the Horde Goblin Transponder (Booty Bay transporter).
+- Source conflicts are written into the relevant quest / boss / loot notes (AtlasQuest vs AzerothCore levels and rewards, AtlasLoot vs AzerothCore items and rates).
+- Loading-screen cover art: LoadScreenBlackFathomDeeps, LoadScreenGnomeregan, LoadScreenRazorfenKraul and LoadScreenMonastery (all four SM wings) are legacy client files; the card falls back to the bundled Atlas map crop if one fails to load.
+- Dev test harness (tools/harness.lua, not shipped) now also checks the batch-3 ids: browser order, no role-level line, all boss rows, map Prev/Next wrap-around and both quest factions.
+
+---
+
+## 0.3.2 - Batch 2: The Deadmines, Wailing Caverns, Shadowfang Keep, The Stockade (2026-09-27)
+
+UI and architecture unchanged from v0.3.1 apart from one small addition:
+- Header: dungeons with a roleLevels field show a second line "Recommended:  DPS x  /  Healer y  /  Tank z". Only The Deadmines and Wailing Caverns have it (16 / 18 / 18, supplied by the server owner). Other dungeons show the normal level range only.
+
+New data files (loaded after Data\Vanilla.lua; same format as RagefireChasm.lua)
+- Data\Vanilla\TheDeadmines.lua   2 maps (instance + entrance), 13 trash entries, 12 bosses (3 rares/outside), 32 boss loot rows, 5 trash loot rows, 7 Alliance quests.
+- Data\Vanilla\WailingCaverns.lua 2 maps (instance + entrance), 11 trash entries, 12 bosses, 34 boss loot rows (incl. the 4 Fanglord gems), 3 trash loot rows, 7 quests (5 both / 2 Horde).
+- Data\Vanilla\ShadowfangKeep.lua 1 map, 14 trash entries, 12 bosses (incl. seasonal Apothecary Hummel), 36 boss loot rows, 12 trash loot rows, 5 quests (1 Alliance / 3 Horde / 1 both).
+- Data\Vanilla\TheStockade.lua    1 map, 5 trash entries, 6 bosses, 8 boss loot rows, 1 trash loot row, 6 Alliance quests.
+- The old v0.2 Deadmines and Wailing Caverns entries and the SFK / Stockade placeholders were removed from Data\Vanilla.lua. Browser order is unchanged (RFC, Deadmines, WC, SFK, Stockade...).
+- Maps\: 6 Atlas BLPs added. Portraits\: 42 new boss portraits.
+- Trash and boss abilities follow mod-individual-progression's smart_scripts (the server's restored Vanilla AI), falling back to AzerothCore smart_scripts / C++ scripts. Rare spawn chances come from the same scripts.
+- Loading-screen cover art: LoadScreenDeadmines, LoadScreenWailingCaverns, LoadScreenShadowfangKeep and LoadScreenStormwindStockade are legacy client files (low FileDataIDs in the wowdev community listfile). If one fails to load, the card falls back to the bundled Atlas map crop, as in v0.3.1.
+- Dev test harness (tools/harness.lua, not shipped) now also checks browser order, the role-level header, Prev/Next/counter wrap-around for the 2-map dungeons, all boss rows and both quest factions for the new dungeons.
+
+---
+
+## 0.3.1 - Batch 1: Ragefire Chasm (2026-09-27)
+
+**Fixes (3.3.5a compatibility / bugs)**
+
+- Main window background used Interface\FrameGeneral\UI-Background-Rock, which is a Cataclysm+ file and does not exist in the 3.3.5 client. Now uses Interface\DialogFrame\UI-DialogBox-Background.
+- Boss portraits: the PlayerModel:SetCreature() portrait (black box) is replaced with static bundled portraits in Portraits\ plus a framed "?" fallback if a file is missing.
+- Map: the black map panel is fixed. The Atlas RFC map is now bundled in Maps\ and loaded from Interface\AddOns\ServerDungeonJournal\Maps\RagefireChasm. Atlas BLPs are 512x512 and use the whole texture (Atlas shows them at 512x512, texcoords 0-1), so the map canvas is now square. Prev / 1/N / Next only appear for multi-floor maps. The map legend (A, 1-4) is shown beside it. The optional "use the installed Atlas addon" path and the hand-drawn fallback map were removed.
+- Disabled placeholder maps for other dungeons no longer carry later-client Interface\WorldMap tile paths; they show a clear "not bundled yet" message.
+- Loot: RFC boss drops were marked green (quality 2); AtlasLoot lists them as rare (blue, q3). Fixed.
+- Uncached items: GetItemInfo() returns nil until cached. Rows now show the stored name/icon (GetItemIcon works uncached), the item is requested from the server with a hidden tooltip, and an OnUpdate poller refreshes the view when it arrives (3.3.5 has no GET_ITEM_INFO_RECEIVED).
+- Shift-click now works for uncached items (requests them and asks you to click again) and uses HandleModifiedItemClick / ChatEdit_InsertLink / ChatFrame_OpenChat. Links are never hand-built.
+- Boss text (who/abilities/mechanics) was clipped by a fixed 115px FontString; it now scrolls.
+- Preparation rows used a fixed 55px spacing (long lines overlapped); now one scrolling text block.
+- "Both factions" quests showed two faction icons; they now show plain "BOTH FACTIONS" text.
+- SavedVariables are now initialised on ADDON_LOADED (tidy-up: the old file-scope table was simply replaced when the saved data loaded).
+- Dungeon cover art: if a loading-screen texture fails to load, the card falls back to the bundled map instead of showing an empty or green texture.
+- The browser order is now explicit (SDJ.ORDER), so per-dungeon data files can live in Data\Vanilla\ and RFC still appears first.
+
+**Ragefire Chasm content**
+- TRASH: 6 dangerous mob types with their abilities, a priority, and a short tip each. Trash loot: the 2 RFC trash quest drops. AtlasLoot has no RFC trash table, so no percentages.
+- BOSSES: Oggleflint (optional), Taragaman the Hungerer, Jergosh the Invoker, Zelemar the Wrathful (optional summon), Bazzalan. Portrait, level, subtitle, flag, who they are, abilities (with spell icons), key mechanics, and the full AtlasLoot table with drop %.
+- QUESTS (Horde): 5723, 5725, 5722, 5728, 5761 with ID, level, min level, giver + location, prerequisites, objective, required items + where to get them, turn-in, follow-up, rewards (money, reputation, choice items), server notes, and a collapsible quest chain.
+- PREPARATION: level, consumables, keys/required items, server rules.
+- MAP: Atlas map + legend.
+
+---
+
+## 0.2.1-WIP - First test build (2026-09-28)
+
+Published as a GitHub pre-release titled "Naxx Dungeon Journal v0.2.1 — WIP Test Build" (tag `v0.2.1-WIP` on commit `fa5c7a7`, asset `DungeonJournal.zip`). Vanilla / TBC / Wrath categories, Trash, Bosses, Quests, Preparation and Map sections, `/dj` and `/dungeonjournal`. Content was incomplete and marked for testing and feedback only. The pre-release and its tag were removed on 14 October 2026 after v0.6.2 was published; the commit is still in `main`'s history.

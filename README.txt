@@ -29,4 +29,4 @@ Do not use GitHub "Code → Download ZIP" without renaming the folder from
 N-Dungeon-Journal-main to DungeonJournal. Prefer the release zip.
 
 Licence: GPLv2 — see LICENSE-GPL-2.0.txt and CREDITS.txt
-Changelog: CHANGELOG.txt
+Changelog and docs: https://github.com/CosmicCuddle/N-Dungeon-Journal
