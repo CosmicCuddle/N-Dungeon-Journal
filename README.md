@@ -2,7 +2,8 @@
 
 A **WoW 3.3.5a** dungeon journal addon, styled after [Forever Dungeon Journal](https://www.curseforge.com/wow/addons/forever-dungeon-journal) and built for Michael’s Naxxramas progression server on **Grimfeather’s AzerothCore** fork with **Individual Progression**.
 
-Current release: **[v0.6.2 – Vanilla Complete](https://github.com/CosmicCuddle/N-Dungeon-Journal/releases/latest)**
+Current release: **[v0.6.2 – Bot Consumables update](https://github.com/CosmicCuddle/N-Dungeon-Journal/releases/latest)**  
+Status: Vanilla complete. TBC and Wrath are deferred; see the [roadmap](ROADMAP.md).
 
 ## What’s in Vanilla
 
@@ -37,6 +38,23 @@ Downloading the repository via **Code → Download ZIP** produces a folder named
 - rename that folder to **`DungeonJournal`**, or  
 - use the release zip instead (recommended).
 
+## Documentation
+
+| Document | What it covers |
+| --- | --- |
+| [ROADMAP.md](ROADMAP.md) | Done phases by version, current state, Vanilla polish, TBC and Wrath (deferred) |
+| [CHANGELOG.md](CHANGELOG.md) | Every version, newest first |
+| [docs/FEATURES.md](docs/FEATURES.md) | UI tour: home tabs, era filter, cards, instance tabs |
+| [docs/BOT-CONSUMABLES.md](docs/BOT-CONSUMABLES.md) | The `.bot consumables` command, profiles and rules, and how the journal ties to Mod-Naxxramas-Core and N-MultiBot-Chatless |
+| [docs/DATA-SOURCES.md](docs/DATA-SOURCES.md) | Where the data comes from and the "server wins" policy |
+| [docs/DATA-FORMAT.md](docs/DATA-FORMAT.md) | Data file layout, field names, adding or editing an entry |
+| [docs/ART-AND-TEXTURES.md](docs/ART-AND-TEXTURES.md) | TGA rules, cover art, maps and portraits |
+| [docs/INSTALL.md](docs/INSTALL.md) | Install, upgrade, removing ServerDungeonJournal, rollback |
+| [docs/TROUBLESHOOTING.md](docs/TROUBLESHOOTING.md) | Addon not loading, green covers, uncached items |
+| [docs/TESTING.md](docs/TESTING.md) | In-game test plan |
+| [docs/RELEASE-CHECKLIST.md](docs/RELEASE-CHECKLIST.md) | Version bump, build, tag and release steps |
+| [tools/README.md](tools/README.md) | Offline harness, denylist and build script |
+
 ## Licence and credits
 
 Distributed under **GPLv2** (`LICENSE-GPL-2.0.txt`) because it includes GPL-derived material:
@@ -46,4 +64,4 @@ Distributed under **GPLv2** (`LICENSE-GPL-2.0.txt`) because it includes GPL-deri
 - **AtlasQuest** quest text / locations where used  
 - Boss **portraits** cropped from Wowhead Wrath model-viewer thumbnails (see `CREDITS.txt`)
 
-Full attribution: **[CREDITS.txt](CREDITS.txt)**. Version history: **[CHANGELOG.txt](CHANGELOG.txt)**.
+Full attribution: **[CREDITS.txt](CREDITS.txt)**. Version history: **[CHANGELOG.md](CHANGELOG.md)**.
