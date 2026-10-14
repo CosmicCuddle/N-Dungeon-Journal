@@ -6,7 +6,7 @@ DungeonJournal = DungeonJournal or {}
 local SDJ = DungeonJournal
 
 SDJ.ADDON_NAME = ADDON_NAME or "DungeonJournal"
-SDJ.VERSION = "0.6.1"
+SDJ.VERSION = "0.6.2"
 SDJ.ROOT = "Interface\\AddOns\\DungeonJournal\\"
 SDJ.MEDIA = SDJ.ROOT .. "Media\\"
 SDJ.MAPS = SDJ.ROOT .. "Maps\\"
@@ -27,44 +27,44 @@ local function C(cmd) return SDJ.CMD .. cmd .. "|r" end
 -- Per-dungeon Preparation "Bot Consumables" lines (facts from the server owner only).
 SDJ.BOT_CONSUMABLES = {
     mara_p = {
-        C(".bot consumables mara") .. " — level cap 54; adds Nature Protection (Greater if the bot can use it).",
+        C(".bot consumables mara") .. " — level cap 54; Nature Protection (Greater Nature Protection if the bot can use it at its effective level).",
     },
     mara_o = {
-        C(".bot consumables mara") .. " — level cap 54; adds Nature Protection (Greater if the bot can use it).",
+        C(".bot consumables mara") .. " — level cap 54; Nature Protection (Greater Nature Protection if the bot can use it at its effective level).",
     },
     mara_i = {
-        C(".bot consumables mara") .. " — level cap 54; adds Nature Protection (Greater if the bot can use it).",
+        C(".bot consumables mara") .. " — level cap 54; Nature Protection (Greater Nature Protection if the bot can use it at its effective level).",
     },
     st = {
-        C(".bot consumables sunken") .. " — level cap 54; Nature Protection.",
+        C(".bot consumables sunken") .. " — level cap 54; Nature Protection (Greater Nature Protection if the bot can use it at its effective level).",
     },
     brd = {
-        C(".bot consumables brd") .. " — level cap 60; Fire Protection.",
+        C(".bot consumables brd") .. " — level cap 60; Fire Protection (Greater Fire Protection if the bot can use it at its effective level).",
     },
     scholo = {
-        C(".bot consumables scholo") .. " — Shadow Protection.",
+        C(".bot consumables scholo") .. " — level cap 60; Shadow Protection (Greater Shadow Protection if the bot can use it at its effective level).",
     },
     strat_ud = {
-        C(".bot consumables stratud") .. " (alias " .. C("strat") .. ") — Shadow Protection; you must be on the Undead/Service Entrance side.",
+        C(".bot consumables stratud") .. " (alias " .. C("strat") .. ") — level cap 60; Shadow Protection (Greater Shadow Protection if the bot can use it at its effective level); you must be on the Undead/Service Entrance side.",
     },
     strat_live = {
         "No named Living-side profile. Use " .. C(".bot consumables <level>") .. " (custom levels 1–54 only).",
         "The named Stratholme profile is Undead-side only (" .. C(".bot consumables stratud") .. ").",
     },
     dm_e = {
-        C(".bot consumables dm") .. " — server detects the wing. East: Nature Protection.",
+        C(".bot consumables dm") .. " — level cap 60; the server detects the wing. East: Nature Protection (Greater Nature Protection if the bot can use it at its effective level).",
     },
     dm_w = {
-        C(".bot consumables dm") .. " — server detects the wing. West: Shadow Protection.",
+        C(".bot consumables dm") .. " — level cap 60; the server detects the wing. West: Shadow Protection (Greater Shadow Protection if the bot can use it at its effective level).",
     },
     dm_n = {
-        C(".bot consumables dm") .. " — server detects the wing. North: Enhanced profile (bandages 20, Limited Invulnerability Potions 5, Brilliant Wizard Oil 1 for casters, Brilliant Mana Oil 1 for healers, Instant Poison VI 20 / Deadly Poison IV 20 for rogues).",
+        C(".bot consumables dm") .. " — level cap 60; the server detects the wing. North: no protection potion; Enhanced extras, each only if usable at the bot's effective level (bandages 20, Limited Invulnerability Potions 5, Brilliant Wizard Oil 1 for casters, Brilliant Mana Oil 1 for healers, Instant Poison VI 20 / Deadly Poison IV 20 for rogues).",
     },
     lbrs = {
-        C(".bot consumables lbrs") .. " — normal level-60 role package; you must be in the Lower section.",
+        C(".bot consumables lbrs") .. " — level cap 60; role package with no protection potion; you must be in the Lower section.",
     },
     ubrs = {
-        C(".bot consumables ubrs") .. " — Fire Protection plus the Enhanced profile; you must be in the Upper section.",
+        C(".bot consumables ubrs") .. " — level cap 60; Fire Protection (Greater Fire Protection if the bot can use it at its effective level) plus the Enhanced extras (as for DM North); you must be in the Upper section.",
     },
     mc = {
         C(".bot consumables mc") .. " — works only inside Molten Core.",
@@ -87,37 +87,37 @@ SDJ.BOT_CONSUMABLES = {
         "Juju needs a Cache of Mau'ari (supplied automatically). Juju Flurry is applied 3 times, about 60 seconds apart.",
     },
     onyxia = {
-        "Onyxia has no named " .. C(".bot consumables") .. " profile — do not invent one. Use flasks/pots from the raid checklist manually.",
+        "Onyxia has no named " .. C(".bot consumables") .. " profile (only Molten Core has a raid profile). Use flasks/pots from the raid checklist manually.",
     },
     bwl = {
-        "Blackwing Lair has no named " .. C(".bot consumables") .. " profile — do not invent one. Use FR pots / Onyxia Scale Cloak / flasks from the preparation checklist manually.",
+        "Blackwing Lair has no named " .. C(".bot consumables") .. " profile (only Molten Core has a raid profile). Use FR pots / Onyxia Scale Cloak / flasks from the preparation checklist manually.",
     },
     zg = {
         "Zul'Gurub has no named " .. C(".bot consumables") .. " profile (not in mara/sunken/brd/scholo/stratud/dm/lbrs/ubrs/mc).",
-        "Custom " .. C(".bot consumables <1-54>") .. " only works inside non-raid dungeons — the system does not cover ZG yet. Do not invent a profile.",
+        "The custom " .. C(".bot consumables <1-54>") .. " form is refused here: it only works inside non-raid dungeons.",
     },
     aq20 = {
-        "Ruins of Ahn'Qiraj has no named " .. C(".bot consumables") .. " profile — do not invent one. Use NR pots / flasks from the preparation checklist manually.",
+        "Ruins of Ahn'Qiraj has no named " .. C(".bot consumables") .. " profile (only Molten Core has a raid profile). Use NR pots / flasks from the preparation checklist manually.",
     },
     aq40 = {
-        "Temple of Ahn'Qiraj has no named " .. C(".bot consumables") .. " profile — do not invent one. Use NR / frost prep / flasks from the preparation checklist manually.",
+        "Temple of Ahn'Qiraj has no named " .. C(".bot consumables") .. " profile (only Molten Core has a raid profile). Use NR / frost prep / flasks from the preparation checklist manually.",
     },
     naxx = {
-        "Naxxramas has no named " .. C(".bot consumables") .. " profile — do not invent one. Use FR pots / flasks / Frozen Rune gear from the preparation checklist manually.",
+        "Naxxramas has no named " .. C(".bot consumables") .. " profile (only Molten Core has a raid profile). Use FR pots / flasks / Frozen Rune gear from the preparation checklist manually.",
     },
     azuregos = {
-        "Azuregos has no named " .. C(".bot consumables") .. " profile — do not invent one. Use frost pots / flasks from the preparation checklist manually.",
+        "Azuregos has no named " .. C(".bot consumables") .. " profile (only Molten Core has a raid profile). Use frost pots / flasks from the preparation checklist manually.",
     },
     kazzak = {
-        "Lord Kazzak has no named " .. C(".bot consumables") .. " profile — do not invent one. Use shadow pots / flasks from the preparation checklist manually.",
+        "Lord Kazzak has no named " .. C(".bot consumables") .. " profile (only Molten Core has a raid profile). Use shadow pots / flasks from the preparation checklist manually.",
     },
     emerald = {
-        "Emerald Dragons have no named " .. C(".bot consumables") .. " profile — do not invent one. Use nature pots / flasks from the preparation checklist manually.",
+        "Emerald Dragons have no named " .. C(".bot consumables") .. " profile (only Molten Core has a raid profile). Use nature pots / flasks from the preparation checklist manually.",
     },
 }
 SDJ.BOT_CONSUMABLES_DEFAULT = {
     C(".bot consumables <1-54>") .. " — role-based package for this dungeon.",
-    "Effective level = lowest of the requested level, the bot's level and the dungeon's level cap. Only works inside non-raid dungeons.",
+    "Effective level = lowest of the requested level, the bot's level and the dungeon's level cap (from the dungeon's LFG level data, never above 54). Only works inside non-raid dungeons.",
 }
 
 function SDJ:GetBotConsumablesPrep(dungeon)

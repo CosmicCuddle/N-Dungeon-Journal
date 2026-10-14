@@ -1195,7 +1195,7 @@ local function CreateFrameUI()
 
     -- Bot Consumables help (home browser); same parchment style, scrolls, ESC closes the journal
     local help=CreateFrame("Frame",nil,frame); frame.botHelpPanel=help
-    help:SetPoint("TOPLEFT",18,-86); help:SetPoint("BOTTOMRIGHT",-18,18)
+    help:SetPoint("TOPLEFT",18,-90); help:SetPoint("BOTTOMRIGHT",-18,18)   -- same top as contentPanel: below the tab row / back-button strip
     SetBackdrop(help,"Interface\\Buttons\\WHITE8X8","Interface\\Tooltips\\UI-Tooltip-Border",14,4)
     help:SetBackdropColor(unpack(COLORS.panel)); help:SetBackdropBorderColor(unpack(COLORS.border)); AddParchment(help,0.15)
     local htitle=help:CreateFontString(nil,"OVERLAY","GameFontNormalHuge"); htitle:SetPoint("TOPLEFT",18,-15); htitle:SetText("Bot Consumables"); htitle:SetTextColor(unpack(COLORS.gold))
@@ -1228,13 +1228,21 @@ local function BotHelpBody()
         "Every bot gets 5 level-appropriate healing potions. Mana users also get 5 mana potions (not warriors or rogues).",
 
         H .. "Who is affected|r\n" ..
-        "Alt bots and random bots in your group/raid that are inside the correct instance or wing. Random bots are never modified globally. Death Knights and Protection Paladins (MC) are unsupported.",
+        "In a group or raid: bots in your group that are inside the correct instance or wing. Not grouped: your own controlled bots inside it (no group needed). Random bots are only prepared when they are in your group, and are never modified globally. Death Knights are unsupported; Protection Paladins are unsupported in MC (they count as tanks in dungeon profiles).",
+
+        H .. "Levels|r\n" ..
+        "Named dungeon profiles cap the bot's effective level: 54 for mara and sunken, 60 for the rest. Effective level = the lower of the bot's level and that cap. The custom form uses the lowest of the requested level, the bot's level and the dungeon's level cap (never above 54), and only works inside non-raid dungeons. Protection potions use the Greater version when the bot can use it at its effective level, otherwise the normal one.",
+
+        H .. "Cooldown and refresh|r\n" ..
+        "A successful preparation starts a 10-minute cooldown for the group (it survives logout; status and clear are not affected). You cannot prepare while dead. Re-running refreshes auras with 10 minutes or less left, and food with 5 minutes or less left.",
 
         H .. "Commands|r\n" ..
         "- " .. cmd(".bot consumables 1-54") .. " — custom level package (1–54).\n" ..
         "- Named: " .. cmd("mara") .. ", " .. cmd("sunken") .. ", " .. cmd("brd") .. ", " .. cmd("scholo") .. ", " .. cmd("stratud") .. ", " .. cmd("dm") .. ", " .. cmd("lbrs") .. ", " .. cmd("ubrs") .. ", " .. cmd("mc") .. ".\n" ..
         "- " .. cmd(".bot consumables status") .. " — active profile, tracked auras, missing buffs, timed sequences.\n" ..
-        "- " .. cmd(".bot consumables clear") .. " — remove tracked auras and stop timed sequences.",
+        "- " .. cmd(".bot consumables clear") .. " — remove tracked auras and stop timed sequences.\n" ..
+        "- " .. cmd(".bot consumables debug <profile>") .. " — debug output for one preparation.\n" ..
+        cmd("strat") .. " is an alias of " .. cmd("stratud") .. ". You must stand inside the matching dungeon or wing (" .. cmd("dm") .. " detects East/West/North).",
 
         H .. "Tracking|r\n" ..
         "About every 10 seconds the server checks tracked auras and warns once per missing buff (with the command to re-run). Scrolls, Greater Stoneshield and Juju Escape do not warn. Juju Flurry is reapplied automatically 3 times, about 60 seconds apart. Profiles clear when you leave the instance or wing.",
@@ -1243,10 +1251,10 @@ local function BotHelpBody()
         cmd(".bot consumables mc") .. " works inside MC only. Every bot gets Greater Fire Protection, 5 Major Healing Potions, 20 bandages, 5 LIPs and class reagents, plus class/spec raid consumables (flasks, elixirs, juju, food, weapon stones/oils by equipped weapon). A Cache of Mau'ari is supplied automatically for juju.",
 
         H .. "MultiBot addon|r\n" ..
-        "Left-click the Consumables button for the custom level (1–54). Right-click for the named dungeon bar.",
+        "Left-click the Consumables button for the custom level (1–54). Right-click for the named dungeon bar (mara, sunken, brd, scholo, stratud, dm, lbrs, ubrs). The bar has no MC button; type " .. cmd(".bot consumables mc") .. " in Molten Core.",
 
         H .. "Dungeon profiles|r\n" ..
-        "Each dungeon Preparation tab lists the matching command. See mara, sunken, brd, scholo, stratud, dm, lbrs, ubrs; other Vanilla dungeons use " .. cmd(".bot consumables <1-54>") .. ".",
+        "Each dungeon Preparation tab lists the matching command. See mara, sunken, brd, scholo, stratud, dm, lbrs, ubrs; other Vanilla dungeons use " .. cmd(".bot consumables <1-54>") .. ". Onyxia, BWL, ZG, AQ20, AQ40, Naxxramas and the world bosses have no profile, and the custom form does not work in raids or outdoors.",
     }
     return table.concat(parts, "\n\n")
 end
@@ -1256,6 +1264,7 @@ function SDJ:ShowBotConsumablesHelp()
     frame.contentPanel:Hide()
     frame.homePanel:Hide()
     frame.eraHolder:Hide()
+    if frame.sectionHolder then frame.sectionHolder:Hide() end   -- like OpenDungeon: tabs give way to the Back button
     frame.backButton:Show()
     frame.botHelpPanel:Show()
     frame.botHelpText:SetText(BotHelpBody())

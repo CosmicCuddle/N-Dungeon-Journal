@@ -1,3 +1,20 @@
+v0.6.2 - Bot Consumables page layout + module recheck (2026-10-14)
+--------------------------------------------------------------------------
+- Fix: the Bot Consumables help page no longer draws under the
+  DUNGEONS | RAIDS | WORLD BOSSES tab row. The tabs are hidden while it is open
+  (as on instance pages), the Back button shows on its own, and the page is
+  anchored at the same top as instance pages (below the tab row).
+- Bot Consumables text rechecked against Mod-Naxxramas-Core
+  BotRaidConsumables.cpp (69a91be) and N-MultiBot-Chatless (7bc9baa): level
+  caps on every named profile (54 mara/sunken, 60 the rest); Greater/normal
+  protection rule; Enhanced extras only when usable; who is prepared when not
+  grouped; random bots need a group; 10-minute cooldown, refresh thresholds;
+  debug form; strat alias; no MC button in the MultiBot bar; raids other than MC
+  and world bosses have no profile (neutral wording).
+- Repository renamed to CosmicCuddle/N-Dungeon-Journal; links updated (addon
+  folder is still DungeonJournal).
+- Harness: page content must never overlap the section tab row.
+
 v0.6.1 - Onyxia cover art (loading screen), version fix (2026-10-06)
 --------------------------------------------------------------------------
 - Onyxia's Lair cover now uses the Onyxia's Lair loading screen art (Blizzard)

@@ -1,4 +1,4 @@
-Dungeon Journal - v0.6.1 (Vanilla complete)
+Dungeon Journal - v0.6.2 (Vanilla complete)
 ======================================================================
 
 What it is
@@ -26,7 +26,7 @@ SavedVariables: DungeonJournalDB
 (On first load, settings may copy once from ServerDungeonJournalDB if present.)
 
 Do not use GitHub "Code → Download ZIP" without renaming the folder from
-Naxx-Dungeon-Journal-main to DungeonJournal. Prefer the release zip.
+N-Dungeon-Journal-main to DungeonJournal. Prefer the release zip.
 
 Licence: GPLv2 — see LICENSE-GPL-2.0.txt and CREDITS.txt
 Changelog: CHANGELOG.txt

@@ -2,7 +2,7 @@
 
 A **WoW 3.3.5a** dungeon journal addon, styled after [Forever Dungeon Journal](https://www.curseforge.com/wow/addons/forever-dungeon-journal) and built for Michael’s Naxxramas progression server on **Grimfeather’s AzerothCore** fork with **Individual Progression**.
 
-Current release: **[v0.6.1 – Vanilla Complete](https://github.com/CosmicCuddle/Naxx-Dungeon-Journal/releases/latest)**
+Current release: **[v0.6.2 – Vanilla Complete](https://github.com/CosmicCuddle/N-Dungeon-Journal/releases/latest)**
 
 ## What’s in Vanilla
 
@@ -23,7 +23,7 @@ Current release: **[v0.6.1 – Vanilla Complete](https://github.com/CosmicCuddle
 
 ## Install
 
-Prefer the **[Releases](https://github.com/CosmicCuddle/Naxx-Dungeon-Journal/releases/latest)** zip (`DungeonJournal_v0.6.1.zip`):
+Prefer the **[Releases](https://github.com/CosmicCuddle/N-Dungeon-Journal/releases/latest)** zip (`DungeonJournal_v0.6.2.zip`):
 
 1. Exit WoW completely.
 2. Delete any old `Interface\AddOns\ServerDungeonJournal` folder (do not leave both addons installed).
@@ -32,7 +32,7 @@ Prefer the **[Releases](https://github.com/CosmicCuddle/Naxx-Dungeon-Journal/rel
 
 ### Warning: GitHub “Code → Download ZIP”
 
-Downloading the repository via **Code → Download ZIP** produces a folder named **`Naxx-Dungeon-Journal-main`**. WoW will not load that name as this addon. Either:
+Downloading the repository via **Code → Download ZIP** produces a folder named **`N-Dungeon-Journal-main`**. WoW will not load that name as this addon. Either:
 
 - rename that folder to **`DungeonJournal`**, or  
 - use the release zip instead (recommended).
