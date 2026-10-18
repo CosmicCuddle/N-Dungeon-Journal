@@ -1,10 +1,19 @@
-# Dungeon Journal - Test Plan
+# Testing and Verification
 
-**Baseline:** v0.6.2, WoW 3.3.5a
-**Last in-game test outcome:** Not yet run under this document (14 October 2026)
+Use the offline harness for every code or content change, and check the result in a 3.3.5a client when it affects presentation or gameplay information. A passing harness result does not replace a real in-game test.
+
+**Baseline:** v0.6.2, WoW 3.3.5a  
+**Last in-game test outcome:** Not yet run under this document (14 October 2026)  
 **Purpose:** checks to run before a release, in addition to the offline harness
 
-## Offline checks (every change)
+## Quick reference
+
+- Run `tools/build.sh --no-zip` from the repository root.
+- Check for Lua errors, tab overlap, missing textures, item links and navigation.
+- Record what was actually checked. Leave untested cases clearly marked rather than assuming they passed.
+- Keep a backup of the addon and SavedVariables before testing an upgrade.
+
+## Offline verification
 
 ```bash
 tools/build.sh --no-zip
@@ -12,14 +21,14 @@ tools/build.sh --no-zip
 
 Must end with `HARNESS OK`, `LAYOUT CHECKS: ... overflows: 0` and `CLIENT TEXTURES CHECKED AGAINST 3.3.5 LISTFILE, missing: 0`. See [tools/README.md](../tools/README.md).
 
-## Preparation for in-game tests
+## Before opening the client
 
 1. Back up `Interface\AddOns\DungeonJournal\` and `WTF\Account\<account>\SavedVariables\DungeonJournal.lua`.
 2. Record the client resolution, UI scale and the version on the login chat line.
 3. Use an ordinary character; nothing here needs GM commands.
 4. Mark anything you could not check as **Not tested**.
 
-## Manual checks
+## In-game test cases
 
 | ID | Test | Expected result |
 | --- | --- | --- |
@@ -40,8 +49,12 @@ Must end with `HARNESS OK`, `LAYOUT CHECKS: ... overflows: 0` and `CLIENT TEXTUR
 | M15 | Close and reopen | Opens on Dungeons / Vanilla home |
 | M16 | `/reload` | No errors; journal still works |
 
-## Results
+## Test record
 
 | Date | Version | Tester | Checks run | Result | Notes |
 | --- | --- | --- | --- | --- | --- |
 | | | | | | |
+
+## Related guides
+
+See [Developer Tools](../tools/README.md) for the harness and [Troubleshooting](TROUBLESHOOTING.md) for common failure symptoms.

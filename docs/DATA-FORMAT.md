@@ -1,9 +1,18 @@
-# Data Files and How to Add or Edit an Entry
+# Content Data Format
 
-**Applies to:** v0.6.2
+Each instance, raid and world boss is defined in a Lua data file. These entries power the cards, encounter tabs, quests, preparation notes and maps. Use this reference when adding new content or correcting an existing entry.
+
+**Applies to:** v0.6.2  
 **Reference entry:** `Data/Vanilla/RagefireChasm.lua` (the first one written, and the most commented)
 
-## Layout
+## Quick reference
+
+- Start with `Data/Vanilla/RagefireChasm.lua` for a complete example.
+- Give each entry a stable `id`, register it through `SDJ:AddDungeon`, and place its file in the `.toc` load order.
+- Only include drop percentages when a source provides them; leave unknown rates unset.
+- Keep artwork, source notes and the changelog in step with data changes.
+
+## Repository layout
 
 ```text
 DungeonJournal.toc        load order; every data file must be listed here
@@ -19,7 +28,7 @@ Media/Covers/<Name>.tga   bundled cover art (only OnyxiasLair.tga at v0.6.2)
 
 `SDJ:AddDungeon(era, data)` registers an entry. If an entry with the same `id` already exists in that era it is replaced, so a detailed file can override a stub. The home page sorts each era by `SDJ.ORDER[era]`; ids not in the list go to the end in load order.
 
-## Top-level fields
+## Entry fields
 
 | Field | Type | Used for | Example (RFC unless noted) |
 | --- | --- | --- | --- |
@@ -42,7 +51,7 @@ Media/Covers/<Name>.tga   bundled cover art (only OnyxiasLair.tga at v0.6.2)
 | `quests` | list | Quests tab | see below |
 | `preparation` | list | Preparation tab | see below |
 
-## maps
+## Maps
 
 ```lua
 maps = {
@@ -62,7 +71,7 @@ maps = {
 
 More than one entry in `maps` gives Prev / Next buttons.
 
-## trash
+## Trash enemies and loot
 
 ```lua
 trash = {
@@ -83,7 +92,7 @@ trash = {
 
 `spell` is optional; without it the ability has no icon. Tags in use include AOE, FLEE, DEBUFF, SUMMON, HEAL, STUN, ENRAGE, DOT, CURSE, ROOT, IMMUNE.
 
-## bosses
+## Boss encounters
 
 ```lua
 {
@@ -101,7 +110,7 @@ trash = {
 
 Raid files also use `id` on bosses in some places (65 boss entries have one).
 
-## Loot rows
+## Loot entries
 
 ```lua
 {id = 14149, name = "Subterranean Cape", slot = "Back", quality = 3, icon = "INV_Misc_Cape_18", rate = "31.59%"},
@@ -114,7 +123,7 @@ Raid files also use `id` on bosses in some places (65 boss entries have one).
 - `rate`: a string as printed. Leave it out when no source gives one. Do not estimate.
 - `note`: optional, shown on the row.
 
-## quests
+## Quest entries
 
 ```lua
 {
@@ -140,7 +149,7 @@ Raid files also use `id` on bosses in some places (65 boss entries have one).
 
 Check quest IDs, chain order and rewards against the AzerothCore world database tables `quest_template`, `quest_template_addon`, `creature_queststarter` and `creature_questender` on the Grimfeather fork.
 
-## preparation
+## Preparation notes
 
 ```lua
 preparation = {
@@ -151,7 +160,7 @@ preparation = {
 
 Do not add a Bot Consumables block here. It is added automatically from `SDJ.BOT_CONSUMABLES` in `Core.lua` (see [BOT-CONSUMABLES.md](BOT-CONSUMABLES.md)).
 
-## Adding a new entry
+## Adding an instance or boss page
 
 1. Copy the header comment style from `RagefireChasm.lua` and list every source you used, with file names and commits.
 2. Create `Data/<Era>/<Name>.lua` and call `SDJ:AddDungeon("<Era>", { ... })`.
@@ -162,6 +171,10 @@ Do not add a Bot Consumables block here. It is added automatically from `SDJ.BOT
 7. Add the entry to CREDITS.txt and CHANGELOG.md.
 8. Run `tools/build.sh --no-zip`. The harness opens every entry and every tab and fails on overflowing text, missing textures or 3.3.5-incompatible calls.
 
-## Editing an entry
+## Updating existing content
 
 Change the field, then run the build script. If you change a number that came from a source (a drop rate, a level, a quest ID), note the source in the file header or the row's `note`.
+
+## Related guides
+
+Use [Data Sources](DATA-SOURCES.md) to resolve conflicting information and [Artwork and Textures](ART-AND-TEXTURES.md) before adding new images.

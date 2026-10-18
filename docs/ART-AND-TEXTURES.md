@@ -1,11 +1,18 @@
-# Art and Texture Rules
+# Artwork and Texture Guide
 
-**Applies to:** v0.6.2
+All journal artwork must work in the original 3.3.5a client. This guide covers the accepted file formats, safe texture paths and fallbacks used when the client cannot display a cover or portrait.
+
+**Applies to:** v0.6.2  
 **Checked by:** `tools/harness.lua` (cover-art and listfile checks) and `tools/denylist.sh` (continent loading-screen rule)
 
-The 3.3.5a client is picky about textures, and `SetTexture` returning true does not mean the texture will draw. A path that fails silently shows as a solid green box. These rules come from bugs that actually shipped.
+## Quick reference
 
-## Bundled TGA files
+- Use **uncompressed 32-bit TGA** for bundled artwork, with power-of-two dimensions.
+- Use original Atlas BLP files for maps when available; keep their credits.
+- Give cover cards a usable fallback image. A successful texture-path call does not guarantee that the image appears.
+- Run the offline checks, then confirm artwork in the actual client.
+
+## Bundled TGA artwork
 
 - **Uncompressed, 32-bit** (TGA image type 2, 32 bits per pixel, with alpha). RLE-compressed TGAs are not used.
 - **Power-of-two sides.** 64, 128, 256, 512, 1024. Non-square is fine (the Onyxia cover is 1024x512).
@@ -25,7 +32,7 @@ for f in glob.glob('**/*.tga', recursive=True):
 " | grep BAD
 ```
 
-## Cover art
+## Cover images and fallbacks
 
 Each card uses `art`, then `artFallback`, then a book icon (`ApplyDungeonArt` in `UI.lua`).
 
@@ -35,17 +42,21 @@ Each card uses `art`, then `artFallback`, then a book icon (`ApplyDungeonArt` in
 - Set `artFallback` to the bundled map so a broken cover still shows something.
 - `crop` is `{left, right, top, bottom}` in tex coords. The default for loading screens is `{0.04, 0.96, 0.29, 0.73}`.
 
-## Client texture paths
+## Client texture compatibility
 
 Every client path the addon sets is checked against `tools/listfile_335.txt` (from the s0h2x/WoTLK-3.3.5-UI-Source file tree, blp branch). Paths that only exist in later clients fail the harness. Being in the listfile is necessary but not enough, as the continent loading screens showed.
 
 The denylist also blocks later-client `Interface\WorldMap\<zone>\<tile>` paths and retail-only texture APIs such as `SetColorTexture` and `SetAtlas`.
 
-## Maps
+## Instance maps
 
 - Atlas BLPs are copied unmodified into `Maps/`, are 512x512 and use the whole texture (`coords = {0, 1, 0, 1}`).
 - Maps that Atlas does not have (Jintha'Alor, the world bosses) are bundled as 512x512 TGAs following the TGA rules above, with the source in the `credit` line and CREDITS.txt.
 
-## Portraits
+## Boss portraits
 
 128x128 uncompressed 32-bit TGA in `Portraits/`, named after the boss without spaces or punctuation (for example `TaragamanTheHungerer.tga`). If a portrait is missing the boss page shows a framed "?" and the harness prints `PORTRAIT FALLBACK` for it.
+
+## Related guides
+
+See [Data Format](DATA-FORMAT.md) for the `art`, `artFallback`, `maps` and `portrait` fields, and [Testing](TESTING.md) for in-game image checks.

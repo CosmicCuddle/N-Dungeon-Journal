@@ -1,32 +1,40 @@
-Dungeon Journal - v0.6.2 (Vanilla complete)
-======================================================================
+DUNGEON JOURNAL
+===============
+World of Warcraft 3.3.5a | v0.6.2
+Created and maintained by CosmicCuddle
 
-What it is
-A WoW 3.3.5a dungeon journal for Grimfeather AzerothCore + Individual Progression
-(Naxxramas progression server). Slash commands: /dj  /dungeonjournal
+ABOUT
+Dungeon Journal is an in-game reference for the Naxxramas progression server
+running Grimfeather's AzerothCore fork and Individual Progression.
 
-Vanilla contents
-- 29 dungeons (RFC through Stratholme Living/Undead)
-- 7 raids in IP order: Molten Core, Onyxia, Blackwing Lair, Zul'Gurub,
-  Ruins of Ahn'Qiraj, Temple of Ahn'Qiraj, Naxxramas (40)
-- 3 world-boss pages: Azuregos, Lord Kazzak, Emerald Dragons
-- Home: Dungeons | Raids | World Bosses (+ Vanilla/TBC/Wrath filter)
-- Per instance: Trash | Bosses | Quests | Preparation | Map
-- Bot Consumables help (home + Preparation). TBC and Wrath are not filled yet.
+VANILLA CONTENT
+- 29 dungeon entries, including separate wings and Jintha'Alor.
+- 7 raids, from Molten Core through Naxxramas (40).
+- 3 world-boss entries: Azuregos, Lord Kazzak and Emerald Dragons.
+- Trash, Bosses, Quests, Preparation and Map tabs for completed entries.
+- Bot Consumables command guidance on the home screen and in Preparation.
 
-Install (from the Releases zip)
-1. Exit WoW completely.
-2. Delete ANY old Interface\AddOns\ServerDungeonJournal folder
-   (do not merge; both must not load).
-3. Extract into Interface\AddOns so the folder is Interface\AddOns\DungeonJournal
-   (DungeonJournal.toc at the top of that folder).
-4. Restart WoW, enable "Dungeon Journal", type /dj.
+TBC and Wrath currently have dungeon cover cards, not complete guides.
 
-SavedVariables: DungeonJournalDB
-(On first load, settings may copy once from ServerDungeonJournalDB if present.)
+INSTALL
+1. Exit World of Warcraft.
+2. Remove any old ServerDungeonJournal or DungeonJournal addon folder.
+3. Extract the release zip to Interface\AddOns\DungeonJournal.
+4. Check that DungeonJournal.toc is directly inside that folder.
+5. Launch the client, enable Dungeon Journal and enter /dj.
 
-Do not use GitHub "Code → Download ZIP" without renaming the folder from
-N-Dungeon-Journal-main to DungeonJournal. Prefer the release zip.
+COMMANDS
+/dj  or  /dungeonjournal
 
-Licence: GPLv2 — see LICENSE-GPL-2.0.txt and CREDITS.txt
-Changelog and docs: https://github.com/CosmicCuddle/N-Dungeon-Journal
+NOTES
+- The required folder name is DungeonJournal.
+- A source-code ZIP needs renaming from N-Dungeon-Journal-main.
+- Saved settings use DungeonJournalDB; older settings can be copied on first load.
+- Use GitHub Releases for the recommended packaged download.
+
+PROJECT
+https://github.com/CosmicCuddle/N-Dungeon-Journal
+
+DOCUMENTATION AND LICENCE
+See README.md, the docs/ folder, ROADMAP.md, CHANGELOG.md and CREDITS.txt.
+Distributed under GPLv2; see LICENSE-GPL-2.0.txt.

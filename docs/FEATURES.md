@@ -1,13 +1,18 @@
-# Features and UI Tour
+# Features and Controls
 
-**Applies to:** v0.6.2
+Dungeon Journal puts Vanilla dungeon and raid information into a single movable in-game window. Open it with `/dj` or `/dungeonjournal`, choose a section and expansion, then select the entry to read.
+
+**Applies to:** v0.6.2  
 **Source files:** `UI.lua`, `Core.lua`, `Tooltips.lua`
 
-Open the journal with `/dj` or `/dungeonjournal`. The same command closes it. Escape also closes it: the window registers itself in `UISpecialFrames`, and re-registers each time it is shown in case another addon rebuilt that list. The window can be dragged.
+## Quick reference
 
-Closing always resets the journal. The next time it opens you are on **Dungeons**, **Vanilla**, at the top of the list, with the Trash tab selected for whichever instance you open next.
+- Use **Dungeons**, **Raids** and **World Bosses** to switch between entry types.
+- The **Vanilla** section contains the completed guides; TBC and Wrath currently provide dungeon cover cards.
+- Open any populated entry to read Trash, Bosses, Quests, Preparation and Map information.
+- Use the **Back** button to return to the section you came from. Closing the journal resets its starting view.
 
-## Home page
+## Browsing from the home screen
 
 ### Section tabs
 
@@ -39,7 +44,7 @@ Two cards per row, in the order set by `SDJ.ORDER.Vanilla` in `Data/Vanilla.lua`
 
 Top right of the home page. Opens the Bot Consumables page, described in [BOT-CONSUMABLES.md](BOT-CONSUMABLES.md). While that page is open the section tabs are hidden and a Back button takes their place, the same way instance pages work.
 
-## Instance pages
+## Inside an entry
 
 Click a card to open it. The header shows the name, `LV <level>  |  <location>` and, where it applies, `OUTDOOR DUNGEON`, `WORLD BOSS` or `40-PLAYER RAID`. Five dungeons also show a recommended level per role from `roleLevels` (for example The Deadmines: DPS 16 / Healer 18 / Tank 18).
 
@@ -74,10 +79,14 @@ One scrolling page. Each `preparation` block from the data file is shown under i
 
 Atlas map on the left (512x512), with the **Legend** on the right. Instances with more than one map page get **Prev / Next** buttons and a page counter (for example Naxxramas has five pages). The map credit line sits under the map. Entries without a map show "No map has been bundled for this dungeon yet."
 
-## Empty states
+## Content not added yet
 
 Entries without data in a tab show a plain message instead of an empty panel, for example "Boss data for this dungeon has not been populated yet." Every TBC and Wrath card shows these at v0.6.2.
 
-## SavedVariables
+## Saved settings
 
 `DungeonJournalDB`, one per account. It holds `lastEra` and the one-time migration flag `_migratedFromServerDungeonJournalDB`. Nothing else is saved at v0.6.2.
+
+## Related guides
+
+For installation help, see [Installation and Upgrades](INSTALL.md). For the commands described by Bot Consumables, see [Bot Consumables](BOT-CONSUMABLES.md).

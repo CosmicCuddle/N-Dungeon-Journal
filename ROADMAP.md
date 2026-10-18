@@ -1,14 +1,27 @@
-# Dungeon Journal - Roadmap
+# Dungeon Journal — Development Roadmap
 
-**Updated:** 14 October 2026
-**Repository:** https://github.com/CosmicCuddle/N-Dungeon-Journal (branch `main`; renamed from `Naxx-Dungeon-Journal`)
-**Current release:** v0.6.2
-**Target:** WoW 3.3.5a (Interface 30300), Lua 5.1, Grimfeather AzerothCore + Grimfeather mod-individual-progression
-**Roadmap status:** working notes, not a release promise
+**Maintained by:** CosmicCuddle  
+**Updated:** 18 October 2026  
+**Current addon release:** v0.6.2  
+**Client:** WoW 3.3.5a (Interface 30300)  
+**Repository:** https://github.com/CosmicCuddle/N-Dungeon-Journal
 
-Vanilla is complete. The next work is Vanilla polish. TBC and Wrath are deferred until Vanilla polish is done; their cover cards already exist but have no content behind them.
+## Direction
 
-## Status definitions
+Vanilla coverage is complete. The next priority is a polish and verification pass over the existing guides, interface and release process. TBC and Wrath already have cover cards, but their full encounter content is deferred.
+
+This roadmap separates shipped features, work that has only been tested offline and ideas that have not yet been started. Planned items are not release promises.
+
+## Priorities at a glance
+
+| Priority | Work | Position |
+| --- | --- | --- |
+| First | Verify the v0.6.2 interface in the client | Awaiting in-game checks |
+| Next | Vanilla search, favourites and presentation improvements | Proposed |
+| Later | The Burning Crusade data and progression rules | Deferred |
+| Later | Wrath of the Lich King data and progression rules | Deferred |
+
+## How progress is tracked
 
 - **Released** - in a published GitHub release.
 - **Automated-test only** - passes luac, the denylist and the offline harness ([tools/README.md](tools/README.md)), but has not been checked in a 3.3.5a client.
@@ -18,7 +31,7 @@ Vanilla is complete. The next work is Vanilla polish. TBC and Wrath are deferred
 
 The harness mocks the WoW API. A passing harness run is not an in-game test.
 
-## A. Current state (v0.6.2)
+## Current content — v0.6.2
 
 Counted from the data files at v0.6.2:
 
@@ -32,7 +45,7 @@ Counted from the data files at v0.6.2:
 
 Vanilla content across the 39 entries: 318 bosses, 482 trash mob entries, 365 quests, 2,480 boss loot rows and 628 trash loot rows. Bundled art: 42 Atlas map BLPs, 8 map TGAs, 332 boss portraits and one cover TGA (Onyxia's Lair).
 
-## B. Scope and decisions not to reopen casually
+## Project rules
 
 - **Server wins.** Where the Grimfeather AzerothCore or Individual Progression data differs from AtlasLoot, AtlasQuest or Wowhead, the server data is used. See [docs/DATA-SOURCES.md](docs/DATA-SOURCES.md).
 - **No invented data.** A drop rate that is not in a source is left as `rate = nil`. A missing Bot Consumables profile is stated as missing, not guessed.
@@ -42,7 +55,7 @@ Vanilla content across the 39 entries: 318 bosses, 482 trash mob entries, 365 qu
 - **Only the addon ships.** The release zip contains `DungeonJournal/` and nothing else; `docs/`, `tools/`, this file and `CHANGELOG.md` stay in the repository.
 - **N-Addon-Collection is separate.** It pins Dungeon Journal at v0.6.1 (commit `a35e440`) in its `sources.lock.json`. Updating that pin is its own reviewed import, not part of a Dungeon Journal release.
 
-## C. Architecture
+## Repository structure
 
 | Path | Responsibility |
 | --- | --- |
@@ -57,7 +70,7 @@ Vanilla content across the 39 entries: 318 bosses, 482 trash mob entries, 365 qu
 | `tools/` | Offline harness, denylist, 3.3.5 listfile, build script |
 | `docs/` | Player and maintainer documentation |
 
-## D. Done phases
+## Completed milestones
 
 | Phase | Version | Date | What it delivered | Evidence |
 | --- | --- | --- | --- | --- |
@@ -74,7 +87,7 @@ Vanilla content across the 39 entries: 318 bosses, 482 trash mob entries, 365 qu
 
 Per-version detail is in [CHANGELOG.md](CHANGELOG.md).
 
-## E. Next task
+## Next validation task
 
 | Field | Information |
 | --- | --- |
@@ -88,7 +101,7 @@ Per-version detail is in [CHANGELOG.md](CHANGELOG.md).
 
 ## P1 - Vanilla polish
 
-**Status:** Proposed.
+**Status:** Proposed (no release date set).
 
 - [ ] **Search.** There is no search today. A text box on the home page that filters cards by instance, boss and item name across the selected section and era. 3.3.5a has no built-in search widget, so this is an EditBox plus a filter over `SDJ.DUNGEONS`.
 - [ ] **Favourites.** No favourites today. Mark instances, bosses or items and keep them in `DungeonJournalDB` (additive keys only, so older saves still load).
@@ -123,24 +136,24 @@ Cover cards exist for 16 dungeons in `Data/Wrath.lua`, Utgarde Keep through Hall
 - [ ] Wrath raids and world bosses
 - [ ] Note where Wrath Naxxramas (map 533) differs from the Vanilla Naxxramas 40 page, which already uses that map id
 
-## F. Testing, backups and rollback
+## Testing and rollback
 
 - Offline: `tools/build.sh --no-zip` (luac, denylist, harness). See [tools/README.md](tools/README.md).
 - In game: [docs/TESTING.md](docs/TESTING.md).
 - Players: back up `Interface\AddOns\DungeonJournal` and `WTF\Account\<account>\SavedVariables\DungeonJournal.lua` before upgrading. Roll back by reinstalling the previous release zip.
 
-## G. Risks and known gaps
+## Known limitations
 
 - Every Vanilla entry is automated-test only unless noted.
 - Item names, icons and quality are stored in the data files; the client replaces them with cached item info when it has it. An item ID that does not exist on the server shows the stored text only.
 - AtlasLoot drop rates are kept where the server has no rate; the server's own loot tables are used where they exist (see [docs/DATA-SOURCES.md](docs/DATA-SOURCES.md)).
 - The 3.3.5 listfile in `tools/` comes from the client UI source tree. A path being in it does not prove the client can load it; the continent loading screens were in it and still rendered green.
 
-## H. Release procedure
+## Releases
 
 See [docs/RELEASE-CHECKLIST.md](docs/RELEASE-CHECKLIST.md). Tags are `vX.Y.Z`, annotated. A published tag or asset is not replaced in place except with explicit owner approval (this happened once, for v0.6.1).
 
-## I. Handover checklist
+## Keeping the documentation current
 
 - [ ] ROADMAP.md matches the code and version
 - [ ] CHANGELOG.md has an entry for the change

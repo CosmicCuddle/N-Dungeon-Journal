@@ -1,15 +1,17 @@
-# Tools
+# Development Tools and Build Checks
 
-Offline checks and the release build. None of this ships in the addon zip.
+The `tools/` directory contains the local verification and packaging utilities for Dungeon Journal. These files are kept in the source repository and are not included in the player download.
 
-| File | What it is |
-| --- | --- |
-| `build.sh` | Copies the addon files into `build/DungeonJournal/`, runs the three checks below against that copy, then zips it to `dist/DungeonJournal_v<version>.zip` |
-| `harness.lua` | A mock of the 3.3.5a WoW API. Loads the addon in `.toc` order and drives every view |
-| `denylist.sh` | Greps the Lua for retail-only APIs, later-client texture paths and continent loading screens used as covers |
-| `listfile_335.txt` | Client `Interface\` file list for 3.3.5 (12340), from the s0h2x/WoTLK-3.3.5-UI-Source file tree (blp branch). The harness checks every client texture path against it |
 
-## Requirements
+
+## Quick reference
+
+- Run `tools/build.sh --no-zip` for checks without packaging.
+- Run `tools/build.sh` to perform checks and create the release zip in `dist/`.
+- The Lua harness simulates the supported WoW interface; it cannot confirm the final on-screen appearance.
+- Verify interface changes in the game using the [test plan](../docs/TESTING.md).
+
+## Required tools
 
 Lua 5.1 (`lua` and `luac`), bash, ripgrep (`rg`), `zip` and `unzip`. On Debian or Ubuntu:
 
@@ -17,7 +19,7 @@ Lua 5.1 (`lua` and `luac`), bash, ripgrep (`rg`), `zip` and `unzip`. On Debian o
 sudo apt-get install lua5.1 ripgrep zip unzip
 ```
 
-## Running
+## Running a build
 
 From the repository root:
 
@@ -38,7 +40,7 @@ lua tools/harness.lua build/DungeonJournal
 
 The harness takes about 15 seconds. The full log is written to `build/harness.log` by `build.sh`.
 
-## What the harness checks
+## What is checked
 
 - Every entry in every era opens, and every tab (Trash, Bosses, Quests, Preparation, Map) renders. Every boss row, quest row, quest chain and map page is clicked.
 - **Layout:** no text runs outside its panel unless it is inside a scroll frame whose height covers it; scrollbars show only when content overflows; the map credit does not overlap the map or legend.
@@ -51,10 +53,14 @@ The harness takes about 15 seconds. The full log is written to `build/harness.lo
 
 It ends with `HARNESS OK`, or stops at the first failed assert, or exits with a list of `LAYOUT OVERFLOW` lines.
 
-## What it does not check
+## Limits of offline testing
 
 It does not draw anything. It models anchors and font metrics, not the client's actual textures, so a pass is not an in-game test. Use [docs/TESTING.md](../docs/TESTING.md) for that.
 
-## Preview dump
+## Optional preview output
 
 `SDJ_DUMP=/path/out.txt lua tools/harness.lua build/DungeonJournal` also writes the Bot Consumables page's frame rectangles and help text to that file, for making a mock preview image. It changes nothing else.
+
+## Related guides
+
+Use the [Release Checklist](../docs/RELEASE-CHECKLIST.md) before publishing and the [Testing Guide](../docs/TESTING.md) for manual checks.

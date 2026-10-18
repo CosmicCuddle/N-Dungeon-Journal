@@ -1,10 +1,27 @@
-# Changelog
+# Dungeon Journal — Release History
 
-All notable changes to Dungeon Journal are documented here. Newest first. Dates are when the version was finished; see the GitHub Releases page for what was actually published.
+**Project:** Dungeon Journal by CosmicCuddle  
+**Current release:** v0.6.2  
+**Client:** WoW 3.3.5a
+
+This record follows Dungeon Journal from its early test builds through the completed Vanilla content and subsequent improvements. Versions are listed newest first. Dates record when each version's work was completed; published downloads and release dates are available on [GitHub Releases](https://github.com/CosmicCuddle/N-Dungeon-Journal/releases).
+
+## Release overview
+
+| Release | Main change |
+| --- | --- |
+| **v0.6.2** | Bot Consumables page layout and profile information |
+| **v0.6.1** | Onyxia cover artwork and loading-screen safeguards |
+| **v0.6.0** | Completion of Vanilla entries, including Naxxramas |
+| **v0.5.x** | Raids, world bosses and journal navigation |
+| **v0.4.x** | Final Vanilla dungeons, addon rename and consumables guidance |
+| **v0.3.x** | Dungeon content and 3.3.5a compatibility improvements |
+
+## Detailed changes
 
 ---
 
-## 0.6.2 - Bot Consumables update (2026-10-14)
+## v0.6.2 - Bot Consumables update (2026-10-14)
 
 ### Fixed
 - The Bot Consumables page no longer draws under the DUNGEONS | RAIDS | WORLD BOSSES tab row. The tabs are hidden while it is open, as on instance pages, the Back button shows on its own, and the page starts at the same height as instance pages.
@@ -32,7 +49,7 @@ All notable changes to Dungeon Journal are documented here. Newest first. Dates 
 
 ---
 
-## 0.6.1 - Onyxia cover art (loading screen), version fix (2026-10-06)
+## v0.6.1 - Onyxia cover art (loading screen), version fix (2026-10-06)
 
 - Onyxia's Lair cover now uses the Onyxia's Lair loading screen art (Blizzard) as a bundled TGA (Media\Covers\OnyxiasLair.tga, 1024x512 32-bit), replacing the continent loading screen that showed solid green / missing on the client. Atlas map kept as artFallback.
 - Fix: the login chat message now reports the correct addon version (it still said v0.6.0).
@@ -40,7 +57,7 @@ All notable changes to Dungeon Journal are documented here. Newest first. Dates 
 
 ---
 
-## 0.6.0 - Vanilla raids complete: Naxxramas 40 (2026-10-05)
+## v0.6.0 - Vanilla raids complete: Naxxramas 40 (2026-10-05)
 
 Sources: Grimfeather IP naxx40 (map 533 + RAID_DIFFICULTY_10MAN_HEROIC; creature entries 351xxx; naxx40_creatures.sql / naxx40_gameobjects.sql loot refs 3045xx / 314800; naxx40Scripts/*_40.cpp). IndividualProgression isAttuned (9121/9122/9123), RequireNaxxStrathEntrance (default off), Stratholme Elders' Square gate 176424, gobject_naxx40_tele, PROGRESSION_AQ visibility / Kel'Thuzad → PROGRESSION_NAXX40. Atlas Naxxramas.blp (one art file; journal wing pages share it). AtlasLoot OriginalWoW has T3 tables only — boss loot from IP (server wins).
 
@@ -53,7 +70,7 @@ Sources: Grimfeather IP naxx40 (map 533 + RAID_DIFFICULTY_10MAN_HEROIC; creature
 
 ---
 
-## 0.5.4 - Ruins of Ahn'Qiraj + Temple of Ahn'Qiraj (2026-10-05)
+## v0.5.4 - Ruins of Ahn'Qiraj + Temple of Ahn'Qiraj (2026-10-05)
 
 Sources: Grimfeather IP IndividualProgressionPlayer (PROGRESSION_PRE_AQ stage 4 on MAP_RUINS_OF_AHN_QIRAJ / MAP_AHN_QIRAJ_TEMPLE; Bang a Gong! 8743 / Simply Bang a Gong! 108743 award PRE_AQ; Chaos and Destruction 108744 → PROGRESSION_AQ_WAR stage 5 for outdoor war / Field Duty — not required to zone into the raids; C'Thun kill → PROGRESSION_AQ stage 6). aq_gate_quest.sql / aq_scripts.cpp (Scarab Gong restore; Simply Bang needs Mallet of Zul'Farrak 9240). aq_war_effort.sql. dungeon_aq20.sql (IP boss loot refs 30411–30436; server wins). dungeon_aq40.sql minimal (Ouro Scarab 15718 SAI) — AtlasLoot AQ40* for Temple loot. AzerothCore RuinsOfAhnQiraj / TempleOfAhnQiraj boss_*.cpp. Atlas TheRuinsofAhnQiraj / TheTempleofAhnQiraj maps (one page each).
 
@@ -67,7 +84,7 @@ Sources: Grimfeather IP IndividualProgressionPlayer (PROGRESSION_PRE_AQ stage 4 
 
 ---
 
-## 0.5.3 - Blackwing Lair (2026-10-05)
+## v0.5.3 - Blackwing Lair (2026-10-05)
 
 Sources: Grimfeather IP IndividualProgressionPlayer (PROGRESSION_ONYXIA gate on MAP_BLACKWING_LAIR; Nefarian → PROGRESSION_BLACKWING_LAIR) + dungeon_blackwing_lair.sql (trash SmartAI, Vael flags_extra, Chromaggus Time Lapse spell_script, Nefarian loot refs 30486/30487/30551). AzerothCore BlackwingLair boss_*.cpp / instance (orb AT 7761 ghost teleport; Chromaggus RandomResize 2 breaths; Nefarian class calls). Atlas BlackwingLair map. AtlasLoot BWL* tables for non-Nefarian loot (server wins on Nefarian).
 
@@ -80,7 +97,7 @@ Sources: Grimfeather IP IndividualProgressionPlayer (PROGRESSION_ONYXIA gate on 
 
 ---
 
-## 0.5.2 - Home sections + Vanilla World Bosses (2026-10-05)
+## v0.5.2 - Home sections + Vanilla World Bosses (2026-10-05)
 
 Sources: Grimfeather AC creature spawns + mod-individual-progression (zz_ipp_aware_npcs.sql, zone_azshara.sql sinew 100%, boss_lord_kazzak.sql / vanillaScripts/boss_lord_kazzak.cpp, checkIPPhasing PROGRESSION_ONYXIA for emerald portal areas). AzerothCore boss_azuregos.cpp / boss_emerald_dragons.cpp spell IDs. AtlasLoot WorldBossesClassic + DYsondre/DLethon/DEmeriss/DTaerar (server rates win: 18704 and 20644 at 100%). Zone maps from Wowhead (wow.zamimg.com original zone art) with spawn markers — same approach as Jintha'Alor. Portraits from Wowhead wrath modelviewer display IDs.
 
@@ -102,9 +119,9 @@ Checks: luac, denylist, harness (ESC, overflow, section entries). Local commit o
 
 ---
 
-## 0.5.1 - Raids batch 2: Zul'Gurub (2026-10-05)
+## v0.5.1 - Raids batch 2: Zul'Gurub (2026-10-05)
 
-Sources: Grimfeather mod-individual-progression (RequiredZulGurubProgression default 3 / PROGRESSION_BLACKWING_LAIR; dungeon_zulgurub.sql trash AI) + AzerothCore ZulGurub boss scripts for spell IDs. Atlas ZulGurub map. AtlasLoot ZG* tables (no IP loot-rate overrides found in dungeon_zulgurub.sql — AtlasLoot rates used).
+Sources: Grimfeather mod-individual-progression (RequiredZulGurubProgression default 3 / PROGRESSION_BLACKWING_LAIR; dungeon_zulgurub.sql trash behaviour) + AzerothCore ZulGurub boss scripts for spell IDs. Atlas ZulGurub map. AtlasLoot ZG* tables (no IP loot-rate overrides found in dungeon_zulgurub.sql — AtlasLoot rates used).
 
 - 20-player raid; IP gate: progression stage 3 (Nefarian/BWL complete; after Onyxia unlocks BWL).
 - Prep: Zandalar coins/bijous, Primal Hakkari / Zanza enchants, Edge of Madness, Gahz'ranka Mudskunk Lure, NR + Hakkar Blood Siphon / Poisonous Blood, consumables checklist.
@@ -115,7 +132,7 @@ Sources: Grimfeather mod-individual-progression (RequiredZulGurubProgression def
 
 ---
 
-## 0.5.0 - Raids framework + Molten Core + Onyxia's Lair (2026-10-05)
+## v0.5.0 - Raids framework + Molten Core + Onyxia's Lair (2026-10-05)
 
 Sources: Grimfeather/azerothcore-wotlk + Grimfeather/mod-individual-progression (Vanilla raid scripts and dungeon_molten_core.sql / dungeon_onyxia.sql / quest_the_masquerade.sql). Atlas 1.17.0 maps MoltenCore / OnyxiasLair. AtlasLoot OriginalWoW MC* tables; Onyxia Vanilla loot from IP (AtlasLoot 3.3.5 only has Wrath Onyxia_* — noted in the journal).
 
@@ -137,7 +154,7 @@ Checks: luac, denylist, harness (raids toggle + MC/Onyxia prep) OK. Local commit
 
 ---
 
-## 0.4.2 - Bot Consumables (Naxxramas Core) (2026-10-05)
+## v0.4.2 - Bot Consumables (Naxxramas Core) (2026-10-05)
 
 - Preparation tab: every Vanilla dungeon gets a short "Bot Consumables" section with the matching .bot consumables command (named profiles for mara/sunken/brd/scholo/stratud/dm/ lbrs/ubrs; Living Strat notes Undead-only named profile; others use .bot consumables <1-54>).
 - Home browser: "Bot Consumables" button opens a scrolling help page (what it does, roles, who is affected, commands, tracking, Molten Core, MultiBot). Commands highlighted in cyan.
@@ -146,7 +163,7 @@ Checks: luac, denylist, harness (raids toggle + MC/Onyxia prep) OK. Local commit
 
 ---
 
-## 0.4.1 - Rename to Dungeon Journal (2026-10-05)
+## v0.4.1 - Rename to Dungeon Journal (2026-10-05)
 
 - Folder / zip top-level renamed ServerDungeonJournal -> DungeonJournal.
 - Toc: DungeonJournal.toc, Title "Dungeon Journal", Version 0.4.1, SavedVariables DungeonJournalDB.
@@ -158,7 +175,7 @@ Checks: luac, denylist, harness (raids toggle + MC/Onyxia prep) OK. Local commit
 
 ---
 
-## 0.4.0 - Batch 9: Scholomance + Stratholme Living/Undead (final Vanilla pass) (2026-10-05)
+## v0.4.0 - Batch 9: Scholomance + Stratholme Living/Undead (final Vanilla pass) (2026-10-05)
 
 Sources: Grimfeather/azerothcore-wotlk @ 1a7e71b3 and Grimfeather/mod-individual-progression @ d5e393bd (same commits as v0.3.8). TBC and Wrath are unchanged.
 
@@ -184,7 +201,7 @@ Checks: luac -p on all Lua, denylist clean, harness OK (role line asserted for s
 
 ---
 
-## 0.3.8 - Batch 8: Lower and Upper Blackrock Spire (2026-09-27)
+## v0.3.8 - Batch 8: Lower and Upper Blackrock Spire (2026-09-27)
 
 Sources: Grimfeather/azerothcore-wotlk @ 1a7e71b3 and Grimfeather/mod-individual-progression @ d5e393bd (same commits as v0.3.7). TBC and Wrath are unchanged.
 
@@ -208,7 +225,7 @@ Checks: luac -p on all Lua, denylist clean, harness OK (role line asserted for U
 
 ---
 
-## 0.3.7 - Batch 7: Dire Maul, Grimfeather re-check, UI fixes (2026-09-27)
+## v0.3.7 - Batch 7: Dire Maul, Grimfeather re-check, UI fixes (2026-09-27)
 
 No role levels: the Dire Maul headers show the normal level range only (Atlas; minimum level 45 from AzerothCore dungeon access). Creature levels use the Individual Progression overrides.
 
@@ -231,7 +248,7 @@ Dire Maul (new data files, loaded after Data\Vanilla\BlackrockDepths.lua)
 
 ---
 
-## 0.3.6 - Batch 6: Blackrock Depths (2026-09-27)
+## v0.3.6 - Batch 6: Blackrock Depths (2026-09-27)
 
 UI and architecture unchanged from v0.3.5. No role levels: the header shows the normal level range (Atlas 52-58, minimum level 40). Creature levels use the Individual Progression overrides.
 
@@ -246,7 +263,7 @@ New data file (loaded after Data\Vanilla\SunkenTemple.lua; same format as batch 
 
 ---
 
-## 0.3.5 - Batch 5: Maraudon (Purple, Orange, Inner) and Sunken Temple (2026-09-27)
+## v0.3.5 - Batch 5: Maraudon (Purple, Orange, Inner) and Sunken Temple (2026-09-27)
 
 UI and architecture unchanged from v0.3.4. No role levels: every batch-5 header shows the normal level range only. Creature levels use the Individual Progression overrides, as in v0.3.4.
 
@@ -263,7 +280,7 @@ New data files (loaded after Data\Vanilla\JinthaAlor.lua; same format as batch 4
 
 ---
 
-## 0.3.4 - Batch 4: Razorfen Downs, Uldaman, Zul'Farrak, Jintha'Alor (2026-09-27)
+## v0.3.4 - Batch 4: Razorfen Downs, Uldaman, Zul'Farrak, Jintha'Alor (2026-09-27)
 
 UI and architecture unchanged from v0.3.3. No role levels: every batch-4 header shows the normal level range only.
 
@@ -284,7 +301,7 @@ Fix to earlier batches: creature levels and elite rank now apply mod-individual-
 
 ---
 
-## 0.3.3 - Batch 3: Blackfathom Deeps, Gnomeregan, Razorfen Kraul, Scarlet Monastery (4 wings) (2026-09-27)
+## v0.3.3 - Batch 3: Blackfathom Deeps, Gnomeregan, Razorfen Kraul, Scarlet Monastery (4 wings) (2026-09-27)
 
 UI and architecture unchanged from v0.3.2. No role levels: every batch-3 header shows the normal level range only.
 
@@ -306,7 +323,7 @@ New data files (loaded after Data\Vanilla\TheStockade.lua; same format as batch 
 
 ---
 
-## 0.3.2 - Batch 2: The Deadmines, Wailing Caverns, Shadowfang Keep, The Stockade (2026-09-27)
+## v0.3.2 - Batch 2: The Deadmines, Wailing Caverns, Shadowfang Keep, The Stockade (2026-09-27)
 
 UI and architecture unchanged from v0.3.1 apart from one small addition:
 - Header: dungeons with a roleLevels field show a second line "Recommended:  DPS x  /  Healer y  /  Tank z". Only The Deadmines and Wailing Caverns have it (16 / 18 / 18, supplied by the server owner). Other dungeons show the normal level range only.
@@ -318,13 +335,13 @@ New data files (loaded after Data\Vanilla.lua; same format as RagefireChasm.lua)
 - Data\Vanilla\TheStockade.lua    1 map, 5 trash entries, 6 bosses, 8 boss loot rows, 1 trash loot row, 6 Alliance quests.
 - The old v0.2 Deadmines and Wailing Caverns entries and the SFK / Stockade placeholders were removed from Data\Vanilla.lua. Browser order is unchanged (RFC, Deadmines, WC, SFK, Stockade...).
 - Maps\: 6 Atlas BLPs added. Portraits\: 42 new boss portraits.
-- Trash and boss abilities follow mod-individual-progression's smart_scripts (the server's restored Vanilla AI), falling back to AzerothCore smart_scripts / C++ scripts. Rare spawn chances come from the same scripts.
+- Trash and boss abilities follow mod-individual-progression's smart_scripts (the server's restored Vanilla creature behaviour), falling back to AzerothCore smart_scripts / C++ scripts. Rare spawn chances come from the same scripts.
 - Loading-screen cover art: LoadScreenDeadmines, LoadScreenWailingCaverns, LoadScreenShadowfangKeep and LoadScreenStormwindStockade are legacy client files (low FileDataIDs in the wowdev community listfile). If one fails to load, the card falls back to the bundled Atlas map crop, as in v0.3.1.
 - Dev test harness (tools/harness.lua, not shipped) now also checks browser order, the role-level header, Prev/Next/counter wrap-around for the 2-map dungeons, all boss rows and both quest factions for the new dungeons.
 
 ---
 
-## 0.3.1 - Batch 1: Ragefire Chasm (2026-09-27)
+## v0.3.1 - Batch 1: Ragefire Chasm (2026-09-27)
 
 **Fixes (3.3.5a compatibility / bugs)**
 
@@ -351,6 +368,6 @@ New data files (loaded after Data\Vanilla.lua; same format as RagefireChasm.lua)
 
 ---
 
-## 0.2.1-WIP - First test build (2026-09-28)
+## v0.2.1-WIP - First test build (2026-09-28)
 
 Published as a GitHub pre-release titled "Naxx Dungeon Journal v0.2.1 — WIP Test Build" (tag `v0.2.1-WIP` on commit `fa5c7a7`, asset `DungeonJournal.zip`). Vanilla / TBC / Wrath categories, Trash, Bosses, Quests, Preparation and Map sections, `/dj` and `/dungeonjournal`. Content was incomplete and marked for testing and feedback only. The pre-release and its tag were removed on 14 October 2026 after v0.6.2 was published; the commit is still in `main`'s history.

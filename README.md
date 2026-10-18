@@ -1,67 +1,79 @@
 # Dungeon Journal
 
-A **WoW 3.3.5a** dungeon journal addon, styled after [Forever Dungeon Journal](https://www.curseforge.com/wow/addons/forever-dungeon-journal) and built for Michael’s Naxxramas progression server on **Grimfeather’s AzerothCore** fork with **Individual Progression**.
+**Dungeon Journal** is a World of Warcraft 3.3.5a addon by **CosmicCuddle**, built for the Naxxramas progression server running Grimfeather's AzerothCore fork and Individual Progression.
 
-Current release: **[v0.6.2 – Bot Consumables update](https://github.com/CosmicCuddle/N-Dungeon-Journal/releases/latest)**  
-Status: Vanilla complete. TBC and Wrath are deferred; see the [roadmap](ROADMAP.md).
+It brings dungeon, raid and world-boss information into one in-game journal: encounters, loot, quests, preparation notes and maps. The aim is simple: find the information you need without switching between several addons or external guides.
 
-## What’s in Vanilla
+**Current release:** [v0.6.2 — Bot Consumables update](https://github.com/CosmicCuddle/N-Dungeon-Journal/releases/latest)  
+**Current coverage:** Vanilla content complete; The Burning Crusade and Wrath of the Lich King are planned for later.  
+**Client:** WoW 3.3.5a (Interface 30300)
 
-| Section | Count | Contents |
-|--------|------:|----------|
-| **Dungeons** | 29 | Ragefire Chasm through Stratholme (Living / Undead), including Scarlet Monastery wings, Maraudon sides, Dire Maul wings, LBRS/UBRS, Scholomance, and Jintha’Alor |
-| **Raids** | 7 | In Individual Progression order: **Molten Core → Onyxia → Blackwing Lair → Zul’Gurub → Ruins of Ahn’Qiraj → Temple of Ahn’Qiraj → Naxxramas (40)** |
-| **World Bosses** | 3 | Azuregos, Lord Kazzak, Emerald Dragons |
+## What's included
 
-**The Burning Crusade** and **Wrath of the Lich King** tabs exist in the UI but are **not populated yet**.
+| Content | Coverage |
+| --- | --- |
+| **Dungeons** | 29 Vanilla entries, from Ragefire Chasm to Stratholme, including the individual Scarlet Monastery, Maraudon and Dire Maul sections and Jintha'Alor |
+| **Raids** | 7: Molten Core, Onyxia's Lair, Blackwing Lair, Zul'Gurub, Ruins of Ahn'Qiraj, Temple of Ahn'Qiraj and Naxxramas (40) |
+| **World bosses** | Azuregos, Lord Kazzak and the Emerald Dragons |
+| **Later expansions** | 16 TBC and 16 Wrath dungeon cover cards; full encounter data has not been added yet |
 
-## Features
+Vanilla entries follow the server's Individual Progression rules where those differ from ordinary guides or loot tables.
 
-- Home tabs: **Dungeons | Raids | World Bosses**, with a Vanilla / TBC / Wrath expansion filter
-- Per-instance tabs: **Trash | Bosses | Quests | Preparation | Map** (Atlas maps; Prev/Next where multiple pages exist)
-- Loot, mechanics and preparation notes aligned to this server’s Individual Progression data where it differs from AtlasLoot
-- **Bot Consumables** guidance on the home screen and in Preparation (commands and packages from the Naxxramas Core bot consumables system; named profiles are only listed where the server actually has them)
+## Using the journal
 
-## Install
+Enter `/dj` or `/dungeonjournal` to open the journal. Choose **Dungeons**, **Raids** or **World Bosses**, then select the expansion and the entry you want.
 
-Prefer the **[Releases](https://github.com/CosmicCuddle/N-Dungeon-Journal/releases/latest)** zip (`DungeonJournal_v0.6.2.zip`):
+Each populated entry has five sections:
 
-1. Exit WoW completely.
-2. Delete any old `Interface\AddOns\ServerDungeonJournal` folder (do not leave both addons installed).
-3. Extract so the folder is `Interface\AddOns\DungeonJournal` (with `DungeonJournal.toc` inside).
-4. Restart WoW, enable **Dungeon Journal**, type `/dj` or `/dungeonjournal`.
+| Tab | Information |
+| --- | --- |
+| **Trash** | Dangerous enemies, abilities, priorities and notable drops |
+| **Bosses** | Encounter mechanics, portraits and loot tables |
+| **Quests** | Alliance and Horde quests, objectives, chains and rewards |
+| **Preparation** | Entry requirements, attunements, server rules and consumables |
+| **Map** | Instance maps, legends and additional map pages where available |
 
-### Warning: GitHub “Code → Download ZIP”
+The home screen also includes **Bot Consumables** guidance. This describes the server's `.bot consumables` commands; the journal does not run the commands itself.
 
-Downloading the repository via **Code → Download ZIP** produces a folder named **`N-Dungeon-Journal-main`**. WoW will not load that name as this addon. Either:
+For a closer look at the interface, see [Features and Controls](docs/FEATURES.md).
 
-- rename that folder to **`DungeonJournal`**, or  
-- use the release zip instead (recommended).
+## Installing the addon
+
+1. Download the zip from [GitHub Releases](https://github.com/CosmicCuddle/N-Dungeon-Journal/releases/latest).
+2. Close World of Warcraft.
+3. Remove any old `Interface\AddOns\ServerDungeonJournal` folder. Remove the previous `DungeonJournal` addon folder before replacing it.
+4. Extract the new zip so the file sits at `Interface\AddOns\DungeonJournal\DungeonJournal.toc`.
+5. Start the game, enable **Dungeon Journal**, and type `/dj`.
+
+**Important:** GitHub's **Code → Download ZIP** creates a folder called `N-Dungeon-Journal-main`. Rename it to `DungeonJournal` if installing from source. The release zip is the recommended download.
+
+See the [Installation and Upgrade Guide](docs/INSTALL.md) for backups, migration and rollback instructions.
 
 ## Documentation
 
-| Document | What it covers |
+| Guide | What you'll find |
 | --- | --- |
-| [ROADMAP.md](ROADMAP.md) | Done phases by version, current state, Vanilla polish, TBC and Wrath (deferred) |
-| [CHANGELOG.md](CHANGELOG.md) | Every version, newest first |
-| [docs/FEATURES.md](docs/FEATURES.md) | UI tour: home tabs, era filter, cards, instance tabs |
-| [docs/BOT-CONSUMABLES.md](docs/BOT-CONSUMABLES.md) | The `.bot consumables` command, profiles and rules, and how the journal ties to Mod-Naxxramas-Core and N-MultiBot-Chatless |
-| [docs/DATA-SOURCES.md](docs/DATA-SOURCES.md) | Where the data comes from and the "server wins" policy |
-| [docs/DATA-FORMAT.md](docs/DATA-FORMAT.md) | Data file layout, field names, adding or editing an entry |
-| [docs/ART-AND-TEXTURES.md](docs/ART-AND-TEXTURES.md) | TGA rules, cover art, maps and portraits |
-| [docs/INSTALL.md](docs/INSTALL.md) | Install, upgrade, removing ServerDungeonJournal, rollback |
-| [docs/TROUBLESHOOTING.md](docs/TROUBLESHOOTING.md) | Addon not loading, green covers, uncached items |
-| [docs/TESTING.md](docs/TESTING.md) | In-game test plan |
-| [docs/RELEASE-CHECKLIST.md](docs/RELEASE-CHECKLIST.md) | Version bump, build, tag and release steps |
-| [tools/README.md](tools/README.md) | Offline harness, denylist and build script |
+| [Features and Controls](docs/FEATURES.md) | Home screen, browsing, instance tabs and item links |
+| [Bot Consumables](docs/BOT-CONSUMABLES.md) | Commands, profile limits, group rules and server integration |
+| [Installation and Upgrades](docs/INSTALL.md) | Installing, upgrading, older folder names and rollback |
+| [Troubleshooting](docs/TROUBLESHOOTING.md) | Common loading, texture and item-cache problems |
+| [Data Sources](docs/DATA-SOURCES.md) | Source priority and how server-specific data is checked |
+| [Data Format](docs/DATA-FORMAT.md) | Entry structure, fields and examples for editing content |
+| [Artwork and Textures](docs/ART-AND-TEXTURES.md) | Cover images, maps, portraits and 3.3.5a texture rules |
+| [Testing](docs/TESTING.md) | Offline and in-game checks |
+| [Release Checklist](docs/RELEASE-CHECKLIST.md) | Building, tagging and publishing a release |
+| [Developer Tools](tools/README.md) | Build script, Lua harness and compatibility checks |
+| [Roadmap](ROADMAP.md) | Completed work and future priorities |
+| [Release History](CHANGELOG.md) | Changes by version |
 
-## Licence and credits
+## Development and future work
 
-Distributed under **GPLv2** (`LICENSE-GPL-2.0.txt`) because it includes GPL-derived material:
+Vanilla content is the current focus. Planned improvements include search, favourites, more in-game testing and refinements to the existing pages. TBC and Wrath remain on the roadmap rather than being presented as finished features.
 
-- **Atlas** instance maps (Dan Gilbert / Niflheim) — GPLv2  
-- **AtlasLoot** loot table baselines — GPL (server / IP rates win where they conflict)  
-- **AtlasQuest** quest text / locations where used  
-- Boss **portraits** cropped from Wowhead Wrath model-viewer thumbnails (see `CREDITS.txt`)
+The [roadmap](ROADMAP.md) tracks the work in more detail. Changes for each published version are recorded in the [release history](CHANGELOG.md).
 
-Full attribution: **[CREDITS.txt](CREDITS.txt)**. Version history: **[CHANGELOG.md](CHANGELOG.md)**.
+## Credits and licence
+
+Dungeon Journal is maintained by **CosmicCuddle** and distributed under **GPLv2**. It includes material derived from Atlas, AtlasLoot and AtlasQuest, plus other credited artwork and reference sources.
+
+See [CREDITS.txt](CREDITS.txt) for the source and asset acknowledgements, and [LICENSE-GPL-2.0.txt](LICENSE-GPL-2.0.txt) for the licence terms.

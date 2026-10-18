@@ -1,8 +1,22 @@
-CREDITS AND LICENCES
-====================
+DUNGEON JOURNAL - CREDITS AND LICENCES
+======================================
 
-This addon is distributed under the GNU General Public License v2 (see LICENSE-GPL-2.0.txt),
-because it includes material from GPL-licensed addons:
+Project: Dungeon Journal
+Maintainer: CosmicCuddle
+Licence: GNU General Public License v2 (LICENSE-GPL-2.0.txt)
+
+ABOUT THESE CREDITS
+-------------------
+Dungeon Journal brings together original project work, server-specific
+reference information and material from established World of Warcraft addons.
+The acknowledgements below retain the licence details, original authors,
+source locations and version history associated with those materials.
+
+THIRD-PARTY SOURCES AND ASSETS
+------------------------------
+This project includes material from GPL-licensed addons and other attributed
+reference sources:
+
 
 1. Atlas (instance map browser) - GPLv2
    Copyright 2005-2010 Dan Gilbert <dan.b.gilbert@gmail.com>; 3.3.5 update by Lothaer.
@@ -130,7 +144,7 @@ because it includes material from GPL-licensed addons:
    boss_pyroguard_emberseer.cpp, boss_solakar_flamewreath.cpp, boss_gyth.cpp, boss_rend_blackhand.cpp,
    boss_the_beast.cpp, boss_lord_valthalak.cpp and boss_drakkisath.cpp.
 
-4b. mod-individual-progression (MIT License, Copyright (c) 2021 AzerothCore) - restored Vanilla creature AI
+4b. mod-individual-progression (MIT License, Copyright (c) 2021 AzerothCore) - restored Vanilla creature behaviour
    https://github.com/ZhengPeiRu21/mod-individual-progression (commit 0180b9172d0d29bbce53dd84af133b3d998b0622)
    From v0.3.7 the server's fork is used instead: https://github.com/Grimfeather/mod-individual-progression
    master @ d5e393bdc4624239d432d27d3ad2178abf8b94e9 (all earlier batches re-checked).
@@ -270,13 +284,13 @@ because it includes material from GPL-licensed addons:
    https://github.com/s0h2x/WoTLK-3.3.5-UI-Source (blp branch). The mock preview image
    (header_preview_v0.3.7.png, not part of the addon) was drawn from those textures.
 
-6. Server-specific trash/boss behaviour comes from the server owner's notes on the restored Vanilla AI
+6. Server-specific trash/boss behaviour comes from the server owner's notes on the restored Vanilla creature behaviour
    and (v0.3.2) from mod-individual-progression's smart_scripts (see 4b).
    The per-role recommended levels for The Deadmines and Wailing Caverns were supplied by the
    server owner.
 
------ v0.3.0 credits (kept) -----
-TEST BUILD CREDITS
+----- Earlier test-build attributions (v0.3.0) -----
+EARLIER TEST-BUILD CREDITS
 ==================
 
 Visual reference

@@ -1,9 +1,18 @@
-# Data Sources and the "Server Wins" Policy
+# Source and Accuracy Guide
 
-**Applies to:** v0.6.2
+Dungeon Journal is written around the actual Naxxramas progression server. Its source rules put server behaviour first, followed by established reference addons for information the server does not provide.
+
+**Applies to:** v0.6.2  
 **Full attribution:** [CREDITS.txt](../CREDITS.txt), which lists the files and commits used for each batch
 
-## Policy
+## Quick reference
+
+- Use the Grimfeather AzerothCore and Individual Progression forks as the source of truth for server-specific mechanics.
+- Use Atlas, AtlasLoot and AtlasQuest for maps, loot and quests where the server does not provide an override.
+- Do not estimate missing percentages, quest requirements or bot profiles.
+- Keep attribution in `CREDITS.txt` and explain any server-specific exceptions in the relevant entry.
+
+## Which source takes priority
 
 The journal describes what happens on this server, not on retail Classic or another private server. When sources disagree:
 
@@ -12,7 +21,7 @@ The journal describes what happens on this server, not on retail Classic or anot
 3. Wowhead is used only for portraits and for checking spell and item tooltips.
 4. Nothing is invented. A drop rate that no source gives is left out (`rate = nil`), and the row or `lootNote` says so.
 
-## Sources
+## Reference projects
 
 | Source | Used for | Notes |
 | --- | --- | --- |
@@ -25,7 +34,7 @@ The journal describes what happens on this server, not on retail Classic or anot
 | Mod-Naxxramas-Core `BotRaidConsumables.cpp` and N-MultiBot-Chatless | Bot Consumables text | See [BOT-CONSUMABLES.md](BOT-CONSUMABLES.md) |
 | Blizzard loading screens | Cover art (client textures, and the bundled Onyxia's Lair TGA) | |
 
-## Examples of the server winning
+## Server-specific overrides
 
 From the CHANGELOG:
 
@@ -34,7 +43,7 @@ From the CHANGELOG:
 - AQ20 boss loot uses IP references 30411-30436 (v0.5.4).
 - Ragefire Chasm boss drops were corrected from green to blue to match AtlasLoot's quality (v0.3.1).
 
-## When a source is missing
+## Missing or unverified information
 
 Say so in the data. Examples already in the files:
 
@@ -43,3 +52,7 @@ Say so in the data. Examples already in the files:
 - Bot Consumables: "has no named .bot consumables profile" rather than a guessed profile.
 
 One open item: `Data/Vanilla/MoltenCore.lua:150` says the packs near Magmadar "may revive" with no source cited. It is on the [roadmap](../ROADMAP.md).
+
+## Related guides
+
+See [Data Format](DATA-FORMAT.md) for where source notes belong and [Bot Consumables](BOT-CONSUMABLES.md) for the module references.

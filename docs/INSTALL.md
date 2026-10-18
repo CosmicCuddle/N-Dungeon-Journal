@@ -1,9 +1,18 @@
-# Install, Upgrade and Removal
+# Installation and Upgrades
 
-**Applies to:** v0.6.2
+Use the packaged GitHub release for a normal installation. The addon folder must be named `DungeonJournal` and must contain `DungeonJournal.toc` at its top level.
+
+**Applies to:** v0.6.2  
 **Client:** WoW 3.3.5a (Interface 30300)
 
-## Install
+## Quick reference
+
+- Install into `Interface\AddOns\DungeonJournal\`, not a second nested folder.
+- Close World of Warcraft before installing or upgrading.
+- Delete the previous addon folder rather than extracting over old files.
+- Back up SavedVariables before upgrading or rolling back.
+
+## New installation
 
 1. Download `DungeonJournal_v<version>.zip` from the [latest release](https://github.com/CosmicCuddle/N-Dungeon-Journal/releases/latest). Do not use **Code → Download ZIP** (see below).
 2. Exit WoW completely.
@@ -12,7 +21,7 @@
 5. Start WoW. On the character screen open **AddOns** and make sure **Dungeon Journal** is enabled.
 6. In game, type `/dj`. The chat line `Dungeon Journal v<version> loaded. Type /dj to open.` confirms which version is running.
 
-## Upgrade
+## Upgrading an existing installation
 
 1. Exit WoW.
 2. Back up `Interface\AddOns\DungeonJournal\` and `WTF\Account\<account>\SavedVariables\DungeonJournal.lua` somewhere outside the AddOns folder.
@@ -21,7 +30,7 @@
 
 Settings carry over; they are in `DungeonJournalDB`, which is not inside the addon folder.
 
-## Removing the old ServerDungeonJournal
+## Removing the legacy addon
 
 Before v0.4.1 the addon was called ServerDungeonJournal.
 
@@ -31,14 +40,18 @@ Before v0.4.1 the addon was called ServerDungeonJournal.
 
 On first load Dungeon Journal copies any values from the old `ServerDungeonJournalDB` that it does not already have into `DungeonJournalDB`, once, and sets `_migratedFromServerDungeonJournalDB`. The old SavedVariables file `WTF\Account\<account>\SavedVariables\ServerDungeonJournal.lua` can be deleted afterwards.
 
-## Code → Download ZIP
+## Installing from a GitHub source ZIP
 
 GitHub's **Code → Download ZIP** gives a folder called `N-Dungeon-Journal-main`. WoW only loads an addon whose folder name matches its `.toc`, so it will not load. It also contains `docs/` and `tools/`, which the release zip does not. Use the release zip. If you must use the source download, rename the folder to `DungeonJournal`; the extra folders are ignored by the client.
 
-## N-Addon-Collection
+## Installing through N-Addon-Collection
 
 [N-Addon-Collection](https://github.com/CosmicCuddle/N-Addon-Collection) also packages Dungeon Journal, pinned to a specific release in its `sources.lock.json` (v0.6.1 at the time of writing). Install it from one place only, not both.
 
-## Rollback
+## Returning to a previous version
 
 Exit WoW, delete `Interface\AddOns\DungeonJournal\`, and extract the previous release zip from the [Releases page](https://github.com/CosmicCuddle/N-Dungeon-Journal/releases). Restore your SavedVariables backup if needed.
+
+## Related guides
+
+See [Troubleshooting](TROUBLESHOOTING.md) if the addon does not appear at character selection or artwork fails to load.
